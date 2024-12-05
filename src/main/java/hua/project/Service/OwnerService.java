@@ -21,6 +21,8 @@ public List<Owner> getAllOwners() {
     return ownerRepository.findAll();
 }
 
+
+@Transactional
 public void saveOwner(Owner owner) {
     ownerRepository.save(owner);
 }
