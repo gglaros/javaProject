@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Properties</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${ not#lists.isEmpty(properties)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Address</th>
+                <th>RentPrice</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="property : ${properties}">
+                <td th:text="${property.description}"></td>
+                <td th:text="${property.address}"></td>
+                <td th:text="${property.rentPrice}"></td>
+                <td th:unless="${property.owner == null}" th:text="${property.owner.firstName}"></td>
+
+
+                <td>
+<!--                    <a  class="btn btn-outline-light btn-sm" th:href="@{'/owner/' + ${owner.id}}">Details</a>-->
+
+                </td>
+
+
+                <!--                <td>-->
+                <!--                    <a  class="btn btn-outline-light btn-sm" th:href="@{'/student/' + ${student.id}}">Details</a>-->
+                <!--                    <a  class="btn btn-outline-info btn-sm" th:href="@{'/student/profile/' + ${student.id}}">Profile</a>-->
+                <!--                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(properties)}">
+        No properties found!
+    </div>
+    <!--    <a href="/student/new" class="btn btn-primary" role="button">Create new Student</a>-->
+</div>
+</body>
+</html>
