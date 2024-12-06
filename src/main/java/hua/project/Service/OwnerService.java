@@ -12,8 +12,11 @@ public class OwnerService {
 
 private OwnerRepository ownerRepository;
 
-public OwnerService(OwnerRepository ownerRepository) {
+private PropertyService propertyService;
+
+public OwnerService(OwnerRepository ownerRepository, PropertyService propertyService) {
     this.ownerRepository = ownerRepository;
+    this.propertyService = propertyService;
 }
 
 @Transactional
@@ -30,6 +33,11 @@ public void saveOwner(Owner owner) {
 @Transactional
 public Owner getOwnerById(Integer id) {
     return ownerRepository.findById(id).get();
+}
+
+
+public void savePropertyToOwner(Owner owner, Integer propertyId) {
+
 }
 
 

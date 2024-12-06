@@ -2,7 +2,10 @@ package hua.project.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
+@Table(name="owner")
 public class Owner {
 
     @Id
@@ -22,6 +25,10 @@ public class Owner {
     @Column
     private String phone;
 
+    @OneToMany(mappedBy = "owner", cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    public List<Property> properties;
+
     public Owner(int id, String firstName, String lastName, String email, String phone) {
         this.id = id;
         this.firstName = firstName;
@@ -34,6 +41,14 @@ public class Owner {
     public Owner() {
     }
 
+
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
+    }
 
     public int getId() {
         return id;

@@ -22,7 +22,7 @@ public List<Property> getAllProperty() {
 }
 
 @Transactional
-public void addProperty(Property property) {
+public void saveProperty(Property property) {
     propertyRepository.save(property);
 }
 
