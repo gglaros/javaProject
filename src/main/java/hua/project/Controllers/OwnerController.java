@@ -61,7 +61,6 @@ public class OwnerController {
 
 
 
-
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);

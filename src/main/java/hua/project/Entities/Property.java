@@ -21,14 +21,15 @@ public class Property {
     private Double rentPrice;
 
     @Column
-    private Boolean status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="owner_id")
    private Owner owner;
 
-    public Property(int id, String description, String address, Double rentPrice, Boolean status, Owner owner) {
+    public Property(int id, String description, String address, Double rentPrice, Status status, Owner owner) {
         this.id = id;
         this.description = description;
         this.address = address;
@@ -40,6 +41,14 @@ public class Property {
     public Property() {
     }
 
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -73,13 +82,7 @@ public class Property {
         this.rentPrice = rentPrice;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
 
     public Owner getOwner() {
         return owner;
