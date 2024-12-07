@@ -1,6 +1,7 @@
 package hua.project.Service;
 
 import hua.project.Entities.Owner;
+import hua.project.Entities.Property;
 import hua.project.Repository.OwnerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public Owner getOwnerById(Integer id) {
 }
 
 
-public void savePropertyToOwner(Owner owner, Integer propertyId) {
+public void savePropertyToOwner(Owner owner, Property property) {
+    property.setOwner(owner);
+    propertyService.saveProperty(property);
 
 }
 

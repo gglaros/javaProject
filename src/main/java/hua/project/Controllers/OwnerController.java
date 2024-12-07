@@ -64,18 +64,7 @@ public class OwnerController {
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
-        System.out.println("HELLO!!!! from post " + owner.getFirstName() + " " + owner.getLastName());
-
-        // Δημιουργία νέου Property
-        System.out.println("Creating new property");
-        property.setOwner(owner); // Ανάθεση του ιδιοκτήτη
-
-        propertyService.saveProperty(property);
-
-        // Διασφάλιση ότι το property έχει το σωστό id
-        System.out.println("Property id = " + property.getId());
-        System.out.println("Property address = " + property.getAddress());
-
+        ownerService.savePropertyToOwner(owner,property);
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";
     }

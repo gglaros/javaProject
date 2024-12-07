@@ -30,20 +30,6 @@ public class propertyController {
         return "property/propertyList";
     }
 
-//    @GetMapping("/new")
-//    public String addProperty(Model model) {
-//        Property property = new Property();
-//        model.addAttribute("property", property);
-//        return "property/propertyForm";
-//    }
-//
-//    @PostMapping("/new")
-//    public String saveProperty(@ModelAttribute("property") Property property, Model model) {
-//        propertyService.saveProperty(property);
-//        model.addAttribute("properties", propertyService.getAllProperty()  );
-//        return "property/propertyList";
-//    }
-
 
 
 }

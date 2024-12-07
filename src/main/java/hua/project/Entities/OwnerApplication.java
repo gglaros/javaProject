@@ -10,9 +10,10 @@ public class OwnerApplication {
     @Column
     private int id;
 
-   private Boolean status;
+   @Enumerated(EnumType.STRING)
+   private Status status;
 
-    public OwnerApplication(int id, Boolean status) {
+    public OwnerApplication(int id, Status status) {
         this.id = id;
         this.status = status;
     }
@@ -28,11 +29,11 @@ public class OwnerApplication {
         this.id = id;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

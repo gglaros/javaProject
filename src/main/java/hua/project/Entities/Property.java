@@ -12,6 +12,9 @@ public class Property {
     private int id;
 
     @Column
+    private String city;
+
+    @Column
     private String description;
 
     @Column
@@ -19,6 +22,8 @@ public class Property {
 
     @Column
     private Double rentPrice;
+
+
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -29,18 +34,27 @@ public class Property {
     @JoinColumn(name="owner_id")
    private Owner owner;
 
-    public Property(int id, String description, String address, Double rentPrice, Status status, Owner owner) {
+    public Property(int id, String description, String address, Double rentPrice, Status status, Owner owner,String city) {
         this.id = id;
         this.description = description;
         this.address = address;
         this.rentPrice = rentPrice;
         this.status = status;
         this.owner = owner;
+        this.city = city;
     }
 
     public Property() {
     }
 
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public Status getStatus() {
         return status;
