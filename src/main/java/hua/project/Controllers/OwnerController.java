@@ -41,12 +41,13 @@ public class OwnerController {
         return "owner/Owner";
     }
 
-    @PostMapping("/new")
-    public String saveOwner(@ModelAttribute("owner") Owner owner, Model model) {
-        ownerService.saveOwner(owner);
-        model.addAttribute("owners", ownerService.getAllOwners());
-        return "owner/ownersList";
-    }
+
+@PostMapping("/new")
+public String saveOwner(@ModelAttribute("owner") Owner owner, Model model) {
+    ownerService.saveOwner(owner);
+    model.addAttribute("owners", ownerService.getAllOwners()  );
+    return "owner/ownersList";
+}
 
 
     @GetMapping("/make/property/{id}")
