@@ -36,7 +36,7 @@ public Owner getOwnerById(Integer id) {
     return ownerRepository.findById(id).get();
 }
 
-
+@Transactional
 public void savePropertyToOwner(Owner owner, Property property) {
     property.setOwner(owner);
     propertyService.saveProperty(property);

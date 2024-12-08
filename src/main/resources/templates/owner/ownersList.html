@@ -10,7 +10,7 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-    <div th:if="${ not#lists.isEmpty(owners)}">
+    <div th:if="${not#lists.isEmpty(owners)}">
         <table class="table">
             <thead>
             <tr>
@@ -45,7 +45,7 @@
     <div th:if="${ #lists.isEmpty(owners)}">
         No Owners found!
     </div>
-    <a th:href="@{'/owner/new'}" class="btn btn-primary" role="button">Create new Owner</a>
+    <a href="/owner/new" class="btn btn-primary" role="button">Create new Owner</a>
 </div>
 </body>
 </html>

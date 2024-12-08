@@ -10,9 +10,6 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-<!--    <form action="#" th:action="@{/owner/make/property}" th:object="${property}"-->
-<!--          method="post">-->
-
 
         <form th:action="@{/owner/make/property/{id}(id=${owner.id})}" th:object="${property}" method="post">
             <input type="hidden" th:field="*{id}" />
