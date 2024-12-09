@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <title>Make Application</title>
+</head>
+<body>
+<h1>Υποβολή Αίτησης</h1>
+
+<form action="/applications/submit" method="post" th:object="${application}">
+<!--    <p>-->
+<!--        <label>Όνομα Ιδιοκτήτη:</label>-->
+<!--        <span th:text="*{owner.name}">John Doe</span>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Ακίνητο:</label>-->
+<!--        <span th:text="*{property.city}">My Property</span>-->
+<!--    </p>-->
+
+<!--    &lt;!&ndash; Κρυφά πεδία για το ID του ιδιοκτήτη και του ακινήτου &ndash;&gt;-->
+    <input type="hidden" th:field="*{owner.id}" />
+    <input type="hidden" th:field="*{property.id}" />
+
+
+
+    <button type="submit">Υποβολή Αίτησης</button>
+</form>
+</body>
+</html>

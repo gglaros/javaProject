@@ -13,49 +13,29 @@ public class OwnerApplication {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column
-    private String oFirstName;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="property_id")
+    private Property property;
 
-    @Column
-    private String oLastName;
 
-    @Column
-    private String oPhoneNumber;
 
-    public OwnerApplication(int id, Status status, String oFirstName, String oLastName, String oPhoneNumber) {
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="owner_id")
+    private Owner owner;
+
+
+    public OwnerApplication(int id, Status status, Property property, Owner owner) {
         this.id = id;
         this.status = status;
-        this.oFirstName = oFirstName;
-        this.oLastName = oLastName;
-        this.oPhoneNumber = oPhoneNumber;
+        this.property = property;
+        this.owner = owner;
     }
 
     public OwnerApplication() {
     }
 
-    public String getoFirstName() {
-        return oFirstName;
-    }
-
-    public void setoFirstName(String oFirstName) {
-        this.oFirstName = oFirstName;
-    }
-
-    public String getoLastName() {
-        return oLastName;
-    }
-
-    public void setoLastName(String oLastName) {
-        this.oLastName = oLastName;
-    }
-
-    public String getoPhoneNumber() {
-        return oPhoneNumber;
-    }
-
-    public void setoPhoneNumber(String oPhoneNumber) {
-        this.oPhoneNumber = oPhoneNumber;
-    }
 
     public int getId() {
         return id;
@@ -71,5 +51,21 @@ public class OwnerApplication {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }

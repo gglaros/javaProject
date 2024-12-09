@@ -32,4 +32,5 @@ public Property getPropertyById(Integer id) {
 }
 
 
+
 }
