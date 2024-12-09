@@ -31,7 +31,8 @@
 
                 <td>
                     <a  class="btn btn-outline-light btn-sm" th:href="@{'/property/' + ${property.id}}">Details</a>
-                    <a th:href="@{/applications/make/{propertyId}/{ownerId}(propertyId=${property.id}, ownerId=${property.owner.id})}">Make Application</a>
+                    <a th:href="@{/applications/make/{propertyId}/{ownerId}(propertyId=${property.id}, ownerId=${property.owner.id})} ">Make Application</a>
+
                 </td>
 
             </tr>
@@ -40,6 +41,7 @@
     </div>
     <div th:if="${ #lists.isEmpty(properties)}">
         No properties found!
+
     </div>
     <!--    <a href="/student/new" class="btn btn-primary" role="button">Create new Student</a>-->
 </div>

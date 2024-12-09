@@ -29,6 +29,10 @@ public class Owner {
             CascadeType.DETACH, CascadeType.REFRESH})
     public List<Property> properties;
 
+    @OneToMany( cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    public List<OwnerApplication> ownerApplications;
+
     public Owner(int id, String firstName, String lastName, String email, String phone) {
         this.id = id;
         this.firstName = firstName;
@@ -88,5 +92,16 @@ public class Owner {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

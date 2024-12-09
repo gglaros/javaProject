@@ -8,9 +8,7 @@ import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -29,49 +27,45 @@ public class OwnerApplicationController {
         this.propertyService = propertyService;
     }
 
+
+
     @GetMapping("")
     public String showApplications(Model model) {
         model.addAttribute("applications",ownerApplicationService.getOwnerApplications());
-        return "application/applications";
+        return "applicationOwner/applications";
     }
+
+
 
     @GetMapping("/make/{propertyId}/{ownerId}")
     public String showApplicationForm(@PathVariable int propertyId, @PathVariable int ownerId, Model model) {
-        // Έλεγχος αν ο ownerId είναι έγκυρος
         Owner owner = ownerService.getOwnerById(ownerId);
-        if (owner == null) {
-            throw new IllegalArgumentException("Invalid owner ID");
-        }
+        System.out.println(owner.getFirstName());
 
-        // Ανάκτηση του ακινήτου
         Property property = propertyService.getPropertyById(propertyId);
-        if (property == null) {
-            throw new IllegalArgumentException("Invalid property ID");
-        }
-System.out.println("OWNERID = " + ownerId);
-System.out.println("PROPERTYID = " + propertyId);
-        // Δημιουργία νέας αίτησης
+        System.out.println(property.getAddress());
+
         OwnerApplication application = new OwnerApplication();
-        application.setOwner(owner);
-        application.setProperty(property);
+//        application.setOwner(owner);
+//        application.setProperty(property);
+        ownerApplicationService.saveOwnerApplication(application,owner,property);
+        System.out.println(application.getOwner().getFirstName());
 
-        // Προσθήκη στο μοντέλο
-        model.addAttribute("application", application);
-
-        return "application/applicationForm"; // Το όνομα του Thymeleaf template
+        model.addAttribute("applications",ownerApplicationService.getOwnerApplications());
+        return "applicationOwner/applications";
     }
 
 
-    // POST: Υποβολή της αίτησης
+
 //    @PostMapping("/submit")
-//    public String submitApplication(@ModelAttribute("application") OwnerApplication application, Principal principal) {
-//        // Ορισμός της κατάστασης της αίτησης ως PENDING
-//        application.setStatus(ApplicationStatus.PENDING);
+//    public String submitApplication(@ModelAttribute("application") OwnerApplication application, Model model) {
+//        ownerApplicationService.saveOwnerApplication(application);
+//        System.out.println("onsumbit"+application.getOwner());
 //
-//        // Αποθήκευση της αίτησης
-//        ownerApplicationService.save(application);
-//
-//        return "redirect:/owner-applications/success"; // Ανακατεύθυνση σε σελίδα επιτυχίας
+//        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
+//        return "applicationOwner/applications";
 //    }
+
+
 
 }

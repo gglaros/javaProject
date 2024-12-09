@@ -1,10 +1,12 @@
 package hua.project.Service;
 
-import hua.project.Entities.OwnerApplication;
+import hua.project.Entities.*;
 import hua.project.Repository.OwnerApplicationRepository;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import java.util.List;
+
+import static hua.project.Entities.Status.PENDING_APPROVAL;
 
 @Service
 public class OwnerApplicationService {
@@ -19,5 +21,13 @@ public class OwnerApplicationService {
  public List<OwnerApplication> getOwnerApplications() {
      return ownerApplicationRepository.findAll();
  }
+
+ @Transactional
+ public void saveOwnerApplication(OwnerApplication ownerApplication,Owner owner,Property property) {
+     ownerApplication.setOwner(owner);
+     ownerApplication.setProperty(property);
+     ownerApplication.setStatus(PENDING_APPROVAL);
+     ownerApplicationRepository.save(ownerApplication);
+    }
 
 }
