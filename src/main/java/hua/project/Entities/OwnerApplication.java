@@ -68,4 +68,7 @@ public class OwnerApplication {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
+
+
 }

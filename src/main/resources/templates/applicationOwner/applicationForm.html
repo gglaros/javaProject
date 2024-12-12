@@ -12,67 +12,19 @@
 <div layout:fragment="main-content">
 <h1>Υποβολή Αίτησης</h1>
 
-<form action="/applications/submit" method="post" th:object="${application}">
-    <!-- Κρυφά πεδία για το propertyId και ownerId -->
-<!--    <input type="hidden" th:value="${application.property !=null ? application.property.id :'No'}" name="propertyId"/>-->
-<!--    <input type="hidden" th:value="${application.property !=null ? application.owner.id : 'No'}" name="ownerId"/>-->
-<!--    <input type="hidden" th:field="*{owner.id}" />-->
-<!--    <input type="hidden" th:field="*{property.id}" />-->
+<form action="/applications/submit" method="post" th:object="${app}">
+    <input type="hidden" th:field="*{owner}" />
 
+
+
+    <select name="property">
+        <option th:each="property : ${properties}"
+                th:value="${property.getId()}"
+                th:text="${property.getCity() + ' ' +property.getAddress()}"></option>
+    </select>
 
     <button type="submit">Υποβολή Αίτησης</button>
 </form>
 </div>
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en"-->
-<!--      xmlns:th="http://www.thymeleaf.org"-->
-<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
-<!--      layout:decorate="~{page_layout/layout}">-->
-
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Owners</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div layout:fragment="main-content">-->
-<!--    <div th:if="${not#lists.isEmpty(owners)}">-->
-<!--        <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>Name</th>-->
-<!--                <th>Surname</th>-->
-<!--                <th>Email</th>-->
-<!--                <th>Properties</th>-->
-<!--                <th>Actions</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr th:each="owner : ${owners}">-->
-<!--                <td th:text="${owner.firstName}"></td>-->
-<!--                <td th:text="${owner.lastName}"></td>-->
-<!--                <td th:text="${owner.email}"></td>-->
-<!--                <td>-->
-<!--                    <ul>-->
-<!--                        <li th:each="property : ${owner.properties}" th:text="${property.city}"></li>-->
-<!--                    </ul>-->
-<!--                </td>-->
-
-<!--                <td>-->
-<!--                    <a class="btn btn-outline-light btn-sm" th:href="@{'/owner/' + ${owner.id}}">Details</a>-->
-<!--                    <a class="btn btn-outline-light btn-sm" th:href="@{'/owner/make/property/' + ${owner.id}  }">make property</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--    <div th:if="${ #lists.isEmpty(owners)}">-->
-<!--        No Owners found!-->
-<!--    </div>-->
-<!--    <a href="/owner/new" class="btn btn-primary" role="button">Create new Owner</a>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->

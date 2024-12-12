@@ -3,6 +3,7 @@ package hua.project.Controllers;
 import hua.project.Entities.Owner;
 import hua.project.Entities.OwnerApplication;
 import hua.project.Entities.Property;
+import hua.project.Entities.Status;
 import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
@@ -11,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-
+import java.util.List;
 
 @Controller
 @RequestMapping("/applications")
@@ -27,8 +28,6 @@ public class OwnerApplicationController {
         this.propertyService = propertyService;
     }
 
-
-
     @GetMapping("")
     public String showApplications(Model model) {
         model.addAttribute("applications",ownerApplicationService.getOwnerApplications());
@@ -36,36 +35,33 @@ public class OwnerApplicationController {
     }
 
 
-
-    @GetMapping("/make/{propertyId}/{ownerId}")
-    public String showApplicationForm(@PathVariable int propertyId, @PathVariable int ownerId, Model model) {
+    @GetMapping("/make/{ownerId}")
+    public String showApplicationForm(@PathVariable int ownerId, Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
-        System.out.println(owner.getFirstName());
-
-        Property property = propertyService.getPropertyById(propertyId);
-        System.out.println(property.getAddress());
+        List<Property> filteredProperties = propertyService.getPropertiesByOwnerId(ownerId);
 
         OwnerApplication application = new OwnerApplication();
-//        application.setOwner(owner);
-//        application.setProperty(property);
-        ownerApplicationService.saveOwnerApplication(application,owner,property);
-        System.out.println(application.getOwner().getFirstName());
-
-        model.addAttribute("applications",ownerApplicationService.getOwnerApplications());
-        return "applicationOwner/applications";
+        application.setOwner(owner);
+        System.out.println("kalimera "+ owner);
+        model.addAttribute("properties", filteredProperties );
+        model.addAttribute("app", application);
+        return "applicationOwner/applicationForm";
     }
 
 
-
-//    @PostMapping("/submit")
-//    public String submitApplication(@ModelAttribute("application") OwnerApplication application, Model model) {
-//        ownerApplicationService.saveOwnerApplication(application);
-//        System.out.println("onsumbit"+application.getOwner());
-//
-//        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
-//        return "applicationOwner/applications";
-//    }
+    @PostMapping("/submit")
+    public String submitApplication(@ModelAttribute("application") OwnerApplication application, Model model) {
+        Property property = propertyService.getPropertyById(application.getProperty().getId());
+        property.setStatus("waiting");
+        System.out.println("on post submit method property id = "+ property.getId());
+        ownerApplicationService.saveOwnerApplication(application);
 
 
+        System.out.println("on post submit method applications = "+ ownerApplicationService.getOwnerApplications());
+
+        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
+
+        return "applicationOwner/applications";
+    }
 
 }

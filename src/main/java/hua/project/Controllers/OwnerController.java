@@ -2,12 +2,15 @@ package hua.project.Controllers;
 
 
 import hua.project.Entities.Owner;
+import hua.project.Entities.OwnerApplication;
 import hua.project.Entities.Property;
 import hua.project.Service.PropertyService;
 import org.springframework.ui.Model;
 import hua.project.Service.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("owner")
@@ -25,11 +28,15 @@ public class OwnerController {
     @GetMapping("")
     public String showOwners(Model model) {
         model.addAttribute("owners", ownerService.getAllOwners());
+
         return "owner/ownersList";
     }
 
     @GetMapping("/{id}")
     public String showOwnerId(Model model, @PathVariable Integer id) {
+        Owner owner = ownerService.getOwnerById(id);
+        List<OwnerApplication> ownerApplicationList = owner.getOwnerApplications();
+
         model.addAttribute("owners", ownerService.getOwnerById(id));
         return "owner/ownersList";
     }

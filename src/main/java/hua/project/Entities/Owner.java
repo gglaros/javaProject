@@ -2,6 +2,7 @@ package hua.project.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,7 @@ public class Owner {
             CascadeType.DETACH, CascadeType.REFRESH})
     public List<Property> properties;
 
-    @OneToMany( cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToMany( mappedBy = "owner" ,cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     public List<OwnerApplication> ownerApplications;
 
@@ -45,6 +46,13 @@ public class Owner {
     public Owner() {
     }
 
+    public List<OwnerApplication> getOwnerApplications() {
+        return ownerApplications;
+    }
+
+    public void setOwnerApplications(List<OwnerApplication> ownerApplications) {
+        this.ownerApplications = ownerApplications;
+    }
 
     public List<Property> getProperties() {
         return properties;

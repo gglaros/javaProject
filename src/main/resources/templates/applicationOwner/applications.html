@@ -15,6 +15,10 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Owner</th>
+
             </tr>
             </thead>
             <tbody>
@@ -22,12 +26,16 @@
                 <td th:text="${app.owner != null ? app.owner.firstName : 'No Owner'}"></td>
                 <td th:text="${app.property !=null ? app.property.address : 'NO'}"></td>
                 <td th:text="${app.property !=null ? app.property.city : 'NO'}"></td>
+                <td th:text="${app.owner.firstName !=null ? app.owner.firstName : 'NO'}"></td>
+
             </tr>
 
             </tbody>
         </table>
     </div>
-
+    <div th:if="${ #lists.isEmpty(applications)}">
+        No Applications found!
+    </div>
 </div>
 </body>
 </html>
