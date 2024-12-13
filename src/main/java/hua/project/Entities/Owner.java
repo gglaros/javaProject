@@ -1,6 +1,7 @@
 package hua.project.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Owner {
     private int id;
 
     @Column
+    @NotEmpty(message = "First Name is required")
     private String firstName;
 
     @Column

@@ -38,11 +38,9 @@ public class OwnerApplicationController {
     @GetMapping("/make/{ownerId}")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
-        List<Property> filteredProperties = propertyService.getPropertiesByOwnerId(ownerId);
-
+        List<Property> filteredProperties = propertyService.getPropertiesByOwnerId(ownerId); // owner's property and do not have application
         OwnerApplication application = new OwnerApplication();
         application.setOwner(owner);
-        System.out.println("kalimera "+ owner);
         model.addAttribute("properties", filteredProperties );
         model.addAttribute("app", application);
         return "applicationOwner/applicationForm";
@@ -52,15 +50,8 @@ public class OwnerApplicationController {
     @PostMapping("/submit")
     public String submitApplication(@ModelAttribute("application") OwnerApplication application, Model model) {
         Property property = propertyService.getPropertyById(application.getProperty().getId());
-        property.setStatus("waiting");
-        System.out.println("on post submit method property id = "+ property.getId());
-        ownerApplicationService.saveOwnerApplication(application);
-
-
-        System.out.println("on post submit method applications = "+ ownerApplicationService.getOwnerApplications());
-
+        ownerApplicationService.saveOwnerApplication(application,property);
         model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
-
         return "applicationOwner/applications";
     }
 

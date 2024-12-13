@@ -15,14 +15,64 @@ a:hover {
 .btn-secondary:focus {
     color: #7304f6;
     text-shadow: none; /* Prevent inheritance from `body` */
-    background-color: #fff;
-    border: .05rem solid #fff;
+    background-color: #ff0d0d;
+    border: .05rem solid #07f1d9;
 }
 
+/* button make property in ownerList */
 
-/*
- * Base structure
- */
+.button {
+    --color: #7d05ea;
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 2.1em;
+    line-height: 2.1em;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: var(--color);
+}
+
+.button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.button:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.button:before {
+    top: 100%;
+    left: 100%;
+    transition: all 0.7s;
+}
+
+.button:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.button:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
+}
+
+/* ---- */
 
 html,
 body {
@@ -99,7 +149,10 @@ body {
 .cover .btn-lg {
     padding: .75rem 1.25rem;
     font-weight: 700;
+    border: .05rem solid #07f1d9;
 }
+
+
 
 
 /*

@@ -1,53 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en"-->
-<!--      xmlns:th="http://www.thymeleaf.org"-->
-<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
-<!--      layout:decorate="~{page_layout/layout}">-->
-
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Properties</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div layout:fragment="main-content">-->
-<!--    &lt;!&ndash; Check if properties are not empty &ndash;&gt;-->
-<!--    <div th:if="${not#lists.isEmpty(properties)}">-->
-<!--        <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>City</th>-->
-<!--                <th>Description</th>-->
-<!--                <th>Address</th>-->
-<!--                <th>Rent Price</th>-->
-<!--                <th>Owner</th>-->
-<!--                <th>Actions</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            &lt;!&ndash; Loop through properties &ndash;&gt;-->
-<!--            <tr th:each="property : ${properties}">-->
-<!--                <td th:text="${property.city}"></td>-->
-<!--                <td th:text="${property.description}"></td>-->
-<!--                <td th:text="${property.address}"></td>-->
-<!--                <td th:text="${property.rentPrice}"></td>-->
-<!--                <td th:if="${property.owner != null}" th:text="${property.owner.firstName}"></td>-->
-<!--                <td th:if="${property.owner == null}">No Owner</td>-->
-<!--                <td>-->
-<!--                    <a class="btn btn-outline-light btn-sm"-->
-<!--                       th:href="@{'/property/' + ${property.id}}">Details</a>-->
-<!--            <a class="btn btn-outline-light btn-sm"-->
-<!--               th:href="@{/applications/make/{ownerId}(ownerId=${property.owner.id})}">-->
-<!--                Make Application-->
-<!--            </a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -90,7 +40,6 @@
                        th:if="${ property.status==null}">
                         Make Application
                     </a>
-<!--                    <span th:if="${property.status == "waiting" }">Cannot Apply</span>-->
                 </td>
             </tr>
             </tbody>

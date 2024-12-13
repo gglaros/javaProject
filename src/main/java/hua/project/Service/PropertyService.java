@@ -3,6 +3,7 @@ package hua.project.Service;
 import hua.project.Entities.Property;
 import hua.project.Repository.PropertyRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class PropertyService {
 
+@Autowired
 private PropertyRepository propertyRepository;
 
 public PropertyService(PropertyRepository propertyRepository) {
@@ -25,10 +27,9 @@ public List<Property> getAllProperty() {
 @Transactional
     public List<Property> getPropertiesByOwnerId(int ownerId) {
         return getAllProperty().stream()
-                .filter(property -> property.getOwner() != null && property.getOwner().getId() == ownerId)
+                .filter(property -> property.getOwner() != null && property.getOwner().getId() == ownerId).filter(property -> property.getStatus() == null)
                 .collect(Collectors.toList());
     }
-
 
 
 @Transactional

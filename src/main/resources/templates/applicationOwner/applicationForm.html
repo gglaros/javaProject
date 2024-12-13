@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{page_layout/layout}">
-
 <head>
     <meta charset="UTF-8">
     <title>Make Application</title>
@@ -11,11 +10,9 @@
 <body>
 <div layout:fragment="main-content">
 <h1>Υποβολή Αίτησης</h1>
-
+    <div th:if="${not #lists.isEmpty(properties)}">
 <form action="/applications/submit" method="post" th:object="${app}">
     <input type="hidden" th:field="*{owner}" />
-
-
 
     <select name="property">
         <option th:each="property : ${properties}"
@@ -25,6 +22,10 @@
 
     <button type="submit">Υποβολή Αίτησης</button>
 </form>
+</div>
+    <div th:if="${#lists.isEmpty(properties)}">
+       you have make all your applications
+    </div>
 </div>
 </body>
 </html>

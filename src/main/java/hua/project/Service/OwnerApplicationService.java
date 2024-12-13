@@ -31,8 +31,9 @@ public class OwnerApplicationService {
  }
 
  @Transactional
- public void saveOwnerApplication(OwnerApplication ownerApplication) {
+ public void saveOwnerApplication(OwnerApplication ownerApplication,Property property) {
      ownerApplication.setStatus(PENDING_APPROVAL);
+     property.setStatus("waiting");
      ownerApplicationRepository.save(ownerApplication);
     }
 

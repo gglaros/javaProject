@@ -15,17 +15,17 @@
 
         <div class="form-group">
             <label for="firstName">First Name</label>
-            <input type="text" id="firstName" class="form-control" th:field="*{firstName}">
+            <input type="text" id="firstName" class="form-control" th:field="*{firstName}"  required>
         </div>
 
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" class="form-control" th:field="*{lastName}">
+            <input type="text" id="lastName" class="form-control" th:field="*{lastName}"  required>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" th:field="*{email}">
+            <input type="email" id="email" class="form-control" th:field="*{email}"  required >
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
