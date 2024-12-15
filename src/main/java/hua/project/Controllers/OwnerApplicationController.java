@@ -55,4 +55,39 @@ public class OwnerApplicationController {
         return "applicationOwner/applications";
     }
 
+
+
+    @GetMapping("/change/appStatus/{appId}")
+    public String changeStatusApplication(@PathVariable int appId, Model model) {
+        OwnerApplication ownerApplication = ownerApplicationService.getOwnerApplicationById(appId);
+        System.out.println(appId);
+        Property property = ownerApplication.getProperty();
+        System.out.println("city property app "+property.getCity());
+        System.out.println("address property in app "+ownerApplication.getProperty().getAddress());
+        System.out.println("owner's id in app "+ownerApplication.getOwner().getId());
+        System.out.println("application id " + ownerApplication.getId());
+     //  propertyService.saveStatusProperty(property);
+       //  property.setStatus("on eye");
+      //  ownerApplication.setStatus(Status.APPROVED);
+    //    ownerApplicationService.changeOwnerApplication(ownerApplication);
+        model.addAttribute("app", ownerApplication);
+        return "applicationOwner/applicationStatusChange";
+    }
+
+    @PostMapping("/change/appStatus/{appId}")
+    public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
+        ownerApplicationService.processApplicationAction(appId, action);
+
+        // OwnerApplication ownerApplication = ownerApplicationService.getOwnerApplicationById(appId);
+        System.out.println("Action: " + action);
+      //  Property property = ownerApplication.getProperty();
+      //  propertyService.saveStatusProperty(property);
+       // ownerApplicationService.changeOwnerApplication(ownerApplication);
+
+        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
+        return "applicationOwner/applications";
+    }
+
+
+
 }

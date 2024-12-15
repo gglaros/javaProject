@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="main-content">
     <!-- Έλεγχος αν η λίστα properties δεν είναι άδεια -->
-    <div th:if="${not #lists.isEmpty(properties)}">
+    <div th:if="${not #lists.isEmpty(ownerProperties)}">
         <table class="table">
             <thead>
             <tr>
@@ -20,32 +20,24 @@
                 <th>Address</th>
                 <th>Rent Price</th>
                 <th>Status</th>
-                <th>Owner</th>
-                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <!-- Loop through properties -->
-            <tr th:each="property : ${properties}">
+            <tr th:each="property : ${ownerProperties}">
                 <td th:text="${property.city}">City</td>
                 <td th:text="${property.description}">Description</td>
                 <td th:text="${property.address}">Address</td>
                 <td th:text="${property.rentPrice}">Rent Price</td>
                 <td th:text="${property.status !=null ? property.status : 'not maked application'}"></td>
-                <td th:if="${property.owner != null}" th:text="${property.owner.firstName}">Owner</td>
-                <td th:if="${property.owner == null}">No Owner</td>
-                <td>
-                    <a class="button"
-                       th:href="@{'/property/' + ${property.id}}">Details</a>
-                </td>
             </tr>
             </tbody>
         </table>
     </div>
 
     <!-- Αν η λίστα properties είναι άδεια -->
-    <div th:if="${#lists.isEmpty(properties)}">
-        No properties found!
+    <div th:if="${#lists.isEmpty(ownerProperties)}">
+        you do not have any property
     </div>
 </div>
 </body>

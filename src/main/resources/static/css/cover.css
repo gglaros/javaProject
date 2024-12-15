@@ -24,17 +24,18 @@ a:hover {
 .button {
     --color: #7d05ea;
     font-family: inherit;
-    display: inline-block;
-    width: 8em;
+    display: block;
+    width: 7em;
     height: 2.1em;
     line-height: 2.1em;
-    margin: 20px;
+    margin: 10px;
+    text-decoration: none;
     position: relative;
     cursor: pointer;
     overflow: hidden;
     border: 2px solid var(--color);
     transition: color 0.5s;
-    z-index: 1;
+    z-index: 0;
     font-size: 17px;
     border-radius: 6px;
     font-weight: 500;
@@ -42,6 +43,7 @@ a:hover {
 }
 
 .button:before {
+    text-decoration: none;
     content: "";
     position: absolute;
     z-index: -1;
@@ -60,19 +62,88 @@ a:hover {
     top: 100%;
     left: 100%;
     transition: all 0.7s;
+    text-decoration: none;
 }
 
 .button:hover:before {
+    text-decoration: none;
     top: -30px;
     left: -30px;
 }
 
 .button:active:before {
     background: #3a0ca3;
+    text-decoration: none;
     transition: background 0s;
 }
+.button.text {
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    color: white;
+    font-weight: 550;
+    transition: inherit;
+}
+
 
 /* ---- */
+
+
+
+/* details */
+/* From Uiverse.io by vinodjangid07 */
+.Btn {
+    width: 110px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+    background-size: 250%;
+    background-position: left;
+    color: #b27b1a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 1s;
+    overflow: hidden;
+}
+
+.Btn::before {
+    position: absolute;
+    text-decoration: none;
+    content: "Details";
+    color: #eabd08;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    border-radius: 8px;
+    transition-duration: 1s;
+    background-color: rgba(36, 36, 26, 0.84);
+    background-size: 200%;
+}
+
+.Btn:hover {
+    text-decoration: none;
+    background-position: right;
+    transition-duration: 1s;
+}
+
+.Btn:hover::before {
+    text-decoration: none;
+    background-position: right;
+    transition-duration: 1s;
+}
+
+.Btn:active {
+    text-decoration: none;
+    transform: scale(0.95);
+}
+/* details */
+
 
 html,
 body {
@@ -95,7 +166,6 @@ body {
 .cover-container {
     max-width: 42em;
 }
-
 
 /*
  * Header
@@ -151,8 +221,6 @@ body {
     font-weight: 700;
     border: .05rem solid #07f1d9;
 }
-
-
 
 
 /*

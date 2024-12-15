@@ -2,7 +2,6 @@ package hua.project.Controllers;
 
 
 import hua.project.Entities.Owner;
-import hua.project.Entities.OwnerApplication;
 import hua.project.Entities.Property;
 import hua.project.Service.PropertyService;
 import org.springframework.ui.Model;
@@ -28,15 +27,11 @@ public class OwnerController {
     @GetMapping("")
     public String showOwners(Model model) {
         model.addAttribute("owners", ownerService.getAllOwners());
-
         return "owner/ownersList";
     }
 
     @GetMapping("/{id}")
     public String showOwnerId(Model model, @PathVariable Integer id) {
-        Owner owner = ownerService.getOwnerById(id);
-        List<OwnerApplication> ownerApplicationList = owner.getOwnerApplications();
-
         model.addAttribute("owners", ownerService.getOwnerById(id));
         return "owner/ownersList";
     }
@@ -61,7 +56,6 @@ public class OwnerController {
     public String addProperty(@PathVariable int id, Model model) {
         Property property = new Property();
         Owner owner = ownerService.getOwnerById(id);
-
         model.addAttribute("property", property);
         model.addAttribute("owner", owner);
         return "property/propertyForm";
@@ -72,14 +66,17 @@ public class OwnerController {
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
-        System.out.println("on post property  "+property);
         ownerService.savePropertyToOwner(owner,property);
-        System.out.println("on post property  "+property);
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";
     }
 
-
+@GetMapping("show/properties/{id}")
+public String showOwnerProperties(Model model, @PathVariable int id) {
+        List<Property> ownerProperties =propertyService.getPropertiesByOwnersId(id);
+        model.addAttribute("ownerProperties", ownerProperties);
+        return "owner/ownerProperties";
+}
 
 
 

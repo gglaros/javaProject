@@ -28,16 +28,13 @@ public class propertyController {
     public String showProperties(Model model) {
         List<Property> properties = propertyService.getAllProperty();
         properties.forEach(property -> System.out.println(property.getCity() ) );
-
         model.addAttribute("properties", propertyService.getAllProperty());
-
         return "property/propertyList";
     }
 
     @GetMapping("/{id}")
     public String showPropertyId(Model model, @PathVariable Integer id) {
         model.addAttribute("properties", propertyService.getPropertyById(id));
-
         return "property/propertyList";
     }
 

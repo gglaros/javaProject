@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{page_layout/layout}">
-
 <head>
     <meta charset="UTF-8">
     <title>Owners</title>
@@ -17,7 +16,7 @@
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
-                <th>Properties</th>
+                <th>Details</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -27,14 +26,11 @@
                 <td th:text="${owner.lastName}"></td>
                 <td th:text="${owner.email}"></td>
                 <td>
-                    <ul>
-                        <li th:each="property : ${owner.properties}" th:text="${property.city}"></li>
-                    </ul>
+                    <a class="Btn" th:href="@{'/owner/show/properties/' + ${owner.id}}">Details </a>
                 </td>
-
                 <td>
-                    <a class="btn btn-outline-light btn-sm" th:href="@{'/owner/' + ${owner.id}}">Details</a>
-                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">make property</a>
+                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+                    <a class="btn btn-primary" th:href="@{/applications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>
                 </td>
             </tr>
             </tbody>
@@ -44,7 +40,6 @@
         No Owners found!
  </div>
     <a href="/owner/new" class="btn btn-primary" role="button">Create new Owner</a>
-
 
 </div>
 </body>

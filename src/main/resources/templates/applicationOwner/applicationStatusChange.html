@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>change App</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <form th:action="@{/applications/change/appStatus/{id}(id=${app.id})}" th:object="${app}" method="post">
+<!--an einai etsi einai san keno-->
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>City</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Rent Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td th:text="${app.property.city}"></td>
+            <td th:text="${app.property.description}"></td>
+            <td th:text="${app.property.address}"></td>
+            <td th:text="${app.property.rentPrice}"></td>
+                <td>
+                <td>
+                    <button type="submit" name="action" value="confirm" class="btn">Confirm</button>
+                    <button type="submit" name="action" value="reject" class="btn">Reject</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </form>
+</div>
+
+</body>
+</html>
