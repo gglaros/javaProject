@@ -4,6 +4,7 @@ import hua.project.Entities.Owner;
 import hua.project.Entities.Property;
 import hua.project.Repository.OwnerRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +12,10 @@ import java.util.List;
 @Service
 public class OwnerService {
 
-private OwnerRepository ownerRepository;
 
-private PropertyService propertyService;
+private final OwnerRepository ownerRepository;
+
+private final PropertyService propertyService;
 
 public OwnerService(OwnerRepository ownerRepository, PropertyService propertyService) {
     this.ownerRepository = ownerRepository;

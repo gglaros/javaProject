@@ -23,12 +23,8 @@ public class Property {
     @Column
     private Double rentPrice;
 
-
-
     @Column
     private String  status;
-
-
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})

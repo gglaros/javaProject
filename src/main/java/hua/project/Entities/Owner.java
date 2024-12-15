@@ -16,7 +16,6 @@ public class Owner {
     private int id;
 
     @Column
-    @NotEmpty(message = "First Name is required")
     private String firstName;
 
     @Column
@@ -29,11 +28,11 @@ public class Owner {
     private String phone;
 
     @OneToMany(mappedBy = "owner", cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+            CascadeType.DETACH, CascadeType.REMOVE,CascadeType.REFRESH})
     public List<Property> properties;
 
     @OneToMany( mappedBy = "owner" ,cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+            CascadeType.DETACH, CascadeType.REMOVE,CascadeType.REFRESH})
     public List<OwnerApplication> ownerApplications;
 
     public Owner(int id, String firstName, String lastName, String email, String phone) {

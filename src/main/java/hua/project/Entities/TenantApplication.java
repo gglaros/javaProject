@@ -1,9 +1,8 @@
 package hua.project.Entities;
-
 import jakarta.persistence.*;
 
 @Entity
-public class OwnerApplication {
+public class TenantApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,26 +12,32 @@ public class OwnerApplication {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="property_id")
+    @ManyToOne
+    @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
-
-    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="owner_id")
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
+    @ManyToOne
+    @JoinColumn(name = "tenant_id", nullable = false)
+    private Tenant tenant;
 
-    public OwnerApplication(int id, Status status, Property property, Owner owner) {
+    @Column
+    private double rentPrice;
+
+
+    public TenantApplication(int id, Status status, Property property, Owner owner, Tenant tenant, double rentPrice) {
         this.id = id;
         this.status = status;
         this.property = property;
         this.owner = owner;
+        this.tenant = tenant;
+        this.rentPrice = rentPrice;
     }
 
-    public OwnerApplication() {
+    public TenantApplication() {
     }
 
 
@@ -68,6 +73,19 @@ public class OwnerApplication {
         this.owner = owner;
     }
 
+    public Tenant getTenant() {
+        return tenant;
+    }
 
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
+    public double getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(double rentPrice) {
+        this.rentPrice = rentPrice;
+    }
 }
