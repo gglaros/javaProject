@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tenants</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${not#lists.isEmpty(tenants)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Details</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tenant : ${tenants}">
+                <td th:text="${tenant.firstName}"></td>
+                <td th:text="${tenant.lastName}"></td>
+                <td th:text="${tenant.email}"></td>
+                <td>
+<!--                    <a class="Btn" th:href="@{'/owner/show/properties/' + ${tenant.id}}">Details </a>-->
+                    <!--                    <a class="Btn" th:href="@{'/owner/show/properties/' + ${owner.id}}">Details </a>-->
+                </td>
+                <td>
+<!--                    <a class="button" th:href="@{'/owner/make/property/' + ${tenant.id}  }">add property</a>-->
+                    <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(tenants)}">
+        No tenants found!
+    </div>
+    <a href="/tenant/new" class="btn btn-primary" role="button">Create new Tenant</a>
+</div>
+</body>
+</html>

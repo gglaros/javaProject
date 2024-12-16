@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Applications</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div th:if="${not#lists.isEmpty(tenantApplications)}">
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Property City</th>
+                <th>Property Address</th>
+                <th>Property RentPrice</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Tenantapp: ${tenantApplications}">
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getCity() : 'NO'}"></td>
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getAddress() : 'NO'}"></td>
+                <td th:text="${Tenantapp.property!=null ? Tenantapp.getProperty().getRentPrice() : 'NO'}"></td>
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getOwner().getFirstName() : 'NO'}"></td>
+                <td th:text="${Tenantapp.getRentPrice() !=null ? Tenantapp.getRentPrice() : ''}"></td>
+
+                <!--                <td>-->
+<!--                    <a class="btn btn-outline-light btn-sm"-->
+<!--                       th:href="@{'/applications/change/appStatus/' + ${app.id}}" >change status </a>-->
+<!--                </td>-->
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${ #lists.isEmpty(tenantApplications)}">
+        No TenantApplications found!
+    </div>
+
+</div>
+</body>
+</html>
+

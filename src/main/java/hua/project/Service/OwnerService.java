@@ -44,8 +44,5 @@ public void savePropertyToOwner(Owner owner, Property property) {
     propertyService.saveProperty(property);
 
 }
-//    public Owner findByUsername(String username) {
-//    }
-
 
 }

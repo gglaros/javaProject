@@ -12,7 +12,7 @@
 <h1>Υποβολή Αίτησης</h1>
     <div th:if="${not #lists.isEmpty(properties)}">
 <form action="/applications/submit" method="post" th:object="${app}">
-    <input type="hidden" th:field="*{owner}" />
+    <input type="hidden" th:field="*{owner.id}" />
 
     <select name="property">
         <option th:each="property : ${properties}"

@@ -88,4 +88,16 @@ public class TenantApplication {
     public void setRentPrice(double rentPrice) {
         this.rentPrice = rentPrice;
     }
+
+    @Override
+    public String toString() {
+        return "TenantApplication{" +
+                "id=" + id +
+                ", status=" + status +
+                ", property=" + property +
+                ", owner=" + owner +
+                ", tenant=" + tenant +
+                ", rentPrice=" + rentPrice +
+                '}';
+    }
 }

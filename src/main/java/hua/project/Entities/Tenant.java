@@ -86,6 +86,17 @@ public class Tenant {
 
         public void setTenantApplications(List<TenantApplication> tenantApplications) {
             this.tenantApplications = tenantApplications;
-        }
     }
+
+    @Override
+    public String toString() {
+        return "Tenant{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+}
 

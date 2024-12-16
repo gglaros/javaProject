@@ -34,8 +34,15 @@ public List<Property> getAllProperty() {
     @Transactional
     public List<Property> getPropertiesByOwnersId(int ownerId) {
         return getAllProperty().stream()
-                .filter(property -> property.getOwner() != null && property.getOwner().getId() == ownerId).collect(Collectors.toList());
+                .filter(property -> property.getStatus() != null && property.getOwner().getId() == ownerId).collect(Collectors.toList());
     }
+
+
+@Transactional
+public List<Property> getPropertiesByOnEyeStatus() {
+  return getAllProperty().stream()
+    .filter(property ->property.getStatus() != null && property.getStatus().equalsIgnoreCase("on eye")).collect(Collectors.toList());
+ }
 
 
 @Transactional
@@ -44,11 +51,11 @@ public void saveProperty(Property property) {
 }
 
 
-    @Transactional
-    public void saveStatusProperty(Property property) {
-    property.setStatus("on eye");
-    propertyRepository.save(property);
-    }
+@Transactional
+ public void saveStatusProperty(Property property) {
+  property.setStatus("on eye");
+  propertyRepository.save(property);
+}
 
 
 

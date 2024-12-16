@@ -113,7 +113,6 @@ public class Property {
                 ", address='" + address + '\'' +
                 ", rentPrice=" + rentPrice +
                 ", status=" + status +
-                ", owner=" + owner +
                 '}';
     }
 }
