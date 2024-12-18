@@ -6,10 +6,7 @@ import hua.project.Service.TenantApplicationService;
 import hua.project.Service.TenantService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,12 @@ public class TenantController {
         return "tenant/tenantList";
     }
 
+    @GetMapping("MyApplications/{tenantId}")
+    public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
+        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(tenantId);
+        model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
+        return "applicationTenant/tenantApplications";
+    }
 
     @GetMapping("/all/applications")
     public String showAllTenantApplications(Model model) {

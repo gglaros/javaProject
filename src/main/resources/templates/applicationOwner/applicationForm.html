@@ -11,13 +11,13 @@
 <div layout:fragment="main-content">
 <h1>Υποβολή Αίτησης</h1>
     <div th:if="${not #lists.isEmpty(properties)}">
-<form action="/applications/submit" method="post" th:object="${app}">
-    <input type="hidden" th:field="*{owner.id}" />
+<form th:action="@{/applications/submit}" method="post" th:object="${app}">
+    <input type="hidden" th:name="ownerId" th:value="${owner.id}" />
 
     <select name="property">
         <option th:each="property : ${properties}"
                 th:value="${property.getId()}"
-                th:text="${property.getCity() + ' ' +property.getAddress()}"></option>
+             th:text="${property.getCity() + ' ' +property.getAddress() }"></option>       <!--   am valo to owner edo ektiponei to id-->
     </select>
 
     <button type="submit">Υποβολή Αίτησης</button>

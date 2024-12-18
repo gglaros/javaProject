@@ -62,10 +62,7 @@ public class OwnerController {
 
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
-        System.out.println(id);
-     //   System.out.println(property.getId());
         Owner owner = ownerService.getOwnerById(id);
-        System.out.println(owner.getId());
         ownerService.savePropertyToOwner(owner,property);
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";

@@ -32,13 +32,9 @@ public class TenantApplicationController {
     @GetMapping("/make/{tenantId}")
     public String showApplicationForm(@PathVariable int tenantId, Model model) {
        Tenant tenant = tenantService.getTenantById(tenantId);
-        System.out.println("get tenant = "+tenant);
        List<Property> filteredProperties = propertyService.getPropertiesByOnEyeStatus(); // owner's property and do not have application
-       System.out.println(filteredProperties.toString());
        TenantApplication tenantApplication = new TenantApplication();
        tenantApplication.setTenant(tenant);
-
-
      model.addAttribute("tenantApplication", tenantApplication);
      model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
@@ -47,18 +43,12 @@ public class TenantApplicationController {
 
     @PostMapping("/submit")
     public String submitApplication(@ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
-     //System.out.println("tenant" +  tenantApplication.getTenant());
-     System.out.println("tenantApplication submit "+tenantApplication.toString());
-     System.out.println("tenantApplication tenant submit "+tenantApplication.getTenant());
      Property property =propertyService.getPropertyById(tenantApplication.getProperty().getId());
-    System.out.println("on submit == "+property.toString());
      tenantApplication.setProperty(property);
      Owner owner = ownerService.getOwnerById(tenantApplication.getProperty().getOwner().getId());
-     System.out.println("on submit owner == "+owner);
      tenantApplication.setOwner(owner);
      tenantApplicationService.save(tenantApplication);
      List<TenantApplication> tenantApplications=tenantApplicationService.findAll();
-     System.out.println(tenantApplications);
      model.addAttribute("tenantApplications", tenantApplications);
         return "applicationTenant/tenantApplications";
     }

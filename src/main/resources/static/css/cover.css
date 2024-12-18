@@ -11,6 +11,7 @@ a:hover {
 
 .h1{
     color: #370373;
+    text-shadow: 0px 0px 5px blue , 5px -15px 3px red;
 }
 
 .table{
@@ -23,7 +24,8 @@ a:hover {
 }
 
 
-/* Custom default button */
+
+    /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -39,10 +41,10 @@ a:hover {
     --color: #7d05ea;
     font-family: inherit;
     display: block;
-    width: 7em;
+    width: 6em;
     height: 2.1em;
     line-height: 2.1em;
-    margin: 10px;
+    margin: 5px;
     text-decoration: none;
     position: relative;
     cursor: pointer;
@@ -62,8 +64,8 @@ a:hover {
     position: absolute;
     z-index: -1;
     background: var(--color);
-    height: 150px;
-    width: 200px;
+    height: 120px;
+    width: 180px;
     border-radius: 50%;
 }
 
@@ -192,10 +194,13 @@ body {
 
 .masthead-brand {
     margin-bottom: 0;
+    margin-right: 15px;
+
 }
 
+
 .nav-masthead .nav-link {
-    padding: .25rem 0;
+    padding: .35rem 0;
     font-weight: 700;
     color: rgba(255, 255, 255, .5);
     background-color: transparent;
@@ -216,6 +221,8 @@ body {
     border-bottom-color: #fff;
 
 }
+
+
 
 @media (min-width: 48em) {
     .masthead-brand {

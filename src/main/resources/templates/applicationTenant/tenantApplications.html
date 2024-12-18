@@ -20,7 +20,8 @@
                 <th>Property Address</th>
                 <th>Property RentPrice</th>
                 <th>Owner</th>
-                <th>Actions</th>
+                <th>Owner's Email</th>
+                <th>App Status</th>
             </tr>
             </thead>
             <tbody>
@@ -29,7 +30,8 @@
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getAddress() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property!=null ? Tenantapp.getProperty().getRentPrice() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getOwner().getFirstName() : 'NO'}"></td>
-                <td th:text="${Tenantapp.getRentPrice() !=null ? Tenantapp.getRentPrice() : ''}"></td>
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getOwner().getEmail() : 'NO'}"></td>
+                <td th:text="${Tenantapp.getStatus() !=null ? Tenantapp.getStatus() : 'waiting'}"></td>
 
                 <!--                <td>-->
 <!--                    <a class="btn btn-outline-light btn-sm"-->
