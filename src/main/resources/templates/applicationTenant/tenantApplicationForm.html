@@ -13,20 +13,57 @@
     <div th:if="${not #lists.isEmpty(properties)}">
         <form action="/tenantApplications/submit" method="post" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
-<!--            <input type="hidden" th:field="*{property.getOwner().id}" />-->
 
-            <select name="property">
-                <option th:each="property : ${properties}"
-                        th:value="${property.getId()}"
-                        th:text="${property.getCity() + ' ' +property.getAddress()}"></option>
-            </select>
 
-            <button type="submit">Υποβολή Αίτησης</button>
+            <!--            <input type="hidden" th:field="*{property.getOwner().id}" />-->
+
+<!--            <select name="property">-->
+<!--                <option th:each="property : ${properties}"-->
+<!--                        th:value="${property.getId()}"-->
+<!--                        th:text="${property.getCity() + ' ' +property.getAddress()}"></option>-->
+<!--            </select>-->
+
+<!--            <button type="submit">Υποβολή Αίτησης</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div th:if="${#lists.isEmpty(properties)}">-->
+<!--       THERE IS NO  <strong>PROPERTY ON EYE YET</strong>, try again later-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+            <table class="property-table">
+                <thead>
+                <tr>
+                    <th class="property-header">City</th>
+                    <th class="property-header">Address</th>
+                    <th class="property-header">Price (€)</th>
+                    <th class="property-header">Description</th>
+                    <th class="property-header">Owner</th>
+                    <th class="property-header">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="property-row" th:each="property : ${properties}">
+                    <td class="property-cell" title="City" th:text="${property.getCity()}"></td>
+                    <td class="property-cell" title="Address" th:text="${property.getAddress()}"></td>
+                    <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
+                    <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
+                    <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>
+                    <td class="property-cell">
+                        <button type="submit" name="propertyId" th:value="${property.getId()}">Select</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
         </form>
     </div>
     <div th:if="${#lists.isEmpty(properties)}">
-       THERE IS NO  <strong>PROPERTY ON EYE YET</strong>, try again later
-
+        THERE IS NO <strong>PROPERTY ON EYE YET</strong>, try again later
     </div>
 </div>
 </body>

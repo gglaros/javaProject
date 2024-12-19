@@ -41,16 +41,32 @@ public class TenantApplicationController {
     }
 
 
+//    @PostMapping("/submit")
+//    public String submitApplication(@ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
+//     Property property =propertyService.getPropertyById(tenantApplication.getProperty().getId());
+//     tenantApplication.setProperty(property);
+//     Owner owner = ownerService.getOwnerById(tenantApplication.getProperty().getOwner().getId());
+//     tenantApplication.setOwner(owner);
+//     tenantApplicationService.save(tenantApplication);
+//     List<TenantApplication> tenantApplications=tenantApplicationService.findAll();
+//     model.addAttribute("tenantApplications", tenantApplications);
+//        return "applicationTenant/tenantApplications";
+//    }
+
+
     @PostMapping("/submit")
-    public String submitApplication(@ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
-     Property property =propertyService.getPropertyById(tenantApplication.getProperty().getId());
-     tenantApplication.setProperty(property);
-     Owner owner = ownerService.getOwnerById(tenantApplication.getProperty().getOwner().getId());
-     tenantApplication.setOwner(owner);
-     tenantApplicationService.save(tenantApplication);
-     List<TenantApplication> tenantApplications=tenantApplicationService.findAll();
-     model.addAttribute("tenantApplications", tenantApplications);
+    public String submitApplication(@RequestParam("propertyId") int propertyId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
+        Property property = propertyService.getPropertyById(propertyId);
+        tenantApplication.setProperty(property);
+        Owner owner = ownerService.getOwnerById(property.getOwner().getId());
+        tenantApplication.setOwner(owner);
+        tenantApplicationService.save(tenantApplication);
+
+        List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
+        model.addAttribute("tenantApplications", tenantApplications);
         return "applicationTenant/tenantApplications";
     }
+
+
 
 }

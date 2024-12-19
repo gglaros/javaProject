@@ -3,6 +3,42 @@
  */
 
 /* Links */
+
+/*css for tenantApplicationForm*/
+
+.property-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.property-header, .property-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.property-header {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.property-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.property-row:hover {
+    background-color: #ddd;
+}
+
+
+/*end css for tenantApplicationForm*/
+
+
+
+
+
+
+
+
 a,
 a:focus,
 a:hover {
