@@ -44,7 +44,7 @@ public class TenantController {
 
 
     @GetMapping("/new")
-    public String addOwner(Model model) {
+    public String addTenant(Model model) {
         Tenant tenant = new Tenant();
         model.addAttribute("tenant", tenant);
         return "tenant/tenant";
@@ -52,7 +52,7 @@ public class TenantController {
 
 
     @PostMapping("/new")
-    public String saveOwner(@ModelAttribute("tenant") Tenant tenant, Model model) {
+    public String saveTenant(@ModelAttribute("tenant") Tenant tenant, Model model) {
         tenantService.saveTenant(tenant);
         model.addAttribute("tenants", tenantService.getAllTenants()  );
         return "tenant/tenantList";

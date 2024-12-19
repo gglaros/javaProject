@@ -35,18 +35,6 @@ public class OwnerApplicationController {
     }
 
 
-//    @GetMapping("/make/{ownerId}")
-//    public String showApplicationForm(@PathVariable int ownerId, Model model) {
-//        Owner owner = ownerService.getOwnerById(ownerId);
-//        System.out.println("getMapping ownerId "+ownerId);
-//        List<Property> filteredProperties = propertyService.getPropertiesByOwnerId(ownerId); // owner's property and do not have application
-//        OwnerApplication application = new OwnerApplication();
-//        application.setOwner(owner);
-//        model.addAttribute("properties", filteredProperties );
-//        model.addAttribute("app", application);
-//        return "applicationOwner/applicationForm";
-//    }
-
     @GetMapping("/make/{ownerId}")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
@@ -58,15 +46,6 @@ public class OwnerApplicationController {
     }
 
 
-//    @PostMapping("/submit")
-//    public String submitApplication( @ModelAttribute("application") OwnerApplication application, Model model) {
-//        Property property = propertyService.getPropertyById(application.getProperty().getId());
-//        ownerApplicationService.saveOwnerApplication(application,property);
-//        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
-//        return "applicationOwner/applications";
-//    }
-
-
     @PostMapping("/submit")
     public String submitApplication(@ModelAttribute("app") OwnerApplication application, @RequestParam("ownerId") int ownerId,Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
@@ -76,7 +55,6 @@ public class OwnerApplicationController {
         model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
         return "applicationOwner/applications";
     }
-
 
 
     @GetMapping("/change/appStatus/{appId}")

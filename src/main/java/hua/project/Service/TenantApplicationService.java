@@ -1,7 +1,6 @@
 package hua.project.Service;
 
-import hua.project.Entities.Property;
-import hua.project.Entities.TenantApplication;
+import hua.project.Entities.*;
 import hua.project.Repository.OwnerRepository;
 import hua.project.Repository.PropertyRepository;
 import hua.project.Repository.TenantApplicationRepository;
@@ -26,12 +25,20 @@ public class TenantApplicationService {
     }
 
 
-    public void save(TenantApplication tenantApplication) {
+    public void save(TenantApplication tenantApplication, Property property, Owner owner) {
+        tenantApplication.setStatus(Status.PENDING_APPROVAL);
+        tenantApplication.setProperty(property);
+        tenantApplication.setOwner(owner);
         tenantApplicationRepository.save(tenantApplication);
     }
 
     public List<TenantApplication> findAll() {
         return tenantApplicationRepository.findAll();
+    }
+
+    @Transactional
+    public TenantApplication getTenantApplicationById(Integer id) {
+        return tenantApplicationRepository.findById(id).get();
     }
 
 
@@ -43,8 +50,24 @@ public class TenantApplicationService {
     }
 
 
-
-
-
-
+    @Transactional
+    public void processTenantApplicationAction(int appId, String action) {
+        TenantApplication tenantApplication = getTenantApplicationById(appId);
+        if (tenantApplication == null) {
+            throw new IllegalArgumentException("Application not found for ID: " + appId);
+        }
+        Property property = tenantApplication.getProperty();
+        if ("confirm".equalsIgnoreCase(action)) {
+            propertyService.saveStatusProperty(property);
+            tenantApplication.setStatus(Status.APPROVED);
+            tenantApplicationRepository.save(tenantApplication);
+        } else if ("reject".equalsIgnoreCase(action)) {
+            property.setStatus("not on eye");
+            propertyService.saveProperty(property);
+            tenantApplication.setStatus(Status.REJECTED);
+            tenantApplicationRepository.save(tenantApplication);
+        } else {
+            throw new IllegalArgumentException("Invalid action: " + action);
+        }
+    }
 }

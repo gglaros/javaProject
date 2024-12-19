@@ -57,13 +57,26 @@ public class TenantApplicationController {
     @PostMapping("/submit")
     public String submitApplication(@RequestParam("propertyId") int propertyId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
         Property property = propertyService.getPropertyById(propertyId);
-        tenantApplication.setProperty(property);
         Owner owner = ownerService.getOwnerById(property.getOwner().getId());
-        tenantApplication.setOwner(owner);
-        tenantApplicationService.save(tenantApplication);
-
+        tenantApplicationService.save(tenantApplication,property,owner);
         List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
         model.addAttribute("tenantApplications", tenantApplications);
+        return "applicationTenant/tenantApplications";
+    }
+
+
+
+    @GetMapping("/change/appStatus/{appId}")
+    public String changeStatusApplication(@PathVariable int appId, Model model) {
+        TenantApplication tenantApplication =tenantApplicationService.getTenantApplicationById(appId);
+        model.addAttribute("app", tenantApplication);
+        return "applicationTenant/tenantAppChangeStatus";
+    }
+
+    @PostMapping("/change/appStatus/{appId}")
+    public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
+        tenantApplicationService.processTenantApplicationAction(appId, action);
+        model.addAttribute("tenantApplications", tenantApplicationService.findAll());
         return "applicationTenant/tenantApplications";
     }
 

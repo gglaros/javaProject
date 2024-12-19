@@ -10,7 +10,6 @@
 <body>
 <div layout:fragment="main-content">
     <form th:action="@{/applications/change/appStatus/{id}(id=${app.id})}" th:object="${app}" method="post">
-<!--an einai etsi einai san keno-->
     <div>
         <table class="table">
             <thead>
@@ -19,6 +18,8 @@
                 <th>Description</th>
                 <th>Address</th>
                 <th>Rent Price</th>
+                <th>owner's email</th>
+                <th>ACTIONS</th>
             </tr>
             </thead>
             <tbody>
@@ -27,11 +28,12 @@
             <td th:text="${app.property.description}"></td>
             <td th:text="${app.property.address}"></td>
             <td th:text="${app.property.rentPrice}"></td>
+            <td th:text="${app.owner.email}"></td>
+
                 <td>
-                <td>
-                    <button type="submit" name="action" value="confirm" class="btn">Confirm</button>
-                    <button type="submit" name="action" value="reject" class="btn">Reject</button>
-                </td>
+                    <button type="submit" name="action" value="confirm" class="button">Confirm</button>
+                    <button type="submit" name="action" value="reject" class="button">Reject</button>
+                    </td>
             </tr>
             </tbody>
         </table>
