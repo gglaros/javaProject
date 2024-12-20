@@ -2,6 +2,7 @@ package hua.project.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Owner {
     private int id;
 
     @Column
+   // @Size(min = 5, max = 50)
     private String firstName;
 
     @Column

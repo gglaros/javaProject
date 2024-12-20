@@ -1,8 +1,10 @@
 package hua.project.Service;
 
 import hua.project.Entities.Property;
+import hua.project.Entities.TenantApplication;
 import hua.project.Repository.PropertyRepository;
 import jakarta.transaction.Transactional;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,14 +38,6 @@ public List<Property> getAllProperty() {
         return getAllProperty().stream()
                 .filter(property -> property.getStatus() != null && property.getOwner().getId() == ownerId).collect(Collectors.toList());
     }
-
-
-@Transactional
-public List<Property> getPropertiesByOnEyeStatus() {
-  return getAllProperty().stream()
-    .filter(property ->property.getStatus() != null && property.getStatus().equalsIgnoreCase("on eye")).collect(Collectors.toList());
- }
-
 
 @Transactional
 public void saveProperty(Property property) {

@@ -3,6 +3,7 @@ package hua.project.Controllers;
 import hua.project.Entities.Owner;
 import hua.project.Entities.Property;
 import hua.project.Service.PropertyService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
 import hua.project.Service.OwnerService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class OwnerController {
         this.propertyService = propertyService;
     }
 
+//    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showOwners(Model model) {
         model.addAttribute("owners", ownerService.getAllOwners());

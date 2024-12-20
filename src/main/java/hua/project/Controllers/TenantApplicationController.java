@@ -32,26 +32,13 @@ public class TenantApplicationController {
     @GetMapping("/make/{tenantId}")
     public String showApplicationForm(@PathVariable int tenantId, Model model) {
        Tenant tenant = tenantService.getTenantById(tenantId);
-       List<Property> filteredProperties = propertyService.getPropertiesByOnEyeStatus(); // owner's property and do not have application
-       TenantApplication tenantApplication = new TenantApplication();
+        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(tenantId);
+        TenantApplication tenantApplication = new TenantApplication();
        tenantApplication.setTenant(tenant);
      model.addAttribute("tenantApplication", tenantApplication);
      model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
     }
-
-
-//    @PostMapping("/submit")
-//    public String submitApplication(@ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
-//     Property property =propertyService.getPropertyById(tenantApplication.getProperty().getId());
-//     tenantApplication.setProperty(property);
-//     Owner owner = ownerService.getOwnerById(tenantApplication.getProperty().getOwner().getId());
-//     tenantApplication.setOwner(owner);
-//     tenantApplicationService.save(tenantApplication);
-//     List<TenantApplication> tenantApplications=tenantApplicationService.findAll();
-//     model.addAttribute("tenantApplications", tenantApplications);
-//        return "applicationTenant/tenantApplications";
-//    }
 
 
     @PostMapping("/submit")
