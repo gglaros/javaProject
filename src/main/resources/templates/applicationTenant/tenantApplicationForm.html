@@ -13,29 +13,7 @@
     <div th:if="${not #lists.isEmpty(properties)}">
         <form action="/tenantApplications/submit" method="post" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
-
-
-            <!--            <input type="hidden" th:field="*{property.getOwner().id}" />-->
-
-<!--            <select name="property">-->
-<!--                <option th:each="property : ${properties}"-->
-<!--                        th:value="${property.getId()}"-->
-<!--                        th:text="${property.getCity() + ' ' +property.getAddress()}"></option>-->
-<!--            </select>-->
-
-<!--            <button type="submit">Υποβολή Αίτησης</button>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--    <div th:if="${#lists.isEmpty(properties)}">-->
-<!--       THERE IS NO  <strong>PROPERTY ON EYE YET</strong>, try again later-->
-
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
-
-            <table class="property-table">
+             <table class="property-table">
                 <thead>
                 <tr>
                     <th class="property-header">City</th>

@@ -23,7 +23,6 @@ public class OwnerController {
         this.propertyService = propertyService;
     }
 
-//    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showOwners(Model model) {
         model.addAttribute("owners", ownerService.getAllOwners());

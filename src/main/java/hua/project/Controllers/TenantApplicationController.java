@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("tenantApplications")
 public class TenantApplicationController {
 
-    private  TenantService tenantService;
-    private  PropertyService propertyService;
-    private OwnerService ownerService;
-    private TenantApplicationService tenantApplicationService;
+    private final TenantService tenantService;
+    private final PropertyService propertyService;
+    private final OwnerService ownerService;
+    private final TenantApplicationService tenantApplicationService;
 
     public TenantApplicationController(TenantService tenantService, PropertyService propertyService, OwnerService ownerService, TenantApplicationService tenantApplicationService) {
         this.tenantService = tenantService;
@@ -25,8 +25,6 @@ public class TenantApplicationController {
         this.ownerService = ownerService;
         this.tenantApplicationService = tenantApplicationService;
     }
-
-
 
 
     @GetMapping("/make/{tenantId}")
@@ -43,6 +41,7 @@ public class TenantApplicationController {
 
     @PostMapping("/submit")
     public String submitApplication(@RequestParam("propertyId") int propertyId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
+        System.out.println("hello");
         Property property = propertyService.getPropertyById(propertyId);
         Owner owner = ownerService.getOwnerById(property.getOwner().getId());
         tenantApplicationService.save(tenantApplication,property,owner);
@@ -50,7 +49,6 @@ public class TenantApplicationController {
         model.addAttribute("tenantApplications", tenantApplications);
         return "applicationTenant/tenantApplications";
     }
-
 
 
     @GetMapping("/change/appStatus/{appId}")
