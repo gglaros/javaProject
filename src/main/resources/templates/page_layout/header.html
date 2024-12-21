@@ -16,11 +16,11 @@
         <h3 class="masthead-brand">Cover</h3>
         <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="/" data-path="/">Home</a>
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/owner" data-path="/owner">Owners</a>
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/property" data-path="/property">Properties</a>
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/applications" data-path="/applications">Applications</a>
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/tenant" data-path="/tenant">Tenants</a>
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">TenantApps</a>
+            <a   class="nav-link" href="/owner" data-path="/owner">Owners</a>
+            <a  class="nav-link" href="/property" data-path="/property">Properties</a>
+            <a  class="nav-link" href="/applications" data-path="/applications">Applications</a>
+            <a  class="nav-link" href="/tenant" data-path="/tenant">Tenants</a>
+            <a  class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">TenantApps</a>
 
             <a sec:authorize="isAuthenticated()"  class="nav-link">
                 <form th:action="@{/logout}" method="post">

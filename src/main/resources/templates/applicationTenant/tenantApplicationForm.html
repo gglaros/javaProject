@@ -11,7 +11,7 @@
 <div layout:fragment="main-content">
     <h1>Υποβολή Αίτησης</h1>
     <div th:if="${not #lists.isEmpty(properties)}">
-        <form action="/tenantApplications/submit" method="post" th:object="${tenantApplication}">
+        <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
              <table class="property-table">
                 <thead>
