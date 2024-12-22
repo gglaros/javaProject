@@ -27,10 +27,8 @@
                 <td th:text="${tenant.email}"></td>
                 <td>
                     <a class="button" th:href="@{'/tenant/MyApplications/' + ${tenant.id}}">My Apps </a>
-<!--                                        <a class="Btn" th:href="@{'/owner/show/properties/' + ${owner.id}}">Details </a>-->
                 </td>
                 <td>
-<!--                    <a class="button" th:href="@{'/owner/make/property/' + ${tenant.id}  }">add property</a>-->
                     <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>
                 </td>
             </tr>

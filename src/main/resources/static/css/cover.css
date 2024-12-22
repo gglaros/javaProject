@@ -6,6 +6,41 @@
 
 /*css for tenantApplicationForm*/
 
+.ipovoli{
+    margin-bottom: 20px;
+}
+
+
+.center-button-container {
+    display: flex;            /* Χρήση Flexbox για κεντράρισμα */
+    justify-content: center;  /* Κεντράρει οριζόντια το κουμπί */
+    align-items: center;      /* Κεντράρει κάθετα το κουμπί */
+    margin-top: 20px;         /* Απόσταση από το πάνω περιεχόμενο */
+}
+
+.center-button-container .button {
+    display: flex;            /* Flexbox και για το κουμπί */
+    justify-content: center;  /* Κεντράρει οριζόντια το περιεχόμενο του κουμπιού */
+    align-items: center;      /* Κεντράρει κάθετα το περιεχόμενο του κουμπιού */
+    padding: 10px 20px;       /* Διαστάσεις του κουμπιού */
+    font-size: 16px;          /* Μέγεθος γραμματοσειράς */
+    background-color: #007bff; /* Μπλε χρώμα */
+    color: white;             /* Άσπρο χρώμα γραμματοσειράς */
+    border: none;             /* Χωρίς περίγραμμα */
+    border-radius: 5px;       /* Στρογγυλεμένες γωνίες */
+    cursor: pointer;          /* Αλλαγή δείκτη σε χέρι */
+    text-align: center;       /* Ευθυγράμμιση κειμένου στο κέντρο */
+}
+
+
+.center-button-container .button:hover {
+    background-color: #7304f6; /* Σκούρο μπλε στο hover */
+}
+
+
+
+
+
 .property-table {
     border-collapse: collapse;
     width: 100%;
@@ -13,7 +48,7 @@
 
 .property-header, .property-cell {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
 }
 
 .property-header {

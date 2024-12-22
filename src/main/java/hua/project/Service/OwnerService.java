@@ -3,6 +3,7 @@ package hua.project.Service;
 import hua.project.Entities.Owner;
 import hua.project.Entities.Property;
 import hua.project.Repository.OwnerRepository;
+import hua.project.Repository.PropertyRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,11 @@ public class OwnerService {
 
 private final OwnerRepository ownerRepository;
 
-private final PropertyService propertyService;
+private final PropertyRepository propertyRepository;
 
-public OwnerService(OwnerRepository ownerRepository, PropertyService propertyService) {
+public OwnerService(OwnerRepository ownerRepository,PropertyRepository propertyRepository ) {
     this.ownerRepository = ownerRepository;
-    this.propertyService = propertyService;
+    this.propertyRepository = propertyRepository;
 }
 
 @Transactional
@@ -41,7 +42,8 @@ public Owner getOwnerById(Integer id) {
 @Transactional
 public void savePropertyToOwner(Owner owner, Property property) {
     property.setOwner(owner);
-    propertyService.saveProperty(property);
+   // propertyService.saveProperty(property);
+    propertyRepository.save(property);
 
 }
 

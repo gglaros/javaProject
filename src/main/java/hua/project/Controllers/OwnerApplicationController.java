@@ -7,6 +7,7 @@ import hua.project.Entities.Status;
 import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class OwnerApplicationController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/change/appStatus/{appId}")
     public String changeStatusApplication(@PathVariable int appId, Model model) {
         OwnerApplication ownerApplication = ownerApplicationService.getOwnerApplicationById(appId);
@@ -64,6 +66,7 @@ public class OwnerApplicationController {
         return "applicationOwner/applicationStatusChange";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
         ownerApplicationService.processApplicationAction(appId, action);

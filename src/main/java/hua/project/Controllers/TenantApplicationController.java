@@ -41,10 +41,10 @@ public class TenantApplicationController {
 
     @PostMapping("/submit")
     public String submitApplication(@RequestParam("propertyId") int propertyId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
-        System.out.println("hello");
         Property property = propertyService.getPropertyById(propertyId);
         Owner owner = ownerService.getOwnerById(property.getOwner().getId());
         tenantApplicationService.save(tenantApplication,property,owner);
+        System.out.println(List.of(tenantApplication));
         List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
         model.addAttribute("tenantApplications", tenantApplications);
         return "applicationTenant/tenantApplications";
