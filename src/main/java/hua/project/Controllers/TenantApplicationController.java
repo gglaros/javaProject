@@ -5,6 +5,7 @@ import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
 import hua.project.Service.TenantApplicationService;
 import hua.project.Service.TenantService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +59,7 @@ public class TenantApplicationController {
         return "applicationTenant/tenantAppChangeStatus";
     }
 
+    @Secured("ROLE_TENANT")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
         tenantApplicationService.processTenantApplicationAction(appId, action);

@@ -1,5 +1,6 @@
 package hua.project.Service;
 
+import hua.project.Controllers.OwnerController;
 import hua.project.Entities.Role;
 import hua.project.Entities.Tenant;
 import hua.project.Entities.User;
@@ -15,6 +16,7 @@ import hua.project.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,24 +37,29 @@ public class UserService implements UserDetailsService {
         this.tenantRepository = tenantRepository;
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
 
     @Transactional
-    public Integer saveUser(User user) {
+    public Integer saveUser(User user,int roleId) {
         System.out.println("i am in");
         String passwd= user.getPassword();
         String encodedPassword = passwordEncoder.encode(passwd);
         user.setPassword(encodedPassword);
 
-        Role role = roleRepository.findByName("ROLE_TENANT")
+        Role role = roleRepository.findById(roleId)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         Set<Role> roles = new HashSet<>();
+        System.out.println("roleee "+role);
 
-        Tenant tenant = new Tenant();
-        tenant.setFirstName(user.getUsername());
-        tenant.setLastName(user.getUsername());
-        tenant.setEmail(user.getEmail());
-        tenant.setPhone("63484548");
-        tenantRepository.save(tenant);
+//        Tenant tenant = new Tenant();
+//        tenant.setFirstName(user.getUsername());
+//        tenant.setLastName(user.getUsername());
+//        tenant.setEmail(user.getEmail());
+//        tenant.setPhone("63484548");
+//        tenantRepository.save(tenant);
 
         roles.add(role);
         user.setRoles(roles);

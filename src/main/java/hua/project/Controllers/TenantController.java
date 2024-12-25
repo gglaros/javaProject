@@ -4,6 +4,7 @@ import hua.project.Entities.Tenant;
 import hua.project.Entities.TenantApplication;
 import hua.project.Service.TenantApplicationService;
 import hua.project.Service.TenantService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,13 @@ public class TenantController {
         this.tenantApplicationService = tenantApplicationService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showTenants(Model model) {
         model.addAttribute("tenants", tenantService.getAllTenants());
         return "tenant/tenantList";
     }
+
 
     @GetMapping("MyApplications/{tenantId}")
     public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
@@ -35,6 +38,7 @@ public class TenantController {
         return "applicationTenant/tenantApplications";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/all/applications")
     public String showAllTenantApplications(Model model) {
         List<TenantApplication> tenantApplications=tenantApplicationService.findAll();

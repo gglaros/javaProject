@@ -35,6 +35,7 @@ public class OwnerController {
         return "owner/ownersList";
     }
 
+    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @GetMapping("/new")
     public String addOwner(Model model) {
         Owner owner = new Owner();
@@ -42,7 +43,7 @@ public class OwnerController {
         return "owner/Owner";
     }
 
-
+    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @PostMapping("/new")
     public String saveOwner(@ModelAttribute("owner") Owner owner, Model model) {
         ownerService.saveOwner(owner);
@@ -50,7 +51,7 @@ public class OwnerController {
         return "owner/ownersList";
     }
 
-
+@Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @GetMapping("/make/property/{id}")
     public String addProperty(@PathVariable int id, Model model) {
         Property property = new Property();
@@ -60,7 +61,7 @@ public class OwnerController {
         return "property/propertyForm";
     }
 
-
+    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
@@ -68,6 +69,7 @@ public class OwnerController {
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";
     }
+
 
 @GetMapping("show/properties/{id}")
 public String showOwnerProperties(Model model, @PathVariable int id) {
