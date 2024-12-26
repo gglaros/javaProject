@@ -37,11 +37,18 @@ public class OwnerController {
         return "owner/ownersList";
     }
 
-    @GetMapping("/profile/{id}")
-    public String showOwnerId(Model model, @PathVariable Integer id) {
-        model.addAttribute("owner", ownerService.getOwnerById(id));
+
+
+    @GetMapping("/profile")
+    public String viewProfile(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        System.out.println(username);
+        Owner owner = ownerService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Owner not found"));
+        model.addAttribute("owner", owner);
         return "owner/ownerProfile";
     }
+
 
 
 //    @GetMapping("/profileStatus")

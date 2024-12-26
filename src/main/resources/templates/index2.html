@@ -4,20 +4,15 @@
 <!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
 <!--      layout:decorate="~{page_layout/layout}"-->
 <!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">-->
-
-
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <link rel="stylesheet" href="src/main/resources/static/css/cover.css">-->
-<!--    <script src="https://kit.fontawesome.com/d2a7e9e4df.js" crossorigin="anonymous"></script>-->
+<!--    <title>Owners</title>-->
 <!--</head>-->
 <!--<body>-->
 <!--<div layout:fragment="main-content">-->
-<!--    <a  sec:authorize="isAuthenticated() && hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/profile/{id}(id=${user.id})}" data-path="/property">Profile</a>-->
-<!--    <h1 class="h1">Welcome to Rentals page!</h1>-->
+<!--    <a class="Btn" th:href="@{'/owner/profile/' + ${owner.id}}">Profile</a>-->
 
+<!--    </div>-->
 
-<!--</div>-->
 <!--</body>-->
 <!--</html>-->

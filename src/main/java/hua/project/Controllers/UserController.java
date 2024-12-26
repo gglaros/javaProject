@@ -3,9 +3,11 @@ package hua.project.Controllers;
 import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
 import hua.project.Service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute User user, @RequestParam("roleId") int roleId, Model model){
-        System.out.println("Roles: "+user.getRoles());
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult result ,@RequestParam("roleId") int roleId, Model model){
+        if (userService.existsByUsername(user.getUsername())) {
+            model.addAttribute("error", "The username is already taken. Please choose another one.");
+            model.addAttribute("roles", roleRepository.findAll());
+            return "auth/register";
+        }
         userService.saveUser(user,roleId);
-        System.out.println("Roles: "+user.getRoles());
-        System.out.println("Id: "+roleId);
+
         return "index";
     }
 

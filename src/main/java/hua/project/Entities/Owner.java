@@ -39,6 +39,11 @@ public class Owner {
             CascadeType.DETACH, CascadeType.REMOVE,CascadeType.REFRESH})
     public List<OwnerApplication> ownerApplications;
 
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Owner(int id, String firstName, String lastName, String email, String phone) {
         this.id = id;
         this.firstName = firstName;
@@ -51,7 +56,13 @@ public class Owner {
     public Owner() {
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<OwnerApplication> getOwnerApplications() {
         return ownerApplications;

@@ -61,6 +61,16 @@ private OwnerRepository ownerRepository;
         roles.add(role);
         user.setRoles(roles);
         userRepository.save(user);
+        if(role.getName().equalsIgnoreCase("ROLE_OWNER")) {
+            Owner owner = new Owner();
+            owner.setFirstName(user.getFirstName());
+            owner.setLastName(user.getLastName());
+            owner.setEmail(user.getEmail());
+            owner.setPhone(user.getPhone());
+            owner.setUser(user);
+            ownerRepository.save(owner);
+        }
+
 
 
     }
@@ -81,7 +91,7 @@ private OwnerRepository ownerRepository;
         else {
             User user = opt.get();
             return new org.springframework.security.core.userdetails.User(
-                    user.getEmail(),
+                    user.getUsername(),
                     user.getPassword(),
                     user.getRoles()
                             .stream()
@@ -89,5 +99,9 @@ private OwnerRepository ownerRepository;
                             .collect(Collectors.toSet())
             );
         }
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 }

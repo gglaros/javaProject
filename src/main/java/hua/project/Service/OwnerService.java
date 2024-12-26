@@ -31,23 +31,9 @@ public List<Owner> getAllOwners() {
     return ownerRepository.findAll();
 }
 
-//    public boolean hasProfile(String username) {
-//        User user = userRepository.findByUsername(username) .orElseThrow(() -> new RuntimeException("User not found"));
-//        if (user == null) {
-//            throw new RuntimeException("User not found");
-//        }
-//        return ownerRepository.existsByUser(Optional.of(user));
-//    }
-//
-//    public void saveOwnere(Owner owner, String username) {
-//        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
-//        if (user == null) {
-//            throw new RuntimeException("User not found");
-//        }
-//
-//        owner.setUser(user);
-//        ownerRepository.save(owner);
-//    }
+    public Optional<Owner> findByUsername(String username) {
+        return ownerRepository.findByUser_Username(username);
+    }
 
 @Transactional
 public void saveOwner(Owner owner) {
