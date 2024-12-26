@@ -1,9 +1,9 @@
 package hua.project.Service;
 
-import hua.project.Controllers.OwnerController;
+import hua.project.Entities.Owner;
 import hua.project.Entities.Role;
-import hua.project.Entities.Tenant;
 import hua.project.Entities.User;
+import hua.project.Repository.OwnerRepository;
 import hua.project.Repository.TenantRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,25 +25,30 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
-
+private OwnerRepository ownerRepository;
     private RoleRepository roleRepository;
     private TenantRepository tenantRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder,TenantRepository tenantRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder,TenantRepository tenantRepository,OwnerRepository ownerRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.tenantRepository = tenantRepository;
+        this.ownerRepository = ownerRepository;
     }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    }
 
     @Transactional
-    public Integer saveUser(User user,int roleId) {
+    public void saveUser(User user, int roleId) {
         System.out.println("i am in");
         String passwd= user.getPassword();
         String encodedPassword = passwordEncoder.encode(passwd);
@@ -52,26 +57,19 @@ public class UserService implements UserDetailsService {
         Role role = roleRepository.findById(roleId)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         Set<Role> roles = new HashSet<>();
-        System.out.println("roleee "+role);
-
-//        Tenant tenant = new Tenant();
-//        tenant.setFirstName(user.getUsername());
-//        tenant.setLastName(user.getUsername());
-//        tenant.setEmail(user.getEmail());
-//        tenant.setPhone("63484548");
-//        tenantRepository.save(tenant);
 
         roles.add(role);
         user.setRoles(roles);
+        userRepository.save(user);
 
-        user = userRepository.save(user);
 
-        return user.getId();
     }
 
 
-
-
+    @Transactional
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).get();
+    }
 
     @Override
     @Transactional

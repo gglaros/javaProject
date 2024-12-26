@@ -29,6 +29,8 @@ public class Owner {
     @Column
     private String phone;
 
+
+
     @OneToMany(mappedBy = "owner", cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REMOVE,CascadeType.REFRESH})
     public List<Property> properties;
@@ -48,6 +50,8 @@ public class Owner {
 
     public Owner() {
     }
+
+
 
     public List<OwnerApplication> getOwnerApplications() {
         return ownerApplications;

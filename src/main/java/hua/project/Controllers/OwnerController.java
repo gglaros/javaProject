@@ -2,25 +2,33 @@ package hua.project.Controllers;
 
 import hua.project.Entities.Owner;
 import hua.project.Entities.Property;
+import hua.project.Entities.User;
+import hua.project.Repository.UserRepository;
 import hua.project.Service.PropertyService;
+import hua.project.Service.UserService;
+import org.springframework.security.core.Authentication;
+
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
 import hua.project.Service.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("owner")
 public class OwnerController {
 
+    private final UserService userService;
     OwnerService ownerService;
-
     PropertyService propertyService;
 
-    public OwnerController(OwnerService ownerService, PropertyService propertyService) {
+    public OwnerController(OwnerService ownerService, PropertyService propertyService,  UserService userService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
+        this.userService = userService;
     }
 
     @GetMapping("")
@@ -29,13 +37,22 @@ public class OwnerController {
         return "owner/ownersList";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/profile/{id}")
     public String showOwnerId(Model model, @PathVariable Integer id) {
-        model.addAttribute("owners", ownerService.getOwnerById(id));
-        return "owner/ownersList";
+        model.addAttribute("owner", ownerService.getOwnerById(id));
+        return "owner/ownerProfile";
     }
 
-    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
+
+//    @GetMapping("/profileStatus")
+//    public String checkProfileStatus(Authentication authentication, Model model) {
+//        String username = authentication.getName();
+//        boolean hasProfile = ownerService.hasProfile(username);
+//        model.addAttribute("hasProfile", hasProfile);
+//        return "page_layout/header";
+//    }
+
+
     @GetMapping("/new")
     public String addOwner(Model model) {
         Owner owner = new Owner();
@@ -43,13 +60,21 @@ public class OwnerController {
         return "owner/Owner";
     }
 
-    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @PostMapping("/new")
     public String saveOwner(@ModelAttribute("owner") Owner owner, Model model) {
         ownerService.saveOwner(owner);
-        model.addAttribute("owners", ownerService.getAllOwners()  );
+        model.addAttribute("owners", ownerService.getAllOwners());
         return "owner/ownersList";
     }
+
+//@PostMapping("/new")
+//public String saveOwner(@ModelAttribute("owner") Owner owner, Authentication authentication, Model model) {
+//    String username = authentication.getName();
+//    ownerService.saveOwnere(owner, username);
+//    model.addAttribute("owners", ownerService.getAllOwners());
+//    return "owner/ownersList";
+//}
+
 
 @Secured({"ROLE_ADMIN","ROLE_OWNER"})
     @GetMapping("/make/property/{id}")
