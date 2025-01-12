@@ -34,6 +34,7 @@ public class OwnerController {
         this.tenantApplicationService = tenantApplicationService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showOwners(Model model) {
         model.addAttribute("owners", ownerService.getAllOwners());
