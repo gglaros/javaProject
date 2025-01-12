@@ -9,7 +9,7 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-    <form th:action="@{/applications/change/appStatus/{id}(id=${app.id})}" th:object="${app}" method="post">
+    <form th:action="@{/OwnerApplications/change/appStatus/{id}(id=${app.id})}" th:object="${app}" method="post">
     <div>
         <table class="table">
             <thead>

@@ -16,7 +16,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/applications")
+@RequestMapping("/OwnerApplications")
 public class OwnerApplicationController {
 
     private final OwnerApplicationService ownerApplicationService;
