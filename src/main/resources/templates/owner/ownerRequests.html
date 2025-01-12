@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <!-- Έλεγχος αν η λίστα properties δεν είναι άδεια -->
+    <div th:if="${not #lists.isEmpty(ownerRequests)}">
+        <table class="table">
+            <thead>
+            <h2 class="h2">My Requests</h2>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through properties -->
+            <tr th:each="request : ${ownerRequests}">
+                <td th:text="${request.tenant.firstName}">City</td>
+                <td th:text="${request.tenant.lastName}">Description</td>
+                <td th:text="${request.tenant.email}">Address</td>
+                <td th:text="${request.tenant.phone}">Rent Price</td>
+                <td th:text="${request.getProperty().city !=null ? request.getProperty().city : 'not maked application'}"></td>
+                <td th:text="${request.getProperty().address !=null ? request.getProperty().address : 'not maked application'}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Αν η λίστα properties είναι άδεια -->
+    <div th:if="${#lists.isEmpty(ownerRequests)}">
+        you do not have any requests
+    </div>
+</div>
+</body>
+</html>

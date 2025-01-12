@@ -15,20 +15,22 @@
         <table class="table">
             <thead>
             <tr>
+                <th>Tenant</th>
+               <th>Tenant Email</th>
                 <th>Property City</th>
                 <th>Property Address</th>
                 <th>Property RentPrice</th>
-                <th>Owner</th>
                 <th>Owner's Email</th>
                 <th>App Status</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="Tenantapp: ${tenantApplications}">
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().getUser().getUsername() : 'NO'}"></td>
+                <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().email : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getCity() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getAddress() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property!=null ? Tenantapp.getProperty().getRentPrice() : 'NO'}"></td>
-                <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getOwner().getFirstName() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getOwner().getEmail() : 'NO'}"></td>
                 <td th:text="${Tenantapp.getStatus() !=null ? Tenantapp.getStatus() : 'waiting'}"></td>
 

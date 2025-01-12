@@ -12,25 +12,32 @@
 <div layout:fragment="main-content">
     <form action="#" th:action="@{/tenant/new}" th:object="${tenant}"
           method="post">
+        <input type="hidden" th:value="${user.id}" name="userId" />
+
 
         <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" id="firstName" class="form-control" th:field="*{firstName}"  required>
+            <div class="error-message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> </div>
         </div>
 
         <div class="form-group">
             <label for="lastName">Last Name</label>
             <input type="text" id="lastName" class="form-control" th:field="*{lastName}"  required>
+            <div class="error-message" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> </div>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" class="form-control" th:field="*{email}"  required >
+            <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </div>
+
         </div>
 
         <div class="form-group">
             <label for="phone">Phone</label>
             <input type="text" id="phone" class="form-control" th:field="*{phone}"  required >
+            <div class="error-message" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"> </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

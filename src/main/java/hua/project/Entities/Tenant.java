@@ -1,6 +1,8 @@
 package hua.project.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -13,12 +15,14 @@ public class Tenant {
         private int id;
 
         @Column(nullable = false)
+        @Size(min = 3, max = 50)
         private String firstName;
 
         @Column(nullable = false)
         private String lastName;
 
         @Column(nullable = false, unique = true)
+        @Email
         private String email;
 
         @Column(nullable = false)
@@ -26,6 +30,11 @@ public class Tenant {
 
         @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<TenantApplication> tenantApplications;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 
     public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications) {
@@ -39,6 +48,15 @@ public class Tenant {
 
     public Tenant() {
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     public int getId() {
             return id;

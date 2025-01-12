@@ -1,6 +1,8 @@
 package hua.project.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -17,16 +19,21 @@ public class Owner {
     private int id;
 
     @Column
-   // @Size(min = 5, max = 50)
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String firstName;
 
+
     @Column
+    @Size(min = 3, max = 50)
     private String lastName;
 
     @Column
+    @Email
     private String email;
 
     @Column
+    @Size(min = 10, max = 10)
     private String phone;
 
 
@@ -119,7 +126,6 @@ public class Owner {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     @Override
     public String toString() {

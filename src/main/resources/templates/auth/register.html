@@ -9,56 +9,43 @@
     <title>Login</title>
 </head>
 <body>
+
 <div layout:fragment="main-content">
     <div th:if="${param.error}">
         Invalid username and password.
     </div>
-    <h3>User Registration</h3>
-    <form th:action="@{/saveUser}" method="post" th:object="${user}">
-        <div class="form-group row">
+    <h3 class="register">User Registration</h3>
+
+    <form class="newForm" th:action="@{/saveUser}" method="post" th:object="${user}">
+
+        <div class="form-group">
             <label for="username"> User Name</label>
-            <input type="text" class="form-control" th:field="*{username}" id="username"/>
+            <input type="text" class="form-control" th:field="*{username}" id="username" required/>
+<!--            <div class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>-->
         </div>
 
-        <div class="form-group row">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" class="form-control" th:field="*{firstName}"  required>
-        </div>
 
-        <div class="form-group row">
-            <label for="lastName"> Last Name</label>
-            <input type="text" id="lastName" class="form-control" th:field="*{lastName}" required/>
-        </div>
-
-        <div class="form-group row">
-            <label for="phone">phone</label>
-            <input type="text" class="form-control" th:field="*{phone}" id="phone"/>
-        </div>
-
-        <div class="form-group row">
+        <div class="form-group ">
             <label for="email"> Email</label>
-            <input type="text" class="form-control"  th:field="*{email}" id="email"/>
+            <input type="email" class="form-control"  th:field="*{email}" id="email" required/>
+<!--            <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>-->
         </div>
 
-        <div class="form-group row">
-            <label for="password"> Password </label>
-            <input type="password" class="form-control"  id="password" th:field="*{password}"/>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required />
+<!--            <div class="error-message" th:text="${errorMessage}" th:if="${errorMessage != null}"></div>-->
         </div>
 
 
-        <div class="form-group row">
+        <div class="form-group ">
             <label for="roles">Select Role</label>
             <select id="roles" name="roleId" class="form-control">
                 <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
             </select>
         </div>
-        <div th:if="${error}" class="error">
-            <p th:text="${error}"></p>
-        </div>
         <div><input type="submit" class="btn btn-primary" value="Sign Up"/></div>
     </form>
-    <div th:text="${msg}"></div>
-</div>
 
 </div>
 </body>

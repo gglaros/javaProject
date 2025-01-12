@@ -35,8 +35,15 @@ public List<Owner> getAllOwners() {
         return ownerRepository.findByUser_Username(username);
     }
 
+    public Owner findByUser(User user) {
+        return ownerRepository.findByUser(user);
+    }
+
+
 @Transactional
-public void saveOwner(Owner owner) {
+public void saveOwner(Owner owner,User user,String email) {
+    owner.setUser(user);
+    owner.setEmail(user.getEmail());
     ownerRepository.save(owner);
 }
 

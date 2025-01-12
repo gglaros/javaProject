@@ -3,6 +3,7 @@ package hua.project.Controllers;
 import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
 import hua.project.Service.UserService;
+import hua.project.Service.ValidationService;
 import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,12 @@ public class UserController {
     private UserService userService;
 
     private RoleRepository roleRepository;
+    private ValidationService validationService;
 
-    public UserController(UserService userService, RoleRepository roleRepository) {
+    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
+        this.validationService = validationService;
     }
 
     @GetMapping("/register")
@@ -35,13 +38,11 @@ public class UserController {
 
     @PostMapping("/saveUser")
     public String saveUser(@Valid @ModelAttribute User user, BindingResult result ,@RequestParam("roleId") int roleId, Model model){
-        if (userService.existsByUsername(user.getUsername())) {
-            model.addAttribute("error", "The username is already taken. Please choose another one.");
+        try {userService.saveUser(user, roleId); } catch (IllegalArgumentException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
             model.addAttribute("roles", roleRepository.findAll());
             return "auth/register";
         }
-        userService.saveUser(user,roleId);
-
         return "index";
     }
 

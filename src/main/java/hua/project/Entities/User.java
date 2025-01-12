@@ -20,29 +20,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @NotBlank
-    @Size(max = 20)
+    @Size(min =3,max = 20)
     private String username;
 
-    @NotBlank
-    @Size(max = 20)
-    private String firstName;
 
-    @NotBlank
-    @Size(max = 20)
-    private String lastName;
-
-    @NotBlank
-    @Size(max = 10)
-    private String phone;
-
-    @NotBlank
-    @Size(max = 50)
+    @Column
+    @Size(max = 30)
     @Email
+    @NotBlank
     private String email;
 
     @NotBlank
-    @Size(max = 120)
+    @Size(min = 5, max = 120)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -54,38 +45,38 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password,String firstName, String lastName, String phone) {
+    public User(String username, String email, String password/*String firstName, String lastName, String phone*/) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.phone = phone;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
+//
+//    public String getPhone() {
+//        return phone;
+//    }
+//
+//    public void setPhone(String phone) {
+//        this.phone = phone;
+//    }
 
     public Integer getId() {
         return id;

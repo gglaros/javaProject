@@ -5,6 +5,7 @@ import hua.project.Entities.Property;
 import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.PropertyService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class propertyController {
         this.ownerApplicationService = ownerApplicationService;
     }
 
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showProperties(Model model) {
         List<Property> properties = propertyService.getAllProperty();

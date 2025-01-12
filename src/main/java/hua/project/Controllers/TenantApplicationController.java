@@ -34,8 +34,8 @@ public class TenantApplicationController {
         List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(tenantId);
         TenantApplication tenantApplication = new TenantApplication();
        tenantApplication.setTenant(tenant);
-     model.addAttribute("tenantApplication", tenantApplication);
-     model.addAttribute("properties", filteredProperties);
+       model.addAttribute("tenantApplication", tenantApplication);
+       model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
     }
 
@@ -52,6 +52,7 @@ public class TenantApplicationController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/change/appStatus/{appId}")
     public String changeStatusApplication(@PathVariable int appId, Model model) {
         TenantApplication tenantApplication =tenantApplicationService.getTenantApplicationById(appId);

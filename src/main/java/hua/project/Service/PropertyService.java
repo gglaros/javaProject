@@ -34,6 +34,12 @@ public List<Property> getAllProperty() {
     }
 
     @Transactional
+    public List<Property> getAllPropertiesByOwnerId(int ownerId) {
+        return getAllProperty().stream()
+                .filter(property -> property.getOwner().getId() == ownerId).collect(Collectors.toList());
+    }
+
+    @Transactional
     public List<Property> getPropertiesByOwnersId(int ownerId) {
         return getAllProperty().stream()
                 .filter(property -> property.getStatus() != null && property.getOwner().getId() == ownerId).collect(Collectors.toList());

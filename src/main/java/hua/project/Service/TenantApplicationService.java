@@ -45,12 +45,12 @@ public class TenantApplicationService {
         return tenantApplicationRepository.findAllByTenantId(tenantId);
     }
 
-//    @Transactional
-//    public List<TenantApplication> ApplicationsByTenantId(int tenantId) {
-//        return findAll().stream()
-//                .filter(tenantApplication -> tenantApplication.getTenant() !=null && tenantApplication.getTenant().getId() == tenantId)
-//                .collect(Collectors.toList());
-//    }
+    @Transactional
+    public List<TenantApplication> ApplicationsByOwnerId(int ownerId) {
+        return findAll().stream()
+                .filter(tenantApplication -> tenantApplication.getTenant() !=null && tenantApplication.getOwner().getId() == ownerId)
+                .collect(Collectors.toList());
+    }
 
 
 

@@ -1,10 +1,59 @@
-/*
- * Globals
- */
+.register{
+    margin-bottom: 25px;
+}
 
-/* Links */
+.newForm {
+    max-width: 500px; /* Όριο πλάτους για την φόρμα */
+    margin: 0 auto; /* Κεντράρισμα της φόρμας */
 
-/*css for tenantApplicationForm*/
+
+    /*.error-message {*/
+    /*    white-space: normal;*/
+    /*    word-wrap: break-word;*/
+    /*    max-width: 50%; !* Προσαρμόστε το όπως χρειάζεται *!*/
+    /*    overflow-wrap: break-word;*/
+    /*}*/
+}
+
+/* Σταθερά πεδία εισόδου */
+.newForm .form-group input {
+    height: 40px; /* Σταθερό ύψος για τα πεδία εισόδου */
+    box-sizing: border-box; /* Ο σωστός υπολογισμός του padding και border */
+    margin-bottom: 10px; /* Απόσταση κάτω από τα πεδία */
+}
+
+
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff5733; /* Vibrant cartoon color */
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(50px) scale(0.8); /* Start small and lower */
+    animation: bounceIn 1s cubic-bezier(0.25, 1.5, 0.5, 1) 0.8s forwards; /* Delay + animation */
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 #ffbd69, 6px 6px 0 #ffc0cb; /* Cartoon shadow */
+    background: linear-gradient(90deg, #ffbd69, #ff5733, #ffc0cb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent; /* Apply gradient to text */
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8); /* Start small and lower */
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-10px) scale(1.1); /* Overshoot upward */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1); /* Settle at normal size and position */
+    }
+}
+
+
 
 .ipovoli{
     margin-bottom: 20px;
