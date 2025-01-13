@@ -113,7 +113,5 @@ System.out.println("loaduserbyuusername");
         }
     }
 
-//    public boolean existsByUsername(String username) {
-//        return userRepository.existsByUsername(username);
-//    }
+
 }

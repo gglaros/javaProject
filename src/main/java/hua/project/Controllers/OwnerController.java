@@ -1,9 +1,6 @@
 package hua.project.Controllers;
 
-import hua.project.Entities.Owner;
-import hua.project.Entities.Property;
-import hua.project.Entities.TenantApplication;
-import hua.project.Entities.User;
+import hua.project.Entities.*;
 import hua.project.Repository.UserRepository;
 import hua.project.Service.*;
 import jakarta.validation.Valid;
@@ -26,12 +23,14 @@ public class OwnerController {
     OwnerService ownerService;
     PropertyService propertyService;
     private final TenantApplicationService tenantApplicationService;
+    private final OwnerApplicationService ownerApplicationService;
 
-    public OwnerController(OwnerService ownerService, PropertyService propertyService,  UserService userService, TenantApplicationService tenantApplicationService) {
+    public OwnerController(OwnerService ownerService, OwnerApplicationService ownerApplicationService,PropertyService propertyService,  UserService userService, TenantApplicationService tenantApplicationService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
         this.userService = userService;
         this.tenantApplicationService = tenantApplicationService;
+        this.ownerApplicationService = ownerApplicationService;
     }
 
     @Secured("ROLE_ADMIN")
@@ -92,6 +91,17 @@ public class OwnerController {
         ownerService.savePropertyToOwner(owner,property);
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";
+    }
+
+
+    @GetMapping("/OwnerApplications/{userId}")
+    public String ownerApplications(@PathVariable int userId, Model model) {
+        // Λήψη αιτήσεων χρήστη
+        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsByOwnerId(userId);
+        model.addAttribute("ownerApplications", ownerApplications);
+
+        // Επιστροφή του ονόματος του template
+        return "applicationOwner/applications";
     }
 
 

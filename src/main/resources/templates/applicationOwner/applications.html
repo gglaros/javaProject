@@ -11,8 +11,7 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-    <div th:if="${not#lists.isEmpty(applications)}">
-
+    <div th:if="${not#lists.isEmpty(ownerApplications)}">
 
         <table class="table">
             <thead>
@@ -27,7 +26,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="app: ${applications}">
+            <tr th:each="app: ${ownerApplications}">
                 <td th:text="${app.property !=null ? app.property.city : 'NO'}"></td>
                 <td th:text="${app.property !=null ? app.property.address : 'NO'}"></td>
                 <td th:text="${app.property !=null ? app.property.rentPrice : 'NO'}"></td>
@@ -45,7 +44,7 @@
         </table>
     </div>
 
-<div th:if="${ #lists.isEmpty(applications)}">
+<div th:if="${ #lists.isEmpty(ownerApplications)}">
         No Applications found!
     </div>
 

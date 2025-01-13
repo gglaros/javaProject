@@ -7,6 +7,7 @@ import hua.project.Entities.Status;
 import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
+import hua.project.Service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/OwnerApplications")
 public class OwnerApplicationController {
-
+    private final UserService userService;
     private final OwnerApplicationService ownerApplicationService;
     private final OwnerService ownerService;
     private final PropertyService propertyService;
 
-    public OwnerApplicationController(OwnerApplicationService ownerApplicationService, OwnerService ownerService, PropertyService propertyService) {
+    public OwnerApplicationController(OwnerApplicationService ownerApplicationService, OwnerService ownerService, PropertyService propertyService,UserService userService) {
         this.ownerApplicationService = ownerApplicationService;
         this.ownerService = ownerService;
         this.propertyService = propertyService;
+        this.userService = userService;
     }
 
     @GetMapping("")
@@ -35,6 +37,15 @@ public class OwnerApplicationController {
         return "applicationOwner/applications";
     }
 
+//    @GetMapping("/OwnerApplications/{userId}")
+//    public String ownerApplications(@PathVariable int userId, Model model) {
+//        // Λήψη αιτήσεων χρήστη
+//        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsByOwnerId(userId);
+//        model.addAttribute("ownerApplications", ownerApplications);
+//
+//        // Επιστροφή του ονόματος του template
+//        return "applicationOwner/applications";
+//    }
 
     @GetMapping("/make/{ownerId}")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {

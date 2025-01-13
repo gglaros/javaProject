@@ -2,24 +2,27 @@ package hua.project.Service;
 
 import hua.project.Entities.*;
 import hua.project.Repository.OwnerApplicationRepository;
+import hua.project.Repository.OwnerRepository;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-import static hua.project.Entities.Status.APPROVED;
 import static hua.project.Entities.Status.PENDING_APPROVAL;
 
 @Service
 public class OwnerApplicationService {
 
+    private final OwnerRepository ownerRepository;
     private OwnerApplicationRepository ownerApplicationRepository;
     private PropertyService propertyService;
+    private UserService userService;
 
-    public OwnerApplicationService(OwnerApplicationRepository ownerApplicationRepository,PropertyService propertyService) {
+    public OwnerApplicationService(OwnerApplicationRepository ownerApplicationRepository, PropertyService propertyService, UserService userService,OwnerRepository ownerRepository) {
         this.ownerApplicationRepository = ownerApplicationRepository;
         this.propertyService = propertyService;
+        this.ownerRepository = ownerRepository;
+        this.userService = userService;
     }
 
 
@@ -31,6 +34,13 @@ public class OwnerApplicationService {
     @Transactional
     public OwnerApplication getOwnerApplicationById(Integer id) {
         return ownerApplicationRepository.findById(id).get();
+    }
+//
+    @Transactional
+    public List<OwnerApplication> getOwnerApplicationsByOwnerId(Integer userId) {
+        Owner owner=ownerRepository.findByUser(userService.getUserById(userId));
+        System.out.println("hello  !!"+owner);
+        return ownerApplicationRepository.findByOwnerId(owner.getId());
     }
 
  @Transactional
