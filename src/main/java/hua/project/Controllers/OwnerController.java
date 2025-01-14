@@ -87,8 +87,11 @@ public class OwnerController {
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
         ownerService.savePropertyToOwner(owner,property);
-        model.addAttribute("owner", owner);
-        return "owner/ownerProfile";
+//        model.addAttribute("owner", owner);
+//        return "owner/ownerProfile";
+        List<Property> properties =propertyService.getAllPropertiesByOwnerId(id);
+        model.addAttribute("properties", properties);
+        return "property/propertyList";
     }
 
 
@@ -100,14 +103,28 @@ public class OwnerController {
     }
 
 
-    @GetMapping("show/properties/{id}")
-    public String showOwnerProperties(Model model, @PathVariable int id) {
-      List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
-      Owner owner = ownerService.getOwnerById(id);
-      model.addAttribute("ownerProperties", ownerProperties);
-      model.addAttribute("owner", owner);
-      return "owner/ownerProperties";
-}
+//    @GetMapping("show/properties/{id}")
+//    public String showOwnerProperties(Model model, @PathVariable int id) {
+//      List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
+//      Owner owner = ownerService.getOwnerById(id);
+//      model.addAttribute("ownerProperties", ownerProperties);
+//      model.addAttribute("owner", owner);
+//      return "owner/ownerProperties";
+//}
+
+
+    @GetMapping("/show/properties")
+    public String viewProperties(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {throw new RuntimeException("User not found");}
+        Owner existOwner = ownerService.findByUser(user);
+        int id = existOwner.getId();
+        List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
+        model.addAttribute("owner", existOwner);
+        model.addAttribute("ownerProperties", ownerProperties);
+        return "owner/ownerProperties";
+    }
 
 @GetMapping("show/requests/{ownerId}")
     public String showOwnerRequests(Model model,@PathVariable int ownerId) {

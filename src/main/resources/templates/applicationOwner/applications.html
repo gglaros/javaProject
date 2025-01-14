@@ -20,6 +20,7 @@
                 <th>Address</th>
                 <th>RentPrice</th>
                 <th>Owner</th>
+                <th>Email</th>
                 <th>Status</th>
                 <th sec:authorize="hasRole('ADMIN')">Actions</th>
 
@@ -31,6 +32,7 @@
                 <td th:text="${app.property !=null ? app.property.address : 'NO'}"></td>
                 <td th:text="${app.property !=null ? app.property.rentPrice : 'NO'}"></td>
                 <td th:text="${app.owner.firstName !=null ? app.owner.firstName : 'NO'}"></td>
+                <td th:text="${app.owner.email !=null ? app.owner.email : 'NO'}"></td>
                 <td th:text="${app.status !=null ? app.status : 'NO'}"></td>
 
                 <td>

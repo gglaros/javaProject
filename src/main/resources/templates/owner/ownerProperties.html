@@ -35,12 +35,14 @@
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+<!--    <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
     <!-- Αν η λίστα properties είναι άδεια -->
     <div th:if="${#lists.isEmpty(ownerProperties)}">
         you do not have any property
     </div>
-
+    <td>
+        <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+    </td>
 
 </div>
 </body>
