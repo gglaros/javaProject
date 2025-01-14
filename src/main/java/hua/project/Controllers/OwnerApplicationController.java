@@ -33,19 +33,10 @@ public class OwnerApplicationController {
 
     @GetMapping("")
     public String showApplications(Model model) {
-        model.addAttribute("applications",ownerApplicationService.getOwnerApplications());
+        model.addAttribute("ownerApplications",ownerApplicationService.getOwnerApplications());
+        System.out.println("hello !! mother fucka"+ownerApplicationService.getOwnerApplications());
         return "applicationOwner/applications";
     }
-
-//    @GetMapping("/OwnerApplications/{userId}")
-//    public String ownerApplications(@PathVariable int userId, Model model) {
-//        // Λήψη αιτήσεων χρήστη
-//        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsByOwnerId(userId);
-//        model.addAttribute("ownerApplications", ownerApplications);
-//
-//        // Επιστροφή του ονόματος του template
-//        return "applicationOwner/applications";
-//    }
 
     @GetMapping("/make/{ownerId}")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {
@@ -64,8 +55,8 @@ public class OwnerApplicationController {
         application.setOwner(owner);
         Property property = propertyService.getPropertyById(application.getProperty().getId());
         ownerApplicationService.saveOwnerApplication(application, property);
-        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
-        return "applicationOwner/applications";
+        model.addAttribute("owner", owner);
+        return "owner/ownerProfile";
     }
 
 
@@ -81,7 +72,7 @@ public class OwnerApplicationController {
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
         ownerApplicationService.processApplicationAction(appId, action);
-        model.addAttribute("applications", ownerApplicationService.getOwnerApplications());
+        model.addAttribute("ownerApplications", ownerApplicationService.getOwnerApplications());
         return "applicationOwner/applications";
     }
 

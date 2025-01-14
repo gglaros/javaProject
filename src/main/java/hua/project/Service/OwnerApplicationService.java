@@ -31,11 +31,20 @@ public class OwnerApplicationService {
      return ownerApplicationRepository.findAll();
  }
 
+
+    @Transactional
+    public List<OwnerApplication> getOwnerApplicationsById(Integer id) {
+        return ownerApplicationRepository.findByOwnerId(id);
+    }
+
+
     @Transactional
     public OwnerApplication getOwnerApplicationById(Integer id) {
         return ownerApplicationRepository.findById(id).get();
     }
-//
+
+
+
     @Transactional
     public List<OwnerApplication> getOwnerApplicationsByOwnerId(Integer userId) {
         Owner owner=ownerRepository.findByUser(userService.getUserById(userId));

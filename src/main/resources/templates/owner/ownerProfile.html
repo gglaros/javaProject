@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Owners</title>
+
 </head>
 <body>
 <div layout:fragment="main-content">
@@ -20,6 +21,7 @@
         <th>UserName</th>
         <th>Properties</th>
         <th>Requests</th>
+        <th>Applications</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -37,9 +39,12 @@
         <td>
           <a class="button" th:href="@{'/owner/show/requests/' + ${owner.id}}">requests </a>
         </td>
+        <td>
+          <a class="button" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Apps </a>
+        </td>
 
         <td>
-          <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+<!--          <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
           <a class="btn btn-primary" th:href="@{/OwnerApplications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>
         </td>
       </tr>
@@ -47,7 +52,105 @@
     </table>
   </div>
 
-
-
 </body>
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Centered Table</title>-->
+<!--  <style>-->
+<!--    body {-->
+<!--      display: flex;-->
+<!--      justify-content: center;-->
+<!--      align-items: center;-->
+<!--      height: 100vh;-->
+<!--      margin: 0;-->
+<!--      background-color: #061155;-->
+<!--    }-->
+
+<!--    .table-container {-->
+<!--      text-align: center;-->
+<!--    }-->
+
+<!--    table {-->
+<!--      font-weight: bold;-->
+<!--        background-color: #1a1a60;-->
+<!--        text-align: center;-->
+<!--      margin: auto;-->
+<!--    }-->
+
+<!--    th, td {-->
+<!--      border: 1px solid #ddd;-->
+<!--      padding: 8px;-->
+<!--    }-->
+
+<!--    th {-->
+<!--      background-color: #f2f2f2;-->
+<!--      text-align: left;-->
+<!--    }-->
+
+<!--    .button, .btn {-->
+<!--      display: inline-block;-->
+<!--      padding: 6px 12px;-->
+<!--      text-decoration: none;-->
+<!--      color: white;-->
+<!--      background-color: #007bff;-->
+<!--      border: none;-->
+<!--      border-radius: 4px;-->
+<!--      cursor: pointer;-->
+<!--    }-->
+
+<!--    .btn-primary {-->
+<!--      background-color: #0069d9;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="table-container">-->
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Name</th>-->
+<!--      <th>Surname</th>-->
+<!--      <th>Email</th>-->
+<!--      <th>Phone</th>-->
+<!--      <th>UserName</th>-->
+<!--      <th>Properties</th>-->
+<!--      <th>Requests</th>-->
+<!--      <th>Apps</th>-->
+<!--      <th>Actions</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--      <td class="table-element" th:text="${owner.firstName}"></td>-->
+<!--      <td class="table-element" th:text="${owner.lastName}"></td>-->
+<!--      <td class="table-element" th:text="${owner.email}"></td>-->
+<!--      <td class="table-element" th:text="${owner.phone}"></td>-->
+<!--      <td class="table-element" th:text="${owner.user}"></td>-->
+
+<!--      <td>-->
+<!--        <a class="button" th:href="@{'/owner/show/properties/' + ${owner.id}}">properties</a>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <a class="button" th:href="@{'/owner/show/requests/' + ${owner.id}}">requests</a>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--                  <a class="button" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Apps </a>-->
+<!--                </td>-->
+<!--      <td>-->
+<!--        <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}}">add property</a>-->
+<!--        <a class="btn btn-primary" th:href="@{/OwnerApplications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>-->
+<!--      </td>-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

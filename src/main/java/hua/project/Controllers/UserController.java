@@ -53,5 +53,4 @@ public class UserController {
         model.addAttribute("roles", roleRepository.findAll());
         return "auth/users";
     }
-
 }

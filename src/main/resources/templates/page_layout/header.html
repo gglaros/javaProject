@@ -16,12 +16,6 @@
         <h3 class="masthead-brand">Cover</h3>
         <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="/" data-path="/">Home</a>
-<!--            <a sec:authorize="hasRole('OWNER')" class="nav-link"-->
-<!--               th:href="@{/OwnerApplications/{userId}(userId=${userId})}"-->
-<!--               data-path="/OwnerApplications">-->
-<!--                My Applications-->
-<!--            </a>-->
-
 
             <a  sec:authorize="hasRole('ADMIN')"  class="nav-link" href="/owner" data-path="/owner">Owners</a>
             <a  sec:authorize="hasRole('ADMIN')"  class="nav-link" href="/property" data-path="/property">Properties</a>
@@ -40,7 +34,6 @@
             <a sec:authorize="hasRole('ROLE_TENANT')" class="nav-link" th:href="@{/tenant/profile}">
                 <button type="button" class="btn btn-primary">Profile</button>
             </a>
-
 
             <a sec:authorize="!isAuthenticated()"  class="nav-link">
                 <a  class="btn btn-primary" href="/login">Login</a>

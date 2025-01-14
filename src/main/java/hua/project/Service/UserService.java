@@ -57,16 +57,13 @@ private OwnerRepository ownerRepository;
     public void saveUser(User user, int roleId) {
         if (validationService.isUsernameTaken(user.getUsername())) { throw new IllegalArgumentException("Username is already taken"); }
 
-
         if (validationService.isEmailTaken(user.getEmail())) {
             throw new IllegalArgumentException("Email is already taken");}
-
 
         if (!validationService.isPasswordValid(user.getPassword())) {
             logger.warn("Invalid password: does not meet security requirements.");
             throw new IllegalArgumentException("Password must be at least 5 characters long.");
         }
-
 
         if(!validationService.isUserNameValid(user.getUsername())) {
             throw new IllegalArgumentException("Username must me between 3 and 20");
@@ -83,8 +80,7 @@ private OwnerRepository ownerRepository;
         roles.add(role);
         user.setRoles(roles);
         userRepository.save(user);
-        System.out.println("yeaaayyy store user" + user.getUsername());
-        
+
     }
 
 

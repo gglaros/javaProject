@@ -20,8 +20,8 @@ import java.util.List;
 public class OwnerController {
 
     private final UserService userService;
-    OwnerService ownerService;
-    PropertyService propertyService;
+    private final  OwnerService ownerService;
+    private final   PropertyService propertyService;
     private final TenantApplicationService tenantApplicationService;
     private final OwnerApplicationService ownerApplicationService;
 
@@ -39,7 +39,6 @@ public class OwnerController {
         model.addAttribute("owners", ownerService.getAllOwners());
         return "owner/ownersList";
     }
-
 
 
     @GetMapping("/profile")
@@ -73,9 +72,8 @@ public class OwnerController {
     }
 
 
-
 @Secured({"ROLE_ADMIN","ROLE_OWNER"})
-    @GetMapping("/make/property/{id}")
+@GetMapping("/make/property/{id}")
     public String addProperty(@PathVariable int id, Model model) {
         Property property = new Property();
         Owner owner = ownerService.getOwnerById(id);
@@ -89,18 +87,15 @@ public class OwnerController {
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
         ownerService.savePropertyToOwner(owner,property);
-        model.addAttribute("properties", propertyService.getAllProperty());
-        return "property/propertyList";
+        model.addAttribute("owner", owner);
+        return "owner/ownerProfile";
     }
 
 
     @GetMapping("/OwnerApplications/{userId}")
     public String ownerApplications(@PathVariable int userId, Model model) {
-        // Λήψη αιτήσεων χρήστη
-        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsByOwnerId(userId);
+        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsById(userId);
         model.addAttribute("ownerApplications", ownerApplications);
-
-        // Επιστροφή του ονόματος του template
         return "applicationOwner/applications";
     }
 
@@ -108,7 +103,9 @@ public class OwnerController {
     @GetMapping("show/properties/{id}")
     public String showOwnerProperties(Model model, @PathVariable int id) {
       List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
+      Owner owner = ownerService.getOwnerById(id);
       model.addAttribute("ownerProperties", ownerProperties);
+      model.addAttribute("owner", owner);
       return "owner/ownerProperties";
 }
 

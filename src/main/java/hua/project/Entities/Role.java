@@ -1,6 +1,5 @@
 package hua.project.Entities;
 
-
 import jakarta.persistence.*;
 
 @Entity

@@ -17,7 +17,7 @@
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
-                <th>-Phone</th>
+                <th>Phone</th>
                 <th>Details</th>
                 <th>Actions</th>
             </tr>
@@ -32,8 +32,8 @@
                     <a class="Btn" th:href="@{'/owner/show/properties/' + ${owner.id}}"></a>
                 </td>
                 <td>
-<!--                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
-<!--                    <a class="btn btn-primary" th:href="@{/applications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>-->
+                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+<!--<a class="btn btn-primary" th:href="@{/applications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>-->
                 </td>
             </tr>
             </tbody>
@@ -42,7 +42,6 @@
      <div th:if="${ #lists.isEmpty(owners)}">
         No Owners found!
  </div>
-<!--    <a href="/owner/new" class="btn btn-primary" role="button">Create new Owner</a>-->
 
 </div>
 </body>
