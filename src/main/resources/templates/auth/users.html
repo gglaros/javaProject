@@ -33,7 +33,6 @@
 <!--                </span>-->
                     <span th:each="role : ${roles}">
                         <a  class="btn btn-dark" th:href="@{/user/role/add/{id}/{role_id}(id=${user.id},role_id=${role.id})}" th:if="${! user.roles.contains(role)}" th:utext="'Add ' + ${role.name}"></a>
-
                     </span>
                 </td>
 
@@ -44,7 +43,7 @@
     <div th:if="${ #lists.isEmpty(users)}">
         No Students found!
     </div>
-    <a href="/register" class="btn btn-primary" role="button">Create new User</a>
+<!--    <a href="/register" class="btn btn-primary" role="button">Create new User</a>-->
 
 </div>
 </body>

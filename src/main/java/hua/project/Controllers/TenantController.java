@@ -42,7 +42,7 @@ public class TenantController {
     }
 
 
-    @GetMapping("MyApplications/{tenantId}")
+    @GetMapping("/MyApplications/{tenantId}")
     public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
         List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(tenantId);
         model.addAttribute("tenantApplications", tenantApplicationsByTenantId);

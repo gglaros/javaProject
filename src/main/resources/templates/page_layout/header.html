@@ -39,7 +39,7 @@
 <!--                <a  class="btn btn-primary" href="/login">Login</a>-->
 <!--                <a  class="btn btn-primary" href="/register">Register</a>-->
 <!--            </a>-->
-            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/properties}">All Properties</a>
+            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/properties}">My Properties</a>
 
 
             <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/profile}">

@@ -65,7 +65,6 @@ public class OwnerController {
             return "owner/Owner";
         }
         if (user == null) {throw new RuntimeException("User not found");}
-
         ownerService.saveOwner(owner,user,user.getEmail());
         model.addAttribute("owners", ownerService.getAllOwners());
         return "index";
@@ -87,8 +86,6 @@ public class OwnerController {
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
         ownerService.savePropertyToOwner(owner,property);
-//        model.addAttribute("owner", owner);
-//        return "owner/ownerProfile";
         List<Property> properties =propertyService.getAllPropertiesByOwnerId(id);
         model.addAttribute("properties", properties);
         return "property/propertyList";
@@ -101,17 +98,6 @@ public class OwnerController {
         model.addAttribute("ownerApplications", ownerApplications);
         return "applicationOwner/applications";
     }
-
-
-//    @GetMapping("show/properties/{id}")
-//    public String showOwnerProperties(Model model, @PathVariable int id) {
-//      List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
-//      Owner owner = ownerService.getOwnerById(id);
-//      model.addAttribute("ownerProperties", ownerProperties);
-//      model.addAttribute("owner", owner);
-//      return "owner/ownerProperties";
-//}
-
 
     @GetMapping("/show/properties")
     public String viewProperties(Authentication authentication, Model model) {

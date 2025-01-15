@@ -19,7 +19,6 @@
         <th>Email</th>
         <th>Phone</th>
         <th>UserName</th>
-        <th>Properties</th>
         <th>Requests</th>
         <th>Applications</th>
         <th>Actions</th>
@@ -33,9 +32,6 @@
         <td class="table-element" th:text="${owner.phone}"></td>
         <td class="table-element" th:text="${owner.user}"></td>
 
-<!--        <td>-->
-<!--          <a class="button" th:href="@{'/owner/show/properties/' + ${owner.id}}">properties </a>-->
-<!--        </td>-->
         <td>
           <a class="button" th:href="@{'/owner/show/requests/' + ${owner.id}}">requests </a>
         </td>
@@ -44,7 +40,6 @@
         </td>
 
         <td>
-<!--          <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
           <a class="btn btn-primary" th:href="@{/OwnerApplications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>
         </td>
       </tr>
