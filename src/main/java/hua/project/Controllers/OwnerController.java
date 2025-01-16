@@ -105,6 +105,12 @@ public class OwnerController {
         User user = userService.findByUsername(username);
         if (user == null) {throw new RuntimeException("User not found");}
         Owner existOwner = ownerService.findByUser(user);
+        if (existOwner == null) {
+            Owner owner = new Owner();
+            model.addAttribute("owner", owner);
+            model.addAttribute("user", user);
+            return "owner/Owner";
+        }
         int id = existOwner.getId();
         List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(id);
         model.addAttribute("owner", existOwner);

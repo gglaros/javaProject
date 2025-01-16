@@ -14,7 +14,7 @@
     <div th:if="${not #lists.isEmpty(ownerProperties)}">
         <table class="table">
             <thead>
-            <h2 class="h2">My Properties</h2>
+            <h2 class="h2">Your properties</h2>
             <tr>
                 <th>City</th>
                 <th>Description</th>
@@ -38,10 +38,10 @@
 <!--    <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
     <!-- Αν η λίστα properties είναι άδεια -->
     <div th:if="${#lists.isEmpty(ownerProperties)}">
-        you do not have any property
+        You do not have any properties registered yet!
     </div>
     <td>
-        <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
+        <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">Register property</a>
     </td>
 
 </div>

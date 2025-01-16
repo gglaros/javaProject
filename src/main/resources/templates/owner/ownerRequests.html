@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Requests</title>
+    <title>Rental requests</title>
 </head>
 <body>
 <div layout:fragment="main-content">
@@ -41,7 +41,7 @@
 
     <!-- Αν η λίστα properties είναι άδεια -->
     <div th:if="${#lists.isEmpty(ownerRequests)}">
-        you do not have any requests
+        You do not have any rental requests yet!
     </div>
 </div>
 </body>
