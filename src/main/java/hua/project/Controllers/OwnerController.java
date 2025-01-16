@@ -91,13 +91,31 @@ public class OwnerController {
         return "property/propertyList";
     }
 
-
-    @GetMapping("/OwnerApplications/{userId}")
-    public String ownerApplications(@PathVariable int userId, Model model) {
-        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsById(userId);
+    @Secured("ROLE_OWNER")
+    @GetMapping("/OwnerApplications")
+    public String ownerApplications(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {throw new RuntimeException("User not found");}
+        Owner existOwner = ownerService.findByUser(user);
+        if (existOwner == null) {
+            Owner owner = new Owner();
+            model.addAttribute("owner", owner);
+            model.addAttribute("user", user);
+            return "owner/Owner";
+        }
+        int id = existOwner.getId();
+        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsById(id);
+        model.addAttribute("owner", existOwner);
         model.addAttribute("ownerApplications", ownerApplications);
         return "applicationOwner/applications";
     }
+//    @GetMapping("/OwnerApplications/{userId}")
+//    public String ownerApplications(@PathVariable int userId, Model model) {
+//        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsById(userId);
+//        model.addAttribute("ownerApplications", ownerApplications);
+//        return "applicationOwner/applications";
+//    }
 
     @GetMapping("/show/properties")
     public String viewProperties(Authentication authentication, Model model) {
@@ -117,7 +135,7 @@ public class OwnerController {
         model.addAttribute("ownerProperties", ownerProperties);
         return "owner/ownerProperties";
     }
-    @GetMapping("show/requests")
+    @GetMapping("/show/requests")
     public String showRentalRequests(Authentication authentication, Model model) {
         String username = authentication.getName();
         User user = userService.findByUsername(username);

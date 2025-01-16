@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Applications</title>
+    <title>Your submitted applications</title>
 </head>
 <body>
 <div layout:fragment="main-content">
@@ -46,9 +46,12 @@
         </table>
     </div>
 
-<div th:if="${ #lists.isEmpty(ownerApplications)}">
-        No Applications found!
+    <div th:if="${ #lists.isEmpty(ownerApplications)}">
+        No submitted applications found!
     </div>
+    <td>
+        <a class="btn btn-primary" th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>
+    </td>
 
 </div>
 </body>

@@ -18,9 +18,7 @@
         <th>Surname</th>
         <th>Email</th>
         <th>Phone</th>
-        <th>UserName</th>
-        <th>Applications</th>
-        <th>Actions</th>
+        <th>Username</th>
       </tr>
       </thead>
       <tbody>
@@ -31,13 +29,13 @@
         <td class="table-element" th:text="${owner.phone}"></td>
         <td class="table-element" th:text="${owner.user}"></td>
 
-        <td>
-          <a class="btn btn-primary" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Submitted applicatioins</a>
-        </td>
+<!--        <td>-->
+<!--          <a class="btn btn-primary" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Submitted applicatioins</a>-->
+<!--        </td>-->
 
-        <td>
-          <a class="btn btn-primary" th:href="@{/OwnerApplications/make/{ownerId}(ownerId=${owner.id})}">Submit an application</a>
-        </td>
+<!--        <td>-->
+<!--          <a class="btn btn-primary" th:href="@{/OwnerApplications/make/{ownerId}(ownerId=${owner.id})}">Submit an application</a>-->
+<!--        </td>-->
       </tr>
       </tbody>
     </table>

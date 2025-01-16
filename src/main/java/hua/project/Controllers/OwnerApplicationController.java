@@ -1,14 +1,12 @@
 package hua.project.Controllers;
 
-import hua.project.Entities.Owner;
-import hua.project.Entities.OwnerApplication;
-import hua.project.Entities.Property;
-import hua.project.Entities.Status;
+import hua.project.Entities.*;
 import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
 import hua.project.Service.UserService;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +28,10 @@ public class OwnerApplicationController {
         this.propertyService = propertyService;
         this.userService = userService;
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showApplications(Model model) {
         model.addAttribute("ownerApplications",ownerApplicationService.getOwnerApplications());
-        System.out.println("hello !! mother fucka"+ownerApplicationService.getOwnerApplications());
         return "applicationOwner/applications";
     }
 
@@ -47,7 +44,6 @@ public class OwnerApplicationController {
         model.addAttribute("app", new OwnerApplication());
         return "applicationOwner/applicationForm";
     }
-
 
     @PostMapping("/submit")
     public String submitApplication(@ModelAttribute("app") OwnerApplication application, @RequestParam("ownerId") int ownerId,Model model) {

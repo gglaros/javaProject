@@ -23,7 +23,8 @@
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant" data-path="/tenant">Tenants</a>
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">TenantApps</a>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/users" data-path="/users">Users</a>
-            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/requests}">Rental requests</a>
+
+
 <!--            <a sec:authorize="isAuthenticated()"  class="nav-link">-->
 <!--                <form th:action="@{/logout}" method="post">-->
 <!--                    <input type="submit"  class="btn btn-primary" value="Sign Out"/>-->
@@ -41,16 +42,15 @@
 <!--                <a  class="btn btn-primary" href="/register">Register</a>-->
 <!--            </a>-->
             <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/properties}">My Properties</a>
-
+            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/OwnerApplications}">My applications</a>
+            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/requests}">Rental requests</a>
 
             <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/profile}">
-                <button type="button" class="btn btn-primary">Profile</button>
+                <button type="button" class="btn btn-primary">View profile</button>
             </a>
             <a sec:authorize="hasRole('ROLE_TENANT')" class="nav-link" th:href="@{/tenant/profile}">
-                <button type="button" class="btn btn-primary">Profile</button>
+                <button type="button" class="btn btn-primary">View profile</button>
             </a>
-
-
             <a sec:authorize="!isAuthenticated()"  class="nav-link">
                 <a  class="btn btn-primary" href="/login">Login</a>
                 <a  class="btn btn-primary" href="/register">Register</a>
