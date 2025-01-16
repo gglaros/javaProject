@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -32,7 +35,9 @@ public class UserController {
     public String register(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("roles", roleRepository.findAll());
+      //  model.addAttribute("roles", roleRepository.findAll());
+        List<String> roleNames = Arrays.asList("ROLE_OWNER", "ROLE_TENANT");
+        model.addAttribute("roles", roleRepository.findAllByNameIn(roleNames));
         return "auth/register";
     }
 
