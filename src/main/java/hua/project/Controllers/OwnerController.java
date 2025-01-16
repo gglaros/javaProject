@@ -117,14 +117,31 @@ public class OwnerController {
         model.addAttribute("ownerProperties", ownerProperties);
         return "owner/ownerProperties";
     }
-
-@GetMapping("show/requests/{ownerId}")
-    public String showOwnerRequests(Model model,@PathVariable int ownerId) {
-        List<TenantApplication> ownerRequests = tenantApplicationService.ApplicationsByOwnerId(ownerId);
-        System.out.println(ownerRequests);
+    @GetMapping("show/requests")
+    public String showRentalRequests(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {throw new RuntimeException("User not found");}
+        Owner existOwner = ownerService.findByUser(user);
+        if (existOwner == null) {
+            Owner owner = new Owner();
+            model.addAttribute("owner", owner);
+            model.addAttribute("user", user);
+            return "owner/Owner";
+        }
+        int id = existOwner.getId();
+        List<TenantApplication> ownerRequests = tenantApplicationService.ApplicationsByOwnerId(id);
+        model.addAttribute("owner", existOwner);
         model.addAttribute("ownerRequests", ownerRequests);
         return "owner/ownerRequests";
-}
+    }
+//@GetMapping("show/requests/{ownerId}")
+//    public String showOwnerRequests(Model model,@PathVariable int ownerId) {
+//        List<TenantApplication> ownerRequests = tenantApplicationService.ApplicationsByOwnerId(ownerId);
+//        System.out.println(ownerRequests);
+//        model.addAttribute("ownerRequests", ownerRequests);
+//        return "owner/ownerRequests";
+//}
 
 
 }

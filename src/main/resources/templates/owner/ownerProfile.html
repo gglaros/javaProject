@@ -19,7 +19,6 @@
         <th>Email</th>
         <th>Phone</th>
         <th>UserName</th>
-        <th>Requests</th>
         <th>Applications</th>
         <th>Actions</th>
       </tr>
@@ -33,10 +32,7 @@
         <td class="table-element" th:text="${owner.user}"></td>
 
         <td>
-          <a class="button" th:href="@{'/owner/show/requests/' + ${owner.id}}">Rental requests</a>
-        </td>
-        <td>
-          <a class="button" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Submitted applicatioins</a>
+          <a class="btn btn-primary" th:href="@{'/owner/OwnerApplications/' + ${owner.id}}">Submitted applicatioins</a>
         </td>
 
         <td>

@@ -23,6 +23,7 @@
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant" data-path="/tenant">Tenants</a>
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">TenantApps</a>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/users" data-path="/users">Users</a>
+            <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/requests}">Rental requests</a>
 <!--            <a sec:authorize="isAuthenticated()"  class="nav-link">-->
 <!--                <form th:action="@{/logout}" method="post">-->
 <!--                    <input type="submit"  class="btn btn-primary" value="Sign Out"/>-->
