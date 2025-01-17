@@ -11,3 +11,8 @@
 
 # API Documentation
 The API documentation is inside the project report
+
+# Aldeary setted up admin in authcontroller class
+username=admin2
+
+password=admin2
