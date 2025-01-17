@@ -86,7 +86,7 @@ public class TenantController {
 
         tenantService.saveTenant(tenant,user, user.getEmail());
         model.addAttribute("tenants", tenantService.getAllTenants());
-        return "tenant/tenantList";
+        return "tenant/tenantProfile";
     }
 
 
