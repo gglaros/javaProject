@@ -50,8 +50,13 @@
         No submitted applications found!
     </div>
     <td>
-        <a class="btn btn-primary" th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>
+        <a sec:authorize="hasRole('OWNER')" class="btn btn-primary"
+           th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>
     </td>
+
+<!--    <td>-->
+<!--        <a class="btn btn-primary" th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>-->
+<!--    </td>-->
 
 </div>
 </body>
