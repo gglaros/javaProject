@@ -42,7 +42,6 @@ public class AuthController {
             user.setUsername("admin2");
 
             if (!validationService.isUsernameTaken(user.getUsername())) {
-                System.out.println("mpikaa!!");
                 String password = "admin2";
                 String encodedPassword = passwordEncoder.encode(password);
                 user.setPassword(encodedPassword);
