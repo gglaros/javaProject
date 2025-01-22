@@ -41,13 +41,31 @@ public class TenantController {
         return "tenant/tenantList";
     }
 
+    @GetMapping("/rentalRequests")
+    public String showTenantApplicationById(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {throw new RuntimeException("User not found");}
+        Tenant existTenant = tenantService.findByUser(user);
 
-    @GetMapping("/MyApplications/{tenantId}")
-    public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
-        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(tenantId);
+        if (existTenant == null) {
+            Tenant tenant = new Tenant();
+            model.addAttribute("tenant", tenant);
+            model.addAttribute("user", user);
+            return "tenant/tenant";
+        }
+        int id=existTenant.getId();
+        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(id);
         model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
         return "applicationTenant/tenantApplications";
     }
+
+//    @GetMapping("/MyApplications/{tenantId}")
+//    public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
+//        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(tenantId);
+//        model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
+//        return "applicationTenant/tenantApplications";
+//    }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("/all/applications")

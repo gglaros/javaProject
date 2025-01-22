@@ -1,11 +1,9 @@
 package hua.project.Controllers;
 
 import hua.project.Entities.*;
-import hua.project.Service.OwnerService;
-import hua.project.Service.PropertyService;
-import hua.project.Service.TenantApplicationService;
-import hua.project.Service.TenantService;
+import hua.project.Service.*;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +17,46 @@ public class TenantApplicationController {
     private final PropertyService propertyService;
     private final OwnerService ownerService;
     private final TenantApplicationService tenantApplicationService;
-
-    public TenantApplicationController(TenantService tenantService, PropertyService propertyService, OwnerService ownerService, TenantApplicationService tenantApplicationService) {
+    UserService userService;
+    public TenantApplicationController(TenantService tenantService, PropertyService propertyService, OwnerService ownerService, TenantApplicationService tenantApplicationService, UserService userService) {
         this.tenantService = tenantService;
         this.propertyService = propertyService;
         this.ownerService = ownerService;
         this.tenantApplicationService = tenantApplicationService;
+        this.userService = userService;
     }
 
+    @GetMapping("/viewProperties")
+    public String showApplicationForm(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {throw new RuntimeException("User not found");}
+        Tenant existTenant = tenantService.findByUser(user);
 
-    @GetMapping("/make/{tenantId}")
-    public String showApplicationForm(@PathVariable int tenantId, Model model) {
-       Tenant tenant = tenantService.getTenantById(tenantId);
-        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(tenantId);
+        if (existTenant == null) {
+            Tenant tenant = new Tenant();
+            model.addAttribute("tenant", tenant);
+            model.addAttribute("user", user);
+            return "tenant/tenant";
+        }
+        int id = existTenant.getId();
+        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
         TenantApplication tenantApplication = new TenantApplication();
-       tenantApplication.setTenant(tenant);
-       model.addAttribute("tenantApplication", tenantApplication);
-       model.addAttribute("properties", filteredProperties);
+        tenantApplication.setTenant(existTenant);
+        model.addAttribute("tenantApplication", tenantApplication);
+        model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
     }
+//    @GetMapping("/make/{tenantId}")
+//    public String showApplicationForm(@PathVariable int tenantId, Model model) {
+//       Tenant tenant = tenantService.getTenantById(tenantId);
+//        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(tenantId);
+//        TenantApplication tenantApplication = new TenantApplication();
+//       tenantApplication.setTenant(tenant);
+//       model.addAttribute("tenantApplication", tenantApplication);
+//       model.addAttribute("properties", filteredProperties);
+//        return "applicationTenant/tenantApplicationForm";
+//    }
 
 
     @PostMapping("/submit")
@@ -60,7 +79,7 @@ public class TenantApplicationController {
         return "applicationTenant/tenantAppChangeStatus";
     }
 
-    @Secured("ROLE_TENANT")
+    @Secured("ROLE_ADMIN")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
         tenantApplicationService.processTenantApplicationAction(appId, action);

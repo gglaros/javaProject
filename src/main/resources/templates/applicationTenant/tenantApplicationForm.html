@@ -9,7 +9,7 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-    <h1>Υποβολή Αίτησης</h1>
+    <h1>Available properties</h1>
     <div th:if="${not #lists.isEmpty(properties)}">
         <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
@@ -41,7 +41,7 @@
         </form>
     </div>
     <div th:if="${#lists.isEmpty(properties)}">
-        THERE IS NO <strong>PROPERTY ON EYE YET</strong>, try again later
+        There are no available properties on eye, please try again later
     </div>
 </div>
 </body>
