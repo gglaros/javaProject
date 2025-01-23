@@ -21,7 +21,7 @@
                 <th>Rent Price</th>
                 <th>Status</th>
                 <th>Owner</th>
-                <th>Actions</th>
+<!--                <th>Actions</th>-->
             </tr>
             </thead>
             <tbody>
@@ -34,10 +34,10 @@
                 <td th:text="${property.status !=null ? property.status : 'not maked application'}"></td>
                 <td th:if="${property.owner != null}" th:text="${property.owner.firstName}">Owner</td>
                 <td th:if="${property.owner == null}">No Owner</td>
-                <td>
-                    <a class="button"
-                       th:href="@{'/property/' + ${property.id}}">Details</a>
-                </td>
+<!--                <td>-->
+<!--                    <a class="button"-->
+<!--                       th:href="@{'/property/' + ${property.id}}">Details</a>-->
+<!--                </td>-->
             </tr>
             </tbody>
         </table>
