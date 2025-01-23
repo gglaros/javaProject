@@ -61,7 +61,7 @@ public class TenantApplicationController {
     }
 
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_OWNER")
     @GetMapping("/change/appStatus/{appId}")
     public String changeStatusApplication(@PathVariable int appId, Model model) {
         TenantApplication tenantApplication =tenantApplicationService.getTenantApplicationById(appId);
@@ -69,7 +69,7 @@ public class TenantApplicationController {
         return "applicationTenant/tenantAppChangeStatus";
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_OWNER")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {
         tenantApplicationService.processTenantApplicationAction(appId, action);

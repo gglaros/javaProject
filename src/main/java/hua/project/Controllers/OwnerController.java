@@ -153,13 +153,6 @@ public class OwnerController {
         model.addAttribute("ownerRequests", ownerRequests);
         return "owner/ownerRequests";
     }
-//@GetMapping("show/requests/{ownerId}")
-//    public String showOwnerRequests(Model model,@PathVariable int ownerId) {
-//        List<TenantApplication> ownerRequests = tenantApplicationService.ApplicationsByOwnerId(ownerId);
-//        System.out.println(ownerRequests);
-//        model.addAttribute("ownerRequests", ownerRequests);
-//        return "owner/ownerRequests";
-//}
 
 
 }

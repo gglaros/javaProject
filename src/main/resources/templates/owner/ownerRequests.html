@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{page_layout/layout}">
+      layout:decorate="~{page_layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -22,6 +22,7 @@
                 <th>Phone</th>
                 <th>City</th>
                 <th>Address</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -33,7 +34,10 @@
                 <td th:text="${request.tenant.phone}">Rent Price</td>
                 <td th:text="${request.getProperty().city !=null ? request.getProperty().city : 'not maked application'}"></td>
                 <td th:text="${request.getProperty().address !=null ? request.getProperty().address : 'not maked application'}"></td>
-
+                                <td>
+                                    <a sec:authorize="hasRole('OWNER')" class="btn btn-primary"
+                                       th:href="@{'/tenantApplications/change/appStatus/' + ${request.id}}"> Change status </a>
+                                </td>
             </tr>
             </tbody>
         </table>
