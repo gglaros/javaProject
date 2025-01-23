@@ -47,25 +47,15 @@ public class TenantApplicationController {
         model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
     }
-//    @GetMapping("/make/{tenantId}")
-//    public String showApplicationForm(@PathVariable int tenantId, Model model) {
-//       Tenant tenant = tenantService.getTenantById(tenantId);
-//        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(tenantId);
-//        TenantApplication tenantApplication = new TenantApplication();
-//       tenantApplication.setTenant(tenant);
-//       model.addAttribute("tenantApplication", tenantApplication);
-//       model.addAttribute("properties", filteredProperties);
-//        return "applicationTenant/tenantApplicationForm";
-//    }
 
 
     @PostMapping("/submit")
-    public String submitApplication(@RequestParam("propertyId") int propertyId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
+    public String submitApplication(@RequestParam("propertyId") int propertyId,@RequestParam("tenant") int tenantId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
         Property property = propertyService.getPropertyById(propertyId);
         Owner owner = ownerService.getOwnerById(property.getOwner().getId());
         tenantApplicationService.save(tenantApplication,property,owner);
-        System.out.println(List.of(tenantApplication));
-        List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
+        List<TenantApplication> tenantApplications = tenantApplicationService.ApplicationsByTenantId(tenantId);
+       // List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
         model.addAttribute("tenantApplications", tenantApplications);
         return "applicationTenant/tenantApplications";
     }
