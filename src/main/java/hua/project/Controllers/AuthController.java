@@ -4,6 +4,8 @@ import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
 import hua.project.Repository.UserRepository;
 import hua.project.Service.ValidationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.HashSet;
 import java.util.Set;
 
+@Tag(name = "Authentication", description = "Handles user authentication and role initialization.")
 @Controller
 public class AuthController {
 
@@ -27,6 +30,10 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
+    @Operation(
+            summary = "Initialize Roles and Admin User",
+            description = "Sets up default roles (OWNER, TENANT, ADMIN) and creates an admin user if not already present."
+    )
     @PostConstruct
     public void setup() {
         try {
@@ -57,6 +64,10 @@ public class AuthController {
         }
     }
 
+    @Operation(
+            summary = "Login Page",
+            description = "Displays the login page for users to log into the system."
+    )
     @GetMapping("/login")
     public String login() {
         return "auth/login";

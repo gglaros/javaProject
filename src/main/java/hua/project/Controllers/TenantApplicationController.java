@@ -2,6 +2,7 @@ package hua.project.Controllers;
 
 import hua.project.Entities.*;
 import hua.project.Service.*;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,11 @@ public class TenantApplicationController {
         this.tenantApplicationService = tenantApplicationService;
         this.userService = userService;
     }
-
+    @Operation(
+            summary = "View available properties for tenant application",
+            description = "Fetches the list of properties available for application based on the tenant's status. The tenant must be logged in.",
+            tags = {"Tenant Applications"}
+    )
     @GetMapping("/viewProperties")
     public String showApplicationForm(Authentication authentication, Model model) {
         String username = authentication.getName();
@@ -48,7 +53,11 @@ public class TenantApplicationController {
         return "applicationTenant/tenantApplicationForm";
     }
 
-
+    @Operation(
+            summary = "Submit tenant application",
+            description = "Allows the tenant to submit an application for a property they are interested in.",
+            tags = {"Tenant Applications"}
+    )
     @PostMapping("/submit")
     public String submitApplication(@RequestParam("propertyId") int propertyId,@RequestParam("tenant") int tenantId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
         Property property = propertyService.getPropertyById(propertyId);
@@ -60,7 +69,11 @@ public class TenantApplicationController {
         return "applicationTenant/tenantApplications";
     }
 
-
+    @Operation(
+            summary = "Change application status",
+            description = "Allows owners to change the status of a tenant's application.",
+            tags = {"Tenant Applications"}
+    )
     @Secured("ROLE_OWNER")
     @GetMapping("/change/appStatus/{appId}")
     public String changeStatusApplication(@PathVariable int appId, Model model) {
@@ -68,7 +81,11 @@ public class TenantApplicationController {
         model.addAttribute("app", tenantApplication);
         return "applicationTenant/tenantAppChangeStatus";
     }
-
+    @Operation(
+            summary = "Confirm application status change",
+            description = "Confirms the action taken on a tenant's application (approve/reject).",
+            tags = {"Tenant Applications"}
+    )
     @Secured("ROLE_OWNER")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {

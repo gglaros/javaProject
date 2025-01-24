@@ -18,8 +18,8 @@
                 <th>Surname</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Details</th>
-                <th>Actions</th>
+                <th>Properties</th>
+<!--                <th>Actions</th>-->
             </tr>
             </thead>
             <tbody>
@@ -29,12 +29,15 @@
                 <td class="table-element" th:text="${owner.email}"></td>
                 <td class="table-element" th:text="${owner.phone}"></td>
                 <td>
-                    <a class="Btn" th:href="@{'/owner/show/properties/' + ${owner.id}}"></a>
+                    <div th:if="${not#lists.isEmpty(owner.properties)}">
+                        <!-- edo na fainetai mono an exei properties o owner ALLIOS SVISIMO-->
+                        <a class="Btn" th:href="@{'/owner/show/properties'}"></a>
+                    </div>
                 </td>
-                <td>
-                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>
-<!--<a class="btn btn-primary" th:href="@{/applications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>-->
-                </td>
+<!--                <td>-->
+<!--                    <a class="button" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
+<!--&lt;!&ndash;<a class="btn btn-primary" th:href="@{/applications/make/{ownerId}(ownerId=${owner.id})}">Make Application</a>&ndash;&gt;-->
+<!--                </td>-->
             </tr>
             </tbody>
         </table>

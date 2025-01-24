@@ -5,6 +5,8 @@ import hua.project.Service.OwnerApplicationService;
 import hua.project.Service.OwnerService;
 import hua.project.Service.PropertyService;
 import hua.project.Service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
+@Tag(name = "Owner Applications", description = "Manage owner applications and their status")
 @Controller
 @RequestMapping("/OwnerApplications")
 public class OwnerApplicationController {
@@ -28,13 +31,14 @@ public class OwnerApplicationController {
         this.propertyService = propertyService;
         this.userService = userService;
     }
+    @Operation(summary = "View all owner applications", description = "Accessible only by Admin users, lists all the property applications made by the renters to the admin")
     @Secured("ROLE_ADMIN")
     @GetMapping("")
     public String showApplications(Model model) {
         model.addAttribute("ownerApplications",ownerApplicationService.getOwnerApplications());
         return "applicationOwner/applications";
     }
-
+    @Operation(summary = "Show application form for an owner", description = "Displays the properties the owner hasn’t submitted an application request for, to be approved and posted on the platform yet ")
     @GetMapping("/make/{ownerId}")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
@@ -44,7 +48,7 @@ public class OwnerApplicationController {
         model.addAttribute("app", new OwnerApplication());
         return "applicationOwner/applicationForm";
     }
-
+    @Operation(summary = "Submit owner application", description = "Submit a new application for the specified owner and property.")
     @PostMapping("/submit")
     public String submitApplication(@ModelAttribute("app") OwnerApplication application, @RequestParam("ownerId") int ownerId,Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
@@ -55,7 +59,10 @@ public class OwnerApplicationController {
         return "owner/ownerProfile";
     }
 
-
+    @Operation(summary = "Change application status",
+            description = "Loads the form to change the status of an application(accept/decline) to Admin users" +
+                    "If accept is selected then the property is posted and available for everyone to see. " +
+                    "If decline is selected then the property stays visible only to the owner.")
     @Secured("ROLE_ADMIN")
     @GetMapping("/change/appStatus/{appId}")
     public String changeStatusApplication(@PathVariable int appId, Model model) {
@@ -63,7 +70,7 @@ public class OwnerApplicationController {
         model.addAttribute("app", ownerApplication);
         return "applicationOwner/applicationStatusChange";
     }
-
+    @Operation(summary = "Confirm change of application status", description = "Process the status change for an owner application, returns the now changed status of the property along the other property application requests")
     @Secured("ROLE_ADMIN")
     @PostMapping("/change/appStatus/{appId}")
     public String confirmChangeStatusApplication(@ModelAttribute("application") OwnerApplication application,@PathVariable int appId,  @RequestParam("action") String action,Model model) {

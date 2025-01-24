@@ -4,6 +4,7 @@ import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
 import hua.project.Service.UserService;
 import hua.project.Service.ValidationService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,11 @@ public class UserController {
         this.roleRepository = roleRepository;
         this.validationService = validationService;
     }
-
+    @Operation(
+            summary = "User Registration",
+            description = "Displays the registration form for creating a new user account.",
+            tags = {"User Management"}
+    )
     @GetMapping("/register")
     public String register(Model model) {
         User user = new User();
@@ -41,6 +46,11 @@ public class UserController {
         return "auth/register";
     }
 
+    @Operation(
+            summary = "Save User Registration",
+            description = "Processes the form data and saves the user registration details.",
+            tags = {"User Management"}
+    )
     @PostMapping("/saveUser")
     public String saveUser(@Valid @ModelAttribute User user, BindingResult result ,@RequestParam("roleId") int roleId, Model model){
         try {userService.saveUser(user, roleId); } catch (IllegalArgumentException ex) {
@@ -51,6 +61,11 @@ public class UserController {
         return "index";
     }
 
+    @Operation(
+            summary = "View all users",
+            description = "Displays a list of all users in the system. Accessible by admins only.",
+            tags = {"User Management"}
+    )
     @Secured("ROLE_ADMIN")
     @GetMapping("/users")
     public String showUsers(Model model){
