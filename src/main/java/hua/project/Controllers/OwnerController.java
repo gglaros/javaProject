@@ -27,7 +27,7 @@ public class OwnerController {
     private final   PropertyService propertyService;
     private final TenantApplicationService tenantApplicationService;
     private final OwnerApplicationService ownerApplicationService;
-
+// γιουχοοουυυυ ειμαι εδωω ρε μπρολολοκο!1 γυναικα== κουζινα
     public OwnerController(OwnerService ownerService, OwnerApplicationService ownerApplicationService,PropertyService propertyService,  UserService userService, TenantApplicationService tenantApplicationService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
@@ -170,17 +170,16 @@ public class OwnerController {
         model.addAttribute("ownerProperties", ownerProperties);
         return "owner/ownerProperties";
     }
+
     @GetMapping("/show/properties/{ownerId}")
-    public String viewOwnerPropertiesForAdmin(@PathVariable int id, Model model) {
+    public String viewOwnerPropertiesForAdmin(@PathVariable int ownerId, Model model) {
         // Fetch the owner by ID
-        Owner owner = ownerService.getOwnerById(id);
-//        if (owner == null) {
-//            throw new RuntimeException("Owner not found with ID: " + id);
-//        }
+        Owner owner = ownerService.getOwnerById(ownerId);
+System.out.println("mother fuckaa!!"+owner);
 
         // Fetch properties for the owner
-        List<Property> ownerProperties = propertyService.getAllPropertiesByOwnerId(id);
-
+        List<Property> ownerProperties = propertyService.getAllPropertiesByOwnerId(ownerId);
+System.out.println("mother fuckaa!!"+ownerProperties);
         // Add data to the model
         model.addAttribute("owner", owner);
         model.addAttribute("ownerProperties", ownerProperties);
