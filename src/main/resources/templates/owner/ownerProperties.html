@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{page_layout/layout}">
+      layout:decorate="~{page_layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     <div th:if="${not #lists.isEmpty(ownerProperties)}">
         <table class="table">
             <thead>
-            <h1>Your properties</h1>
+            <h1>Properties</h1>
             <tr>
                 <th>City</th>
                 <th>Description</th>
@@ -41,7 +41,8 @@
         You do not have any properties registered yet!
     </div>
     <td>
-        <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">Register property</a>
+        <a sec:authorize="hasRole('OWNER')" class="btn btn-primary"
+         th:href="@{'/owner/make/property/' + ${owner.id}  }">Register property</a>
     </td>
 
 </div>

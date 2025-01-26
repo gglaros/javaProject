@@ -30,8 +30,7 @@
                 <td class="table-element" th:text="${owner.phone}"></td>
                 <td>
                     <div th:if="${not#lists.isEmpty(owner.properties)}">
-                        <!-- edo na fainetai mono an exei properties o owner ALLIOS SVISIMO-->
-                        <a class="Btn" th:href="@{'/owner/show/properties'}"></a>
+                        <a class="btn btn-primary" th:href="@{'/owner/show/properties/' + ${owner.id}}">Owner's properties</a>
                     </div>
                 </td>
 <!--                <td>-->

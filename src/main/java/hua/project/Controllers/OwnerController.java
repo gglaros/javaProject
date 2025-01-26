@@ -170,6 +170,24 @@ public class OwnerController {
         model.addAttribute("ownerProperties", ownerProperties);
         return "owner/ownerProperties";
     }
+    @GetMapping("/show/properties/{ownerId}")
+    public String viewOwnerPropertiesForAdmin(@PathVariable int id, Model model) {
+        // Fetch the owner by ID
+        Owner owner = ownerService.getOwnerById(id);
+//        if (owner == null) {
+//            throw new RuntimeException("Owner not found with ID: " + id);
+//        }
+
+        // Fetch properties for the owner
+        List<Property> ownerProperties = propertyService.getAllPropertiesByOwnerId(id);
+
+        // Add data to the model
+        model.addAttribute("owner", owner);
+        model.addAttribute("ownerProperties", ownerProperties);
+
+        // Return the same template as the user-facing method
+        return "owner/ownerProperties";
+    }
     @Operation(
             summary = "View rental requests",
             description = "Displays all rental requests for the logged-in owner's properties.",
