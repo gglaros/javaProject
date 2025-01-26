@@ -28,6 +28,7 @@ public class OwnerController {
     private final TenantApplicationService tenantApplicationService;
     private final OwnerApplicationService ownerApplicationService;
 // γιουχοοουυυυ ειμαι εδωω ρε μπρολολοκο!1 γυναικα== κουζινα
+    // olimpiakos
     public OwnerController(OwnerService ownerService, OwnerApplicationService ownerApplicationService,PropertyService propertyService,  UserService userService, TenantApplicationService tenantApplicationService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
