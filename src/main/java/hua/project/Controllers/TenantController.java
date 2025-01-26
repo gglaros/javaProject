@@ -69,17 +69,12 @@ public class TenantController {
         return "applicationTenant/tenantApplications";
     }
 
-//    @GetMapping("/MyApplications/{tenantId}")
-//    public String showTenantApplicationById(@PathVariable int tenantId, Model model) {
-//        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(tenantId);
-//        model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
-//        return "applicationTenant/tenantApplications";
-//    }
     @Operation(
             summary = "View all tenant applications",
             description = "Fetches the list of all tenant applications. This is only accessible to admins.",
             tags = {"Tenant Applications"}
     )
+
     @Secured("ROLE_ADMIN")
     @GetMapping("/all/applications")
     public String showAllTenantApplications(Model model) {
@@ -93,6 +88,7 @@ public class TenantController {
             description = "Displays the profile of the logged-in tenant, or creates a new profile if it doesn't exist.",
             tags = {"Tenant Profile"}
     )
+
     @GetMapping("/profile")
     public String viewProfile(Authentication authentication, Model model) {
         String username = authentication.getName();

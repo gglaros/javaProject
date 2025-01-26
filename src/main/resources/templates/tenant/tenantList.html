@@ -26,11 +26,11 @@
                 <td th:text="${tenant.lastName}"></td>
                 <td th:text="${tenant.email}"></td>
                 <td>
-                    <a class="button" th:href="@{'/tenant/MyApplications/' + ${tenant.id}}">My Apps </a>
-                </td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>
-                </td>
+<!--                    <a class="button" th:href="@{'/tenant/MyApplications/' + ${tenant.id}}">My Apps </a>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>-->
+<!--                </td>-->
             </tr>
             </tbody>
         </table>
@@ -38,7 +38,7 @@
     <div th:if="${ #lists.isEmpty(tenants)}">
         No tenants found!
     </div>
-    <a href="/tenant/new" class="btn btn-primary" role="button">Create new Tenant</a>
+<!--    <a href="/tenant/new" class="btn btn-primary" role="button">Create new Tenant</a>-->
 </div>
 </body>
 </html>
