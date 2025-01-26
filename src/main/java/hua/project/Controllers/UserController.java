@@ -1,13 +1,11 @@
 package hua.project.Controllers;
 
 import hua.project.Entities.Owner;
+import hua.project.Entities.Property;
 import hua.project.Entities.Tenant;
 import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
-import hua.project.Service.OwnerService;
-import hua.project.Service.TenantService;
-import hua.project.Service.UserService;
-import hua.project.Service.ValidationService;
+import hua.project.Service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
@@ -23,17 +21,21 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
-   private OwnerService ownerService;
+    private OwnerService ownerService;
     private RoleRepository roleRepository;
     private ValidationService validationService;
     private TenantService tenantService;
+    private PropertyService propertyService;
+    private OwnerApplicationService ownerApplicationService;
 
-    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService, OwnerService ownerService, TenantService tenantService) {
+    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService, OwnerService ownerService, TenantService tenantService, PropertyService propertyService, OwnerApplicationService ownerApplicationService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.validationService = validationService;
         this.ownerService = ownerService;
-       this.tenantService = tenantService;
+        this.tenantService = tenantService;
+        this.propertyService = propertyService;
+        this.ownerApplicationService = ownerApplicationService;
     }
     @Operation(
             summary = "User Registration",
@@ -81,7 +83,7 @@ public class UserController {
 
     @GetMapping("/user/delete/{userId}")
     public String deleteOwnerTenantAndUserByUserId(@PathVariable @ModelAttribute int userId, Model model) {
-        // Βρες τον User με το userId
+
         User user = userService.getUserById(userId);
         if (user == null) {
             System.out.println("User not found with id: " + userId);
@@ -90,14 +92,17 @@ public class UserController {
 
         try{
             Owner owner = ownerService.getOwnerByUserId(userId);
+
             if (owner != null) {
+             int ownerId = owner.getId();
+                ownerApplicationService.deleteAllApplicationsByOwnerId(ownerId);
+                propertyService.deleteAllPropertiesByOwnerId(ownerId);
                 ownerService.deleteOwnerById(owner.getId());
                 System.out.println("Owner deleted with id: " + owner.getId());
             }
         }catch (IllegalArgumentException ex) {
             System.out.println("Owner not found with id: " + userId);
         }
-
 
         try {
             Tenant tenant = tenantService.getTenantByUserId(userId);

@@ -43,7 +43,11 @@ public class OwnerApplicationService {
         return ownerApplicationRepository.findById(id).get();
     }
 
-
+    @Transactional
+    public void deleteAllApplicationsByOwnerId(int ownerId) {
+        List<OwnerApplication> ownerApplications = ownerApplicationRepository.findAllByOwnerId(ownerId);
+        ownerApplicationRepository.deleteAll(ownerApplications);
+    }
 
     @Transactional
     public List<OwnerApplication> getOwnerApplicationsByOwnerId(Integer userId) {

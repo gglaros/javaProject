@@ -66,4 +66,8 @@ public void savePropertyToOwner(Owner owner, Property property) {
         ownerRepository.deleteById(ownerId);
     }
 
+    public void deletePropertiesByOwnerId(int ownerId) {
+
+    }
+
 }

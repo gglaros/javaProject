@@ -178,11 +178,11 @@ public class OwnerController {
     public String viewOwnerPropertiesForAdmin(@PathVariable int ownerId, Model model) {
         // Fetch the owner by ID
         Owner owner = ownerService.getOwnerById(ownerId);
-System.out.println("mother fuckaa!!"+owner);
+        System.out.println("mother fuckaa!!"+owner);
 
         // Fetch properties for the owner
         List<Property> ownerProperties = propertyService.getAllPropertiesByOwnerId(ownerId);
-System.out.println("mother fuckaa!!"+ownerProperties);
+        System.out.println("mother fuckaa!!"+ownerProperties);
         // Add data to the model
         model.addAttribute("owner", owner);
         model.addAttribute("ownerProperties", ownerProperties);

@@ -57,13 +57,15 @@ public void saveProperty(Property property) {
   propertyRepository.save(property);
 }
 
-
-
 @Transactional
 public Property getPropertyById(Integer id) {
     return propertyRepository.findById(id).get();
 }
 
-
+    @Transactional
+    public void deleteAllPropertiesByOwnerId(int ownerId) {
+        List<Property> properties = propertyRepository.findAllByOwnerId(ownerId);
+        propertyRepository.deleteAll(properties);
+    }
 
 }

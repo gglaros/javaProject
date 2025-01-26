@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
-
+    List<Property> findAllByOwnerId(int ownerId);
 }
