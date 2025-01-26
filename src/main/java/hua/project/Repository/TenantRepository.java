@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface TenantRepository extends JpaRepository<Tenant, Integer> {
     Optional<Tenant> findByUser_Username(String username);
     Tenant findByUser(User user);
+    Tenant findByUserId(Integer userId);
 }

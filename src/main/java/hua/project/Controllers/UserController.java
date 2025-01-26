@@ -1,7 +1,11 @@
 package hua.project.Controllers;
 
+import hua.project.Entities.Owner;
+import hua.project.Entities.Tenant;
 import hua.project.Entities.User;
 import hua.project.Repository.RoleRepository;
+import hua.project.Service.OwnerService;
+import hua.project.Service.TenantService;
 import hua.project.Service.UserService;
 import hua.project.Service.ValidationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,10 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,14 +23,17 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
-
+   private OwnerService ownerService;
     private RoleRepository roleRepository;
     private ValidationService validationService;
+    private TenantService tenantService;
 
-    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService) {
+    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService, OwnerService ownerService, TenantService tenantService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.validationService = validationService;
+        this.ownerService = ownerService;
+       this.tenantService = tenantService;
     }
     @Operation(
             summary = "User Registration",
@@ -73,4 +77,52 @@ public class UserController {
         model.addAttribute("roles", roleRepository.findAll());
         return "auth/users";
     }
+
+
+    @GetMapping("/user/delete/{userId}")
+    public String deleteOwnerTenantAndUserByUserId(@PathVariable @ModelAttribute int userId, Model model) {
+        // Βρες τον User με το userId
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            System.out.println("User not found with id: " + userId);
+            return null;
+        }
+
+        try{
+            Owner owner = ownerService.getOwnerByUserId(userId);
+            if (owner != null) {
+                ownerService.deleteOwnerById(owner.getId());
+                System.out.println("Owner deleted with id: " + owner.getId());
+            }
+        }catch (IllegalArgumentException ex) {
+            System.out.println("Owner not found with id: " + userId);
+        }
+
+
+        try {
+            Tenant tenant = tenantService.getTenantByUserId(userId);
+            if (tenant != null) {
+                ownerService.deleteOwnerById(tenant.getId());
+                System.out.println("tenant deleted with id: " + tenant.getId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Owner owner = ownerService.getOwnerByUserId(userId);
+            if (owner == null) {
+                System.out.println("Owner not found with id: " + userId);
+                userService.deleteUserById(userId);
+                System.out.println("User deleted with id: " + userId);
+            }
+        }catch (IllegalArgumentException ex) {
+            System.out.println("Owner not found with id: " + userId);
+        }
+
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("roles", roleRepository.findAll());
+        return "auth/users";
+    }
+
 }

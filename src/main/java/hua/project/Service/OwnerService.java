@@ -58,5 +58,12 @@ public void savePropertyToOwner(Owner owner, Property property) {
     propertyRepository.save(property);
 
 }
+    public Owner getOwnerByUserId(int userId) {
+        return ownerRepository.findByUserId(userId);
+    }
+
+    public void deleteOwnerById(int ownerId) {
+        ownerRepository.deleteById(ownerId);
+    }
 
 }

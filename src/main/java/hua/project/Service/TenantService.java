@@ -44,5 +44,13 @@ public Tenant getTenantById(int id) {
         return tenantRepository.findById(id).get();
 }
 
+    public Tenant getTenantByUserId(int userId) {
+        return tenantRepository.findByUserId(userId);
+    }
+
+    public void deleteTenantById(int tenantId) {
+        tenantRepository.deleteById(tenantId);
+    }
+
 
 }

@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface OwnerRepository extends JpaRepository<Owner, Integer> {
 Optional<Owner> findByUser_Username(String username);
     Owner findByUser(User user);
-
+    Owner findByUserId(Integer userId);
 }

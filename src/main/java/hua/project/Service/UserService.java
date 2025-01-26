@@ -109,5 +109,12 @@ System.out.println("loaduserbyuusername");
         }
     }
 
+    public User getUserById(int userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    public void deleteUserById(int userId) {
+        userRepository.deleteById(userId);
+    }
 
 }
