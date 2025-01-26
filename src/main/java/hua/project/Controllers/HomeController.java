@@ -23,6 +23,7 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("title", "Home");
         return "index";
+        //home
     }
 
 
