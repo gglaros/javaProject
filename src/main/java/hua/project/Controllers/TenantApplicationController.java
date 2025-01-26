@@ -35,7 +35,9 @@ public class TenantApplicationController {
     public String showApplicationForm(Authentication authentication, Model model) {
         String username = authentication.getName();
         User user = userService.findByUsername(username);
-        if (user == null) {throw new RuntimeException("User not found");}
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
         Tenant existTenant = tenantService.findByUser(user);
 
         if (existTenant == null) {
@@ -44,6 +46,7 @@ public class TenantApplicationController {
             model.addAttribute("user", user);
             return "tenant/tenant";
         }
+//        if (existTenant.getStatus==2) {
         int id = existTenant.getId();
         List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
         TenantApplication tenantApplication = new TenantApplication();
@@ -51,6 +54,8 @@ public class TenantApplicationController {
         model.addAttribute("tenantApplication", tenantApplication);
         model.addAttribute("properties", filteredProperties);
         return "applicationTenant/tenantApplicationForm";
+//    } else {
+//      return "tenant/unvalidated"; }
     }
 
     @Operation(

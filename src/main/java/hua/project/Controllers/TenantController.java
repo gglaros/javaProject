@@ -54,7 +54,9 @@ public class TenantController {
     public String showTenantApplicationById(Authentication authentication, Model model) {
         String username = authentication.getName();
         User user = userService.findByUsername(username);
-        if (user == null) {throw new RuntimeException("User not found");}
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
         Tenant existTenant = tenantService.findByUser(user);
 
         if (existTenant == null) {
@@ -63,10 +65,14 @@ public class TenantController {
             model.addAttribute("user", user);
             return "tenant/tenant";
         }
-        int id=existTenant.getId();
+//        if (existTenant.getStatus==2) {
+        int id = existTenant.getId();
         List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(id);
         model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
         return "applicationTenant/tenantApplications";
+//  } else {
+//      return "tenant/unvalidated";
+//    }
     }
 
     @Operation(
