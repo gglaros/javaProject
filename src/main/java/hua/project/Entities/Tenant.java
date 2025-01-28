@@ -31,19 +31,22 @@ public class Tenant {
         @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<TenantApplication> tenantApplications;
 
+        @Column
+        private String validation;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
 
 
-    public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications) {
+    public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications, String validation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.tenantApplications = tenantApplications;
+        this.validation = validation;
     }
 
     public Tenant() {
@@ -103,7 +106,14 @@ public class Tenant {
         }
 
         public void setTenantApplications(List<TenantApplication> tenantApplications) {
-            this.tenantApplications = tenantApplications;
+            this.tenantApplications = tenantApplications; }
+
+    public String getValidation() {
+        return validation;
+    }
+
+    public void setValidation(String validation) {
+        this.validation = validation;
     }
 
     @Override
@@ -113,7 +123,8 @@ public class Tenant {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+                ", phone='" + phone +
+                ", validation='" + validation +
                 '}';
     }
 }
