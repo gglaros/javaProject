@@ -27,8 +27,9 @@ public class UserController {
     private TenantService tenantService;
     private PropertyService propertyService;
     private OwnerApplicationService ownerApplicationService;
+    private TenantApplicationService tenantApplicationService;
 
-    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService, OwnerService ownerService, TenantService tenantService, PropertyService propertyService, OwnerApplicationService ownerApplicationService) {
+    public UserController(UserService userService, RoleRepository roleRepository, ValidationService validationService, OwnerService ownerService, TenantService tenantService, PropertyService propertyService, OwnerApplicationService ownerApplicationService, TenantApplicationService tenantApplicationService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.validationService = validationService;
@@ -36,6 +37,7 @@ public class UserController {
         this.tenantService = tenantService;
         this.propertyService = propertyService;
         this.ownerApplicationService = ownerApplicationService;
+        this.tenantApplicationService = tenantApplicationService;
     }
     @Operation(
             summary = "User Registration",
@@ -84,19 +86,20 @@ public class UserController {
     @GetMapping("/user/delete/{userId}")
     public String deleteOwnerTenantAndUserByUserId(@PathVariable @ModelAttribute int userId, Model model) {
 
-        User user = userService.getUserById(userId);
-        if (user == null) {
-            System.out.println("User not found with id: " + userId);
-            return null;
+        try{
+            User user = userService.getUserById(userId);
+            if (user == null) {
+                System.out.println("User not found with id: " + userId);
+                return "index"; }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         try{
             Owner owner = ownerService.getOwnerByUserId(userId);
-
             if (owner != null) {
-             int ownerId = owner.getId();
-                ownerApplicationService.deleteAllApplicationsByOwnerId(ownerId);
-                propertyService.deleteAllPropertiesByOwnerId(ownerId);
+                ownerApplicationService.deleteAllApplicationsByOwnerId(owner.getId());
+                propertyService.deleteAllPropertiesByOwnerId(owner.getId());
                 ownerService.deleteOwnerById(owner.getId());
                 System.out.println("Owner deleted with id: " + owner.getId());
             }
@@ -106,8 +109,10 @@ public class UserController {
 
         try {
             Tenant tenant = tenantService.getTenantByUserId(userId);
-            if (tenant != null) {
-                ownerService.deleteOwnerById(tenant.getId());
+             if (tenant != null) {
+                int tenantId = tenant.getId();
+                tenantApplicationService.deleteAllApplicationsByTenantId(tenantId);
+                tenantService.deleteTenantById(tenantId);
                 System.out.println("tenant deleted with id: " + tenant.getId());
             }
         } catch (Exception e) {
@@ -116,7 +121,8 @@ public class UserController {
 
         try {
             Owner owner = ownerService.getOwnerByUserId(userId);
-            if (owner == null) {
+            Tenant tenant = tenantService.getTenantByUserId(userId);
+            if (owner == null || tenant == null) {
                 System.out.println("Owner not found with id: " + userId);
                 userService.deleteUserById(userId);
                 System.out.println("User deleted with id: " + userId);

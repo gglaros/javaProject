@@ -53,6 +53,12 @@ public class TenantApplicationService {
     }
 
 
+    @Transactional
+    public void deleteAllApplicationsByTenantId(int tenantId) {
+        List<TenantApplication> tenantApplications = tenantApplicationRepository.findAllByTenantId(tenantId);
+        tenantApplicationRepository.deleteAll(tenantApplications);
+    }
+
 
         @Transactional
     public List<Property> getPropertiesByOnEyeStatusAndNoApplication(int tenantId) {
