@@ -1,9 +1,6 @@
 package hua.project.Controllers;
 
-import hua.project.Entities.Owner;
-import hua.project.Entities.Tenant;
-import hua.project.Entities.TenantApplication;
-import hua.project.Entities.User;
+import hua.project.Entities.*;
 import hua.project.Service.OwnerService;
 import hua.project.Service.TenantApplicationService;
 import hua.project.Service.TenantService;
@@ -127,9 +124,24 @@ public class TenantController {
         if (user == null) {throw new RuntimeException("User not found");}
 
         tenantService.saveTenant(tenant,user, user.getEmail());
+//        tenantService.changeTenantStatus(tenant);
         model.addAttribute("tenants", tenantService.getAllTenants());
         return "tenant/tenantProfile";
     }
 
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/change/valStatus/{tenantId}")
+    public String changeValidationStatus(@PathVariable int tenantId, Model model) {
+        Tenant tenant =tenantService.getTenantById(tenantId);
+        model.addAttribute("tenant", tenant);
+        return "tenant/tenantValidation";
+    }
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/change/valStatus/{tenantId}")
+    public String confirmChangeValidationStatus(@ModelAttribute("tenant") Tenant tenant, @PathVariable int tenantId, @RequestParam("action") String action, Model model) {
+        tenantService.processTenantValidationStatus(tenantId, action);
+        model.addAttribute("tenants", tenantService.getAllTenants());
+        return "tenant/tenantList";
+    }
 
 }

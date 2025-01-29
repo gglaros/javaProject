@@ -16,8 +16,8 @@
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
-                <th>Details</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +28,16 @@
 <!--                <div th:if="${tetant.status == }" KSEKINISA NA FTIAXNO TA CHANGE STATUS KOUMPIA-->
 <!--                    <a class="button" th:href="@{'/tenant/MyApplications/' + ${tenant.id}}">My Apps </a>-->
 <!--                </td>-->
+                <td th:text="${tenant.validation !=null ? tenant.validation : 'not yet validated'}"></td>
+                <div th:if="${tenant.validation == null}">
+                    <td>
+                        <td> <a class="btn btn-primary" th:href="@{/tenant/change/valStatus/{tenantId}(tenantId=${tenant.id})}">Proccess validation status</a></td>
+                    </td>
+                </div>
+                <div th:if="${not#tenant.validation==null}">
+                    <th> Tenant checked </th>
+                </div>
+
 <!--                <td>-->
 <!--                    <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>-->
 <!--                </td>-->

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>val tenant</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <form th:action="@{/tenant/change/valStatus/{id}(id=${tenant.id})}" th:object="${tenant}" method="post">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Validation actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${tenant.firstName}"></td>
+                    <td th:text="${tenant.lastName}"></td>
+                    <td th:text="${tenant.email}"></td>
+                    <td th:text="${tenant.phone}"></td>
+
+                    <td>
+                        <button type="submit" name="action" value="confirm" class="button">Validate</button>
+                        <button type="submit" name="action" value="reject" class="button">Reject</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

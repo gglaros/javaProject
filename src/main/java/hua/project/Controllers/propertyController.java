@@ -34,7 +34,7 @@ public class propertyController {
     @GetMapping("")
     public String showProperties(Model model) {
         List<Property> properties = propertyService.getAllProperty();
-        properties.forEach(property -> System.out.println(property.getCity() ) );
+        properties.forEach(property -> System.out.println(property.getCity()));
         model.addAttribute("properties", propertyService.getAllProperty());
         return "property/propertyList";
     }

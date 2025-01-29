@@ -1,9 +1,7 @@
 package hua.project.Service;
 
 
-import hua.project.Entities.Owner;
-import hua.project.Entities.Tenant;
-import hua.project.Entities.User;
+import hua.project.Entities.*;
 import hua.project.Repository.TenantRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +37,37 @@ TenantRepository tenantRepository;
         tenant.setEmail(user.getEmail());
         tenantRepository.save(tenant);
     }
+//    @Transactional
+//    public void changeTenantStatus(Tenant tenant) {
+//        tenant.setValidation("pending");
+//        tenantRepository.save(tenant);
+//    }
+    @Transactional
+    public void validateTenant(Tenant tenant) {
+        tenant.setValidation("valid");
+        tenantRepository.save(tenant);
+    }
+    public void invalidateTenant(Tenant tenant) {
+        tenant.setValidation("invalid");
+        tenantRepository.save(tenant);
+    }
 
-public Tenant getTenantById(int id) {
+    @Transactional
+    public void processTenantValidationStatus(int tenantId, String action) {
+        Tenant tenant = getTenantById(tenantId);
+
+        if ("confirm".equalsIgnoreCase(action)) {
+            validateTenant(tenant);
+        } else if ("reject".equalsIgnoreCase(action)) {
+            invalidateTenant(tenant);
+//            tenantApplicationRepository.save(tenantApplication);
+        } else {
+            throw new IllegalArgumentException("Invalid action: " + action);
+        }
+    }
+
+
+    public Tenant getTenantById(int id) {
         return tenantRepository.findById(id).get();
 }
 
