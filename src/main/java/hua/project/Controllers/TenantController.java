@@ -62,14 +62,14 @@ public class TenantController {
             model.addAttribute("user", user);
             return "tenant/tenant";
         }
-//        if (existTenant.getStatus==2) {
-        int id = existTenant.getId();
-        List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(id);
-        model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
-        return "applicationTenant/tenantApplications";
-//  } else {
-//      return "tenant/unvalidated";
-//    }
+        if (existTenant.getValidation()==Validation.VALIDATED) {
+            int id = existTenant.getId();
+            List<TenantApplication> tenantApplicationsByTenantId = tenantApplicationService.ApplicationsByTenantId(id);
+            model.addAttribute("tenantApplications", tenantApplicationsByTenantId);
+            return "applicationTenant/tenantApplications";
+        } else {
+            return "tenant/unvalidated";
+        }
     }
 
     @Operation(
@@ -124,7 +124,7 @@ public class TenantController {
         if (user == null) {throw new RuntimeException("User not found");}
 
         tenantService.saveTenant(tenant,user, user.getEmail());
-//        tenantService.changeTenantStatus(tenant);
+        tenantService.changeTenantStatus(tenant);
         model.addAttribute("tenants", tenantService.getAllTenants());
         return "tenant/tenantProfile";
     }

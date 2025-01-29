@@ -37,18 +37,18 @@ TenantRepository tenantRepository;
         tenant.setEmail(user.getEmail());
         tenantRepository.save(tenant);
     }
-//    @Transactional
-//    public void changeTenantStatus(Tenant tenant) {
-//        tenant.setValidation("pending");
-//        tenantRepository.save(tenant);
-//    }
+    @Transactional
+    public void changeTenantStatus(Tenant tenant) {
+        tenant.setValidation(Validation.PENDING);
+        tenantRepository.save(tenant);
+    }
     @Transactional
     public void validateTenant(Tenant tenant) {
-        tenant.setValidation("valid");
+        tenant.setValidation(Validation.VALIDATED);
         tenantRepository.save(tenant);
     }
     public void invalidateTenant(Tenant tenant) {
-        tenant.setValidation("invalid");
+        tenant.setValidation(Validation.INVALID);
         tenantRepository.save(tenant);
     }
 
@@ -60,7 +60,6 @@ TenantRepository tenantRepository;
             validateTenant(tenant);
         } else if ("reject".equalsIgnoreCase(action)) {
             invalidateTenant(tenant);
-//            tenantApplicationRepository.save(tenantApplication);
         } else {
             throw new IllegalArgumentException("Invalid action: " + action);
         }

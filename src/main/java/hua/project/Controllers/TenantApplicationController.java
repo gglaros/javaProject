@@ -46,16 +46,17 @@ public class TenantApplicationController {
             model.addAttribute("user", user);
             return "tenant/tenant";
         }
-//        if (existTenant.getStatus==2) {
-        int id = existTenant.getId();
-        List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
-        TenantApplication tenantApplication = new TenantApplication();
-        tenantApplication.setTenant(existTenant);
-        model.addAttribute("tenantApplication", tenantApplication);
-        model.addAttribute("properties", filteredProperties);
-        return "applicationTenant/tenantApplicationForm";
-//    } else {
-//      return "tenant/unvalidated"; }
+        if (existTenant.getValidation()==Validation.VALIDATED) {
+            int id = existTenant.getId();
+            List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
+            TenantApplication tenantApplication = new TenantApplication();
+            tenantApplication.setTenant(existTenant);
+            model.addAttribute("tenantApplication", tenantApplication);
+            model.addAttribute("properties", filteredProperties);
+            return "applicationTenant/tenantApplicationForm";
+        } else {
+            return "tenant/unvalidated";
+        }
     }
 
     @Operation(

@@ -31,15 +31,15 @@ public class Tenant {
         @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<TenantApplication> tenantApplications;
 
-        @Column
-        private String validation;
+        @Enumerated(EnumType.STRING)
+        private Validation validation;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
 
 
-    public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications, String validation) {
+    public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications, Validation validation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -108,11 +108,11 @@ public class Tenant {
         public void setTenantApplications(List<TenantApplication> tenantApplications) {
             this.tenantApplications = tenantApplications; }
 
-    public String getValidation() {
+    public Validation getValidation() {
         return validation;
     }
 
-    public void setValidation(String validation) {
+    public void setValidation(Validation validation) {
         this.validation = validation;
     }
 
