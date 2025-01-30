@@ -27,14 +27,17 @@ public class TenantApplication {
     @Column
     private double rentPrice;
 
+    @Enumerated(EnumType.STRING)
+    private Visit visit;
 
-    public TenantApplication(int id, Status status, Property property, Owner owner, Tenant tenant, double rentPrice) {
+    public TenantApplication(int id, Status status, Property property, Owner owner, Tenant tenant, double rentPrice, Visit visit) {
         this.id = id;
         this.status = status;
         this.property = property;
         this.owner = owner;
         this.tenant = tenant;
         this.rentPrice = rentPrice;
+        this.visit = visit;
     }
 
     public TenantApplication() {
@@ -89,6 +92,14 @@ public class TenantApplication {
         this.rentPrice = rentPrice;
     }
 
+    public Visit getVisit() {
+        return visit;
+    }
+
+    public void setVisit(Visit visit) {
+        this.visit = visit;
+    }
+
     @Override
     public String toString() {
         return "TenantApplication{" +
@@ -98,6 +109,7 @@ public class TenantApplication {
                 ", owner=" + owner +
                 ", tenant=" + tenant +
                 ", rentPrice=" + rentPrice +
+                ", visit=" + visit +
                 '}';
     }
 }

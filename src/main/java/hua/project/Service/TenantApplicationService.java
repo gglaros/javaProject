@@ -27,6 +27,7 @@ public class TenantApplicationService {
         tenantApplication.setStatus(Status.PENDING_APPROVAL);
         tenantApplication.setProperty(property);
         tenantApplication.setOwner(owner);
+        //tenantApplication.setVisit();
         tenantApplicationRepository.save(tenantApplication);
     }
 
@@ -60,7 +61,7 @@ public class TenantApplicationService {
     }
 
 
-        @Transactional
+    @Transactional
     public List<Property> getPropertiesByOnEyeStatusAndNoApplication(int tenantId) {
         List<Property> allProperties = propertyService.getAllProperty();
 

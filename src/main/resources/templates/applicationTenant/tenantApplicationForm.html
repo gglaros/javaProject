@@ -21,6 +21,7 @@
                     <th class="property-header">Price (€)</th>
                     <th class="property-header">Description</th>
                     <th class="property-header">Owner</th>
+                    <th class="property-header">Visit</th>
                     <th class="property-header">Action</th>
                 </tr>
                 </thead>
@@ -31,9 +32,15 @@
                     <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
                     <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
                     <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>
-                    <td class="property-cell">
-                        <button type="submit" name="propertyId" th:value="${property.getId()}">Select</button>
+                    <td>
+                        <label>
+                            <input type="radio" name="visit" th:value="${tenantApplication.getVisit()}" />
+                        </label>
                     </td>
+                    <td class="property-cell">
+                        <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>
