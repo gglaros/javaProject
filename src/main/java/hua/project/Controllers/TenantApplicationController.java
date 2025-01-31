@@ -65,10 +65,10 @@ public class TenantApplicationController {
             tags = {"Tenant Applications"}
     )
     @PostMapping("/submit")
-    public String submitApplication(@RequestParam("propertyId") int propertyId,@RequestParam("tenant") int tenantId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
+    public String submitApplication(@RequestParam("propertyId") int propertyId,@RequestParam(value = "visitChecked", required = false) String visitChecked,@RequestParam("tenant") int tenantId, @ModelAttribute("tenantApplication") TenantApplication tenantApplication, Model model) {
         Property property = propertyService.getPropertyById(propertyId);
         Owner owner = ownerService.getOwnerById(property.getOwner().getId());
-        tenantApplicationService.save(tenantApplication,property,owner);
+        tenantApplicationService.save(tenantApplication,property,owner,visitChecked);
         List<TenantApplication> tenantApplications = tenantApplicationService.ApplicationsByTenantId(tenantId);
        // List<TenantApplication> tenantApplications = tenantApplicationService.findAll();
         model.addAttribute("tenantApplications", tenantApplications);

@@ -32,11 +32,12 @@
                     <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
                     <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
                     <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>
-                    <td>
-                        <label>
-                            <input type="radio" name="visit" th:value="${tenantApplication.getVisit()}" />
-                        </label>
-                    </td>
+<!--                    <td>-->
+<!--                        <label>-->
+<!--                            <input type="radio" name="visit" th:value="${tenantApplication.getVisit()}" />-->
+<!--                        </label>-->
+<!--                    </td>-->
+                    <td><input type="checkbox" name="visitChecked" value="true" /></td>
                     <td class="property-cell">
                         <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>
                     </td>

@@ -115,8 +115,8 @@ public class OwnerController {
         ownerService.savePropertyToOwner(owner,property);
         List<Property> properties =propertyService.getAllPropertiesByOwnerId(id);
         model.addAttribute("properties", properties);
-        return "owner/ownerProperties";
-//        return "property/propertyList"; //axristo MALLON den exei koumpi ksero go
+  //      return "owner/ownerProperties";
+        return "property/propertyList"; //axristo MALLON den exei koumpi ksero go
 
     }
 

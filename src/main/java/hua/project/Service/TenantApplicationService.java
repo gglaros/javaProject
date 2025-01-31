@@ -23,11 +23,16 @@ public class TenantApplicationService {
         this.propertyService = propertyService;
     }
 
-    public void save(TenantApplication tenantApplication, Property property, Owner owner) {
+    public void save(TenantApplication tenantApplication, Property property, Owner owner,String visitChecked) {
         tenantApplication.setStatus(Status.PENDING_APPROVAL);
         tenantApplication.setProperty(property);
         tenantApplication.setOwner(owner);
         //tenantApplication.setVisit();
+        if (visitChecked != null) {
+            tenantApplication.setVisit(Visit.VISIT);
+        } else {
+            tenantApplication.setVisit(Visit.NO_VISIT);
+        }
         tenantApplicationRepository.save(tenantApplication);
     }
 

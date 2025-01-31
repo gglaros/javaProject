@@ -55,8 +55,10 @@ public class OwnerApplicationController {
         application.setOwner(owner);
         Property property = propertyService.getPropertyById(application.getProperty().getId());
         ownerApplicationService.saveOwnerApplication(application, property);
+        List<Property> ownerProperties =propertyService.getAllPropertiesByOwnerId(ownerId);
         model.addAttribute("owner", owner);
-        return "owner/ownerProfile";
+        model.addAttribute("ownerProperties", ownerProperties);
+        return "owner/ownerProperties";
     }
 
     @Operation(summary = "Change application status",
