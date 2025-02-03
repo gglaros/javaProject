@@ -56,8 +56,8 @@ public Owner getOwnerById(Integer id) {
 public void savePropertyToOwner(Owner owner, Property property) {
     property.setOwner(owner);
     propertyRepository.save(property);
-
 }
+
     public Owner getOwnerByUserId(int userId) {
         return ownerRepository.findByUserId(userId);
     }
