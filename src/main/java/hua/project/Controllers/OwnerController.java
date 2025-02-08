@@ -144,12 +144,7 @@ public class OwnerController {
         model.addAttribute("ownerApplications", ownerApplications);
         return "applicationOwner/applications";
     }
-//    @GetMapping("/OwnerApplications/{userId}")
-//    public String ownerApplications(@PathVariable int userId, Model model) {
-//        List<OwnerApplication> ownerApplications = ownerApplicationService.getOwnerApplicationsById(userId);
-//        model.addAttribute("ownerApplications", ownerApplications);
-//        return "applicationOwner/applications";
-//    }
+
     @Operation(
         summary = "View owner's properties",
         description = "Displays all properties owned by the logged-in owner.",

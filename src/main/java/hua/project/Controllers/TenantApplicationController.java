@@ -3,6 +3,7 @@ package hua.project.Controllers;
 import hua.project.Entities.*;
 import hua.project.Service.*;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,7 @@ public class TenantApplicationController {
             List<Property> filteredProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
             TenantApplication tenantApplication = new TenantApplication();
             tenantApplication.setTenant(existTenant);
+            System.out.println(filteredProperties);
             model.addAttribute("tenantApplication", tenantApplication);
             model.addAttribute("properties", filteredProperties);
             return "applicationTenant/tenantApplicationForm";
@@ -100,6 +102,64 @@ public class TenantApplicationController {
         return "applicationTenant/tenantApplications";
     }
 
+
+//    @GetMapping("/search")
+//    public String searchProperties(@RequestParam("maxPrice") double maxPrice, Model model) {
+//        List<Property> filteredProperties;
+//
+//        if (maxPrice >0) {
+//            filteredProperties = propertyService.findByMaxPrice(maxPrice);
+//        } else {
+//            filteredProperties = propertyService.getAllProperty();
+//
+//        }
+//        System.out.println(maxPrice);
+//        System.out.println(filteredProperties);
+//
+//        model.addAttribute("properties", filteredProperties);
+//        return "applicationTenant/tenantApplicationForm";
+//
+//    }
+
+
+    @GetMapping("/search")
+    public String showFilterProperty(Authentication authentication, @RequestParam("maxPrice") double maxPrice,Model model) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        Tenant existTenant = tenantService.findByUser(user);
+
+        if (existTenant == null) {
+            Tenant tenant = new Tenant();
+            model.addAttribute("tenant", tenant);
+            model.addAttribute("user", user);
+            return "tenant/tenant";
+        }
+        if (existTenant.getValidation()==Validation.VALIDATED) {
+            int id = existTenant.getId();
+            List<Property> filteredProperties ;
+            TenantApplication tenantApplication = new TenantApplication();
+            tenantApplication.setTenant(existTenant);
+
+            if (maxPrice >0) {
+                filteredProperties = propertyService.findByMaxPrice(maxPrice);
+            } else {
+                filteredProperties = propertyService.getAllProperty();
+
+            }
+            System.out.println(maxPrice);
+            System.out.println(filteredProperties);
+
+
+            model.addAttribute("tenantApplication", tenantApplication);
+            model.addAttribute("properties", filteredProperties);
+            return "applicationTenant/tenantApplicationForm";
+        } else {
+            return "tenant/unvalidated";
+        }
+    }
 
 
 }

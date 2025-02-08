@@ -108,7 +108,7 @@ public class Property {
     @Override
     public String toString() {
         return "Property{" +
-                "id=" + id +
+                "id=" + id + '\'' + ",city='" + city + '\'' +
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
                 ", rentPrice=" + rentPrice +

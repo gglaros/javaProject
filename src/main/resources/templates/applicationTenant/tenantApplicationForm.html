@@ -3,13 +3,25 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{page_layout/layout}">
+
+
 <head>
     <meta charset="UTF-8">
     <title>Make Application</title>
 </head>
 <body>
 <div layout:fragment="main-content">
+<!--    <form th:action="@{/tenantApplications/search}" method="get">-->
+<!--        <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />-->
+<!--        <button type="submit">Search</button>-->
+<!--    </form>-->
     <h1>Available properties</h1>
+    <form th:action="@{/tenantApplications/search}" method="get">
+        <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />
+        <button type="submit">Search</button>
+    </form>
+
+
     <div th:if="${not #lists.isEmpty(properties)}">
         <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
@@ -31,12 +43,8 @@
                     <td class="property-cell" title="Address" th:text="${property.getAddress()}"></td>
                     <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
                     <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
-                    <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>
-<!--                    <td>-->
-<!--                        <label>-->
-<!--                            <input type="radio" name="visit" th:value="${tenantApplication.getVisit()}" />-->
-<!--                        </label>-->
-<!--                    </td>-->
+<!--                    <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>-->
+                    <td class="property-cell" title="Owner" th:text="${property.getOwner() != null ? property.getOwner().firstName : 'N/A'}"></td>
                     <td><input type="checkbox" name="visitChecked" value="true" /></td>
                     <td class="property-cell">
                         <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>

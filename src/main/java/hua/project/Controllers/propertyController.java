@@ -49,6 +49,9 @@ public class propertyController {
         return "property/propertyList";
     }
 
-
+//@GetMapping("/byFilter")
+//    public String showPropertyByFilter(Model model) {
+//
+//}
 
 }

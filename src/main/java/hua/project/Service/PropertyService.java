@@ -68,4 +68,9 @@ public Property getPropertyById(Integer id) {
         propertyRepository.deleteAll(properties);
     }
 
+
+    public List<Property> findByMaxPrice(double maxPrice) {
+     List<Property> properties =propertyRepository.findByRentPriceLessThanEqual(maxPrice);
+     return properties;
+    }
 }
