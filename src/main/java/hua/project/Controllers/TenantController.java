@@ -129,6 +129,9 @@ public class TenantController {
         return "tenant/tenantProfile";
     }
 
+    @Operation(summary = "View tenant validation status change form",
+            description = "Allows an admin to view a tenant's details before updating their validation status.",
+            tags = {"Tenant Management"})
     @Secured("ROLE_ADMIN")
     @GetMapping("/change/valStatus/{tenantId}")
     public String changeValidationStatus(@PathVariable int tenantId, Model model) {
@@ -136,6 +139,10 @@ public class TenantController {
         model.addAttribute("tenant", tenant);
         return "tenant/tenantValidation";
     }
+
+    @Operation(summary = "Update tenant validation status",
+            description = "Allows an admin to change the validation status of a tenant (e.g., validated or not)," +
+                    "tags = {Tenant Management}")
     @Secured("ROLE_ADMIN")
     @PostMapping("/change/valStatus/{tenantId}")
     public String confirmChangeValidationStatus(@ModelAttribute("tenant") Tenant tenant, @PathVariable int tenantId, @RequestParam("action") String action, Model model) {

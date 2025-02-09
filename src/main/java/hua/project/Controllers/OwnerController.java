@@ -27,8 +27,7 @@ public class OwnerController {
     private final   PropertyService propertyService;
     private final TenantApplicationService tenantApplicationService;
     private final OwnerApplicationService ownerApplicationService;
-// γιουχοοουυυυ ειμαι εδωω ρε μπρολολοκο!1 γυναικα== κουζινα
-    // olimpiakos
+
     public OwnerController(OwnerService ownerService, OwnerApplicationService ownerApplicationService,PropertyService propertyService,  UserService userService, TenantApplicationService tenantApplicationService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
@@ -168,7 +167,11 @@ public class OwnerController {
         model.addAttribute("ownerProperties", ownerProperties);
         return "owner/ownerProperties";
     }
-
+    @Operation(
+            summary = "View properties of a specific owner",
+            description = "Allows an admin to view all properties owned by a given owner ID.",
+            tags = {"Property"}
+    )
     @GetMapping("/show/properties/{ownerId}")
     public String viewOwnerPropertiesForAdmin(@PathVariable int ownerId, Model model) {
         // Fetch the owner by ID

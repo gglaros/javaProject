@@ -121,7 +121,11 @@ public class TenantApplicationController {
 //
 //    }
 
-
+    @Operation(
+            summary = "Filter properties by max price",
+            description = "Allows a validated tenant to search for properties within a specified max price.",
+            tags = {"Tenant Applications"}
+    )
     @GetMapping("/search")
     public String showFilterProperty(Authentication authentication, @RequestParam("maxPrice") double maxPrice,Model model) {
         String username = authentication.getName();

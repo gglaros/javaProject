@@ -9,8 +9,10 @@
 //import org.springframework.web.bind.annotation.RequestMapping;
 //
 //@Controller
+//@Tag(name = "Error Handling", description = "Handles application errors and displays appropriate error pages.")
 //public class MyErrorController implements ErrorController {
 //
+//    @Operation(summary = "Handle application errors", description = "Redirects users to appropriate error pages based on the HTTP status code.")
 //    @RequestMapping("/error")
 //    public String handleError(HttpServletRequest request) {
 //        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
