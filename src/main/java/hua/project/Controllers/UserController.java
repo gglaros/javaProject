@@ -98,6 +98,7 @@ public class UserController {
         try{
             Owner owner = ownerService.getOwnerByUserId(userId);
             if (owner != null) {
+                tenantApplicationService.deleteAllRentalRequestForOwnerId(owner.getId());
                 ownerApplicationService.deleteAllApplicationsByOwnerId(owner.getId());
                 propertyService.deleteAllPropertiesByOwnerId(owner.getId());
                 ownerService.deleteOwnerById(owner.getId());
