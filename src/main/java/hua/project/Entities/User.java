@@ -77,6 +77,9 @@ public class User {
 //    public void setPhone(String phone) {
 //        this.phone = phone;
 //    }
+public boolean hasRole(String roleName) {
+    return roles.stream().anyMatch(role -> role.getName().equals(roleName));
+}
 
     public Integer getId() {
         return id;

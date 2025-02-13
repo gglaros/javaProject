@@ -79,6 +79,7 @@ public class UserController {
     public String showUsers(Model model){
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleRepository.findAll());
+
         return "auth/users";
     }
 
@@ -98,7 +99,7 @@ public class UserController {
         try{
             Owner owner = ownerService.getOwnerByUserId(userId);
             if (owner != null) {
-//                tenantApplicationService.deleteAllRentalRequestForOwnerId(owner.getId());
+                tenantApplicationService.deleteAllTenantApplicationsForOwnerId(owner.getId());
                 ownerApplicationService.deleteAllApplicationsByOwnerId(owner.getId());
                 propertyService.deleteAllPropertiesByOwnerId(owner.getId());
                 ownerService.deleteOwnerById(owner.getId());
