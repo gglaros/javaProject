@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TenantApplicationRepository extends JpaRepository<TenantApplication, Integer> {
     List<TenantApplication> findAllByTenantId(int tenantId);
-    List<TenantApplication> findAllByPropertyId(List<Integer> propertyId);
+//    List<TenantApplication> findAllByPropertyId(List<Integer> propertyId);
 }
