@@ -67,12 +67,12 @@ public class TenantApplicationService {
         tenantApplicationRepository.deleteAll(tenantApplications);
     }
 
-//    @Transactional
-//    public void deleteAllRentalRequestByOwnerId(int ownerId, int propertyId) {
-//        List<Property> ownerProperties = propertyRepository.findAllByOwnerId(ownerId);
-//        List<TenantApplication> tenantApplications = tenantApplications.ApplicationsByOwnerId();
-//        tenantApplicationRepository.deleteAll(tenantApplications);
-//    }
+    @Transactional
+    public void deleteAllTenantApplicationsForOwnerId(int ownerId) {
+        List<TenantApplication> tenantApplications = tenantApplicationRepository.findAllByOwnerId(ownerId);
+       tenantApplicationRepository.deleteAll(tenantApplications);
+    }
+
 //    @Transactional
 //    public void deleteAllRentalRequestForOwnerId(int ownerId) {
 //        // Get all properties owned by the given owner
@@ -123,4 +123,7 @@ public class TenantApplicationService {
             throw new IllegalArgumentException("Invalid action: " + action);
         }
     }
+
+
+
 }
