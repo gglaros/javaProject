@@ -73,7 +73,14 @@ public class TenantApplicationService {
        tenantApplicationRepository.deleteAll(tenantApplications);
     }
 
-//    @Transactional
+
+
+
+
+
+
+
+    //    @Transactional
 //    public void deleteAllRentalRequestForOwnerId(int ownerId) {
 //        // Get all properties owned by the given owner
 //        List<Property> ownerProperties = propertyRepository.findAllByOwnerId(ownerId);
