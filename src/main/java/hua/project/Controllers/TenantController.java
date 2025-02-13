@@ -115,7 +115,7 @@ public class TenantController {
             tags = {"Tenant Profile"}
     )
     @PostMapping("/new")
-    public String saveOwner(@Valid @ModelAttribute("tenant") Tenant tenant, BindingResult result,@RequestParam("userId") int userId, Model model) {
+    public String saveTenant(@Valid @ModelAttribute("tenant") Tenant tenant, BindingResult result,@RequestParam("userId") int userId, Model model) {
         User user = userService.getUserById(userId);
         if (result.hasErrors()) {
             model.addAttribute("tenant", tenant);

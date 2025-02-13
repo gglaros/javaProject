@@ -149,6 +149,7 @@ public class OwnerController {
         description = "Displays all properties owned by the logged-in owner.",
         tags = {"Property"}
     )
+    @Secured("ROLE_OWNER")
     @GetMapping("/show/properties")
     public String viewProperties(Authentication authentication, Model model) {
         String username = authentication.getName();
@@ -172,6 +173,7 @@ public class OwnerController {
             description = "Allows an admin to view all properties owned by a given owner ID.",
             tags = {"Property"}
     )
+    @Secured("ROLE_ADMIN")
     @GetMapping("/show/properties/{ownerId}")
     public String viewOwnerPropertiesForAdmin(@PathVariable int ownerId, Model model) {
         // Fetch the owner by ID
@@ -193,6 +195,7 @@ public class OwnerController {
             description = "Displays all rental requests for the logged-in owner's properties.",
             tags = {"Rental Request"}
     )
+    @Secured("ROLE_OWNER")
     @GetMapping("/show/requests")
     public String showRentalRequests(Authentication authentication, Model model) {
         String username = authentication.getName();

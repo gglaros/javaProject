@@ -82,7 +82,7 @@ public class UserController {
         return "auth/users";
     }
 
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/user/delete/{userId}")
     public String deleteOwnerTenantAndUserByUserId(@PathVariable @ModelAttribute int userId, Model model) {
 

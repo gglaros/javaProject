@@ -40,6 +40,7 @@ public class OwnerApplicationController {
     }
     @Operation(summary = "Show application form for an owner", description = "Displays the properties the owner hasn’t submitted an application request for, to be approved and posted on the platform yet ")
     @GetMapping("/make/{ownerId}")
+    @Secured("ROLE_OWNER")
     public String showApplicationForm(@PathVariable int ownerId, Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
         List<Property> filteredProperties = propertyService.getPropertiesByOwnerId(ownerId);
@@ -50,6 +51,7 @@ public class OwnerApplicationController {
     }
     @Operation(summary = "Submit owner application", description = "Submit a new application for the specified owner and property.")
     @PostMapping("/submit")
+    @Secured("ROLE_OWNER")
     public String submitApplication(@ModelAttribute("app") OwnerApplication application, @RequestParam("ownerId") int ownerId,Model model) {
         Owner owner = ownerService.getOwnerById(ownerId);
         application.setOwner(owner);

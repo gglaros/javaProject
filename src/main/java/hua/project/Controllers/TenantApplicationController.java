@@ -127,6 +127,7 @@ public class TenantApplicationController {
             tags = {"Tenant Applications"}
     )
     @GetMapping("/search")
+    @Secured("ROLE_TENANT")
     public String showFilterProperty(Authentication authentication, @RequestParam("maxPrice") double maxPrice,Model model) {
         String username = authentication.getName();
         User user = userService.findByUsername(username);
