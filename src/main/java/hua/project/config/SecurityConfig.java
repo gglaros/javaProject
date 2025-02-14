@@ -40,14 +40,10 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home","register","saveUser", "/images/**", "/js/**", "/css/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                        ).permitAll().requestMatchers("/users").hasRole("ADMIN").anyRequest().authenticated()
                 )
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers(
-//                                "/swagger-ui/**",
-//                                "/swagger-ui.html").permitAll()
-//                        .anyRequest().authenticated())
+
+
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)

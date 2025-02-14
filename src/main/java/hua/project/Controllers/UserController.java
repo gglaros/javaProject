@@ -48,7 +48,6 @@ public class UserController {
     public String register(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-      //  model.addAttribute("roles", roleRepository.findAll());
         List<String> roleNames = Arrays.asList("ROLE_OWNER", "ROLE_TENANT");
         model.addAttribute("roles", roleRepository.findAllByNameIn(roleNames));
         return "auth/register";
