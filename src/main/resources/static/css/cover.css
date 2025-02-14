@@ -73,8 +73,8 @@ h2 {
     align-items: center;      /* Κεντράρει κάθετα το περιεχόμενο του κουμπιού */
     padding: 10px 20px;       /* Διαστάσεις του κουμπιού */
     font-size: 16px;          /* Μέγεθος γραμματοσειράς */
-    background-color: #007bff; /* Μπλε χρώμα */
-    color: white;             /* Άσπρο χρώμα γραμματοσειράς */
+    background-color: #e4e6e8; /* Μπλε χρώμα */
+    color: #0609ca;             /* Άσπρο χρώμα γραμματοσειράς */
     border: none;             /* Χωρίς περίγραμμα */
     border-radius: 5px;       /* Στρογγυλεμένες γωνίες */
     cursor: pointer;          /* Αλλαγή δείκτη σε χέρι */
@@ -98,7 +98,7 @@ h2 {
 }
 
 .property-header {
-    background-color: #f2f2f2;
+    background-color: #031a61;
     text-align: left;
 }
 
