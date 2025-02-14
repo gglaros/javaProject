@@ -40,7 +40,12 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home","register","saveUser", "/images/**", "/js/**", "/css/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**"
-                        ).permitAll().requestMatchers("/users").hasRole("ADMIN").anyRequest().authenticated()
+                        ).permitAll()
+                        .requestMatchers("/OwnerApplications","/OwnerApplications/change/appStatus/{appId}","owner","owner/show/properties/{ownerId}","property/**",
+                                "tenant","tenant/all/applications","tenant/change/valStatus/{tenantId}","/users","/user/delete/{userId}").hasRole("ADMIN")
+                        .requestMatchers("/OwnerApplications/make/{ownerId}","owner/make/property/{id}","owner/OwnerApplications","owner/show/properties", "owner/show/requests",
+                                "tenantApplications/change/appStatus/{appId}").hasRole("OWNER")
+                        .anyRequest().authenticated()
                 )
 
 

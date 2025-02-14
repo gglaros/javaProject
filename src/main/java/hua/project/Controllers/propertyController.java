@@ -43,12 +43,13 @@ public class propertyController {
             description = "Fetches details of a specific property based on its ID.",
             tags = {"Property"}
     )
+    @Secured({"ROLE_OWNER", "ROLE_ADMIN"})
     @GetMapping("/{id}")
     public String showPropertyId(Model model, @PathVariable Integer id) {
         model.addAttribute("properties", propertyService.getPropertyById(id));
         return "property/propertyList";
     }
-
+//den exei mpei sto SecurityConfig
 
 
 }

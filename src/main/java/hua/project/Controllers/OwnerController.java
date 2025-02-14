@@ -92,7 +92,7 @@ public class OwnerController {
             description = "Displays the form to add a new property for a specific owner.",
             tags = {"Property"}
     )
-    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
+    @Secured("ROLE_OWNER")
     @GetMapping("/make/property/{id}")
     public String addProperty(@PathVariable int id, Model model) {
         Property property = new Property();
@@ -107,7 +107,7 @@ public class OwnerController {
             description = "Saves a new property under the specified owner's profile.",
             tags = {"Property"}
     )
-    @Secured({"ROLE_ADMIN","ROLE_OWNER"})
+    @Secured("ROLE_OWNER")
     @PostMapping("/make/property/{id}")
     public String saveProperty(@PathVariable int id, @ModelAttribute("property") Property property, Model model) {
         Owner owner = ownerService.getOwnerById(id);
@@ -178,11 +178,9 @@ public class OwnerController {
     public String viewOwnerPropertiesForAdmin(@PathVariable int ownerId, Model model) {
         // Fetch the owner by ID
         Owner owner = ownerService.getOwnerById(ownerId);
-        System.out.println("mother fuckaa!!"+owner);
 
         // Fetch properties for the owner
         List<Property> ownerProperties = propertyService.getAllPropertiesByOwnerId(ownerId);
-        System.out.println("mother fuckaa!!"+ownerProperties);
         // Add data to the model
         model.addAttribute("owner", owner);
         model.addAttribute("ownerProperties", ownerProperties);
