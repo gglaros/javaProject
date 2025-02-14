@@ -15,7 +15,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Tenant</th>
+<!--                <th>Tenant</th>-->
                 <th>Tenant Email</th>
                 <th>Property City</th>
                 <th>Property Address</th>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
             <tr th:each="Tenantapp: ${tenantApplications}">
-                <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().getUser().getUsername() : 'NO'}"></td>
+<!--                <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().getUser().getUsername() : 'NO'}"></td>-->
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().email : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getCity() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getAddress() : 'NO'}"></td>
@@ -47,7 +47,7 @@
     </div>
 
     <div th:if="${ #lists.isEmpty(tenantApplications)}">
-        Seems like you haven't sent any rental requests :/
+        Seems like no rental requests have been submitted yet :/
     </div>
 
 </div>

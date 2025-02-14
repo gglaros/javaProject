@@ -21,7 +21,7 @@
             <a  sec:authorize="hasRole('ADMIN')"  class="nav-link" href="/property" data-path="/property">Properties</a>
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/OwnerApplications" data-path="/OwnerApplications">Applications</a>
             <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant" data-path="/tenant">Tenants</a>
-            <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">TenantApps</a>
+            <a  sec:authorize="hasRole('ADMIN')" class="nav-link" href="/tenant/all/applications" data-path="/tenant/all/applications">Tenant rental applications</a>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/users" data-path="/users">Users</a>
 
             <a sec:authorize="hasRole('ROLE_OWNER')" class="nav-link" th:href="@{/owner/show/properties}">My Properties</a>
