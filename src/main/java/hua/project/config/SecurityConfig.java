@@ -23,9 +23,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private UserService userService;
-
     private UserDetailsService userDetailsService;
-
     private BCryptPasswordEncoder passwordEncoder;
 
 
@@ -43,8 +41,11 @@ public class SecurityConfig {
                         ).permitAll()
                         .requestMatchers("/OwnerApplications","/OwnerApplications/change/appStatus/{appId}","owner","owner/show/properties/{ownerId}","property/**",
                                 "tenant","tenant/all/applications","tenant/change/valStatus/{tenantId}","/users","/user/delete/{userId}").hasRole("ADMIN")
+
                         .requestMatchers("/OwnerApplications/make/{ownerId}","owner/make/property/{id}","owner/OwnerApplications","owner/show/properties", "owner/show/requests",
                                 "tenantApplications/change/appStatus/{appId}").hasRole("OWNER")
+
+                        .requestMatchers("/tenantApplications/viewProperties","tenant/rentalRequests","tenant/profile").hasRole("TENANT")
                         .anyRequest().authenticated()
                 )
 

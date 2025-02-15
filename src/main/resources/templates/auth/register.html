@@ -28,13 +28,17 @@
         <div class="form-group ">
             <label for="email"> Email</label>
             <input type="email" class="form-control"  th:field="*{email}" id="email" required/>
-<!--            <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>-->
+
         </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="password">Password</label>-->
+<!--            <input type="password" class="form-control" id="password" th:field="*{password}" required />-->
+<!--        </div>-->
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}" required />
-<!--            <div class="error-message" th:text="${errorMessage}" th:if="${errorMessage != null}"></div>-->
+            <input type="password" class="form-control" id="password" th:field="*{password}" required minlength="5" placeholder="Put minimum 5 characters for code">
         </div>
 
 

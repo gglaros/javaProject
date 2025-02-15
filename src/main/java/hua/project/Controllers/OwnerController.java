@@ -53,6 +53,7 @@ public class OwnerController {
             description = "Fetches the owner's profile or displays the registration form if no profile exists.",
             tags = {"Owner"}
     )
+    @Secured("ROLE_OWNER")
     @GetMapping("/profile")
     public String viewProfile(Authentication authentication, Model model) {
         String username = authentication.getName();
@@ -115,7 +116,7 @@ public class OwnerController {
         List<Property> properties =propertyService.getAllPropertiesByOwnerId(id);
         model.addAttribute("properties", properties);
   //      return "owner/ownerProperties";
-        return "property/propertyList"; //axristo MALLON den exei koumpi ksero go
+        return "property/propertyList";
 
     }
 
