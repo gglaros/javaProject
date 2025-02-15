@@ -74,32 +74,6 @@ public class TenantApplicationService {
     }
 
 
-
-
-
-
-
-
-    //    @Transactional
-//    public void deleteAllRentalRequestForOwnerId(int ownerId) {
-//        // Get all properties owned by the given owner
-//        List<Property> ownerProperties = propertyRepository.findAllByOwnerId(ownerId);
-//
-//        // Extract property IDs for filtering
-//        List<Integer> propertyId = ownerProperties.stream()
-//                .map(Property::getId)
-//                .collect(Collectors.toList());
-//
-//        // Find all tenant applications related to these properties
-//        List<TenantApplication> tenantApplications = tenantApplicationRepository
-//                .findAllByPropertyId(propertyId);
-//
-//        // Delete all found applications
-//        tenantApplicationRepository.deleteAll(tenantApplications);
-//    }
-
-
-
     @Transactional
     public List<Property> getPropertiesByOnEyeStatusAndNoApplication(int tenantId) {
         List<Property> allProperties = propertyService.getAllProperty();

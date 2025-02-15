@@ -14,14 +14,13 @@
     <div th:if="${param.error}">
         Invalid username and password.
     </div>
-    <h3 class="register">User Registration</h3>
+    <h3 class="register">User registration</h3>
 
     <form class="newForm" th:action="@{/saveUser}" method="post" th:object="${user}">
 
         <div class="form-group">
             <label for="username"> User Name</label>
             <input type="text" class="form-control" th:field="*{username}" id="username" required/>
-<!--            <div class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>-->
         </div>
 
 
@@ -31,10 +30,6 @@
 
         </div>
 
-<!--        <div class="form-group">-->
-<!--            <label for="password">Password</label>-->
-<!--            <input type="password" class="form-control" id="password" th:field="*{password}" required />-->
-<!--        </div>-->
 
         <div class="form-group">
             <label for="password">Password</label>

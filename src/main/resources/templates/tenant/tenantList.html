@@ -33,15 +33,7 @@
 <!--                <div th:if="${tenant.validation == null}">-->
 <!--                    <td>-->
                 <td> <a class="btn btn-primary" th:href="@{/tenant/change/valStatus/{tenantId}(tenantId=${tenant.id})}">Proccess validation status</a></td>
-<!--                    </td>-->
-<!--                </div>-->
-<!--                <div th:if="${not#tenant.validation==null}">-->
-<!--                    <th> Tenant checked </th>-->
-<!--                </div>-->
 
-<!--                <td>-->
-<!--                    <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>-->
-<!--                </td>-->
             </tr>
             </tbody>
         </table>
@@ -49,7 +41,6 @@
     <div th:if="${ #lists.isEmpty(tenants)}">
         No tenants found!
     </div>
-<!--    <a href="/tenant/new" class="btn btn-primary" role="button">Create new Tenant</a>-->
 </div>
 </body>
 </html>

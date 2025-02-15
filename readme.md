@@ -10,7 +10,7 @@
 * open browser and search url: localhost:8080
 
 # API Documentation
-The API documentation is inside the project report
+For the API documentation visit: http://localhost:8080/swagger-ui/index.html#/
 
 # Already setted up admin in authcontroller class
 username=admin2

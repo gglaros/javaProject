@@ -1,42 +1,42 @@
-<!-- Search bar for filtering by price -->
-<form th:action="@{/tenantApplications/search}" method="get">
-    <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />
-    <button type="submit">Search</button>
-</form>
+<!--&lt;!&ndash; Search bar for filtering by price &ndash;&gt;-->
+<!--<form th:action="@{/tenantApplications/search}" method="get">-->
+<!--    <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />-->
+<!--    <button type="submit">Search</button>-->
+<!--</form>-->
 
-<!-- Display filtered properties if searching, otherwise show all -->
-<div th:if="${not #lists.isEmpty(filteredProperties)}">
-    <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">
-        <input type="hidden" th:field="*{tenant}" />
-        <table class="property-table">
-            <thead>
-            <tr>
-                <th class="property-header">City</th>
-                <th class="property-header">Address</th>
-                <th class="property-header">Price (€)</th>
-                <th class="property-header">Description</th>
-                <th class="property-header">Owner</th>
-                <th class="property-header">Visit</th>
-                <th class="property-header">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="property-row" th:each="property : ${filteredProperties}">
-                <td class="property-cell" title="City" th:text="${property.getCity()}"></td>
-                <td class="property-cell" title="Address" th:text="${property.getAddress()}"></td>
-                <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
-                <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
-                <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>
-                <td><input type="checkbox" name="visitChecked" value="true" /></td>
-                <td class="property-cell">
-                    <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+<!--&lt;!&ndash; Display filtered properties if searching, otherwise show all &ndash;&gt;-->
+<!--<div th:if="${not #lists.isEmpty(filteredProperties)}">-->
+<!--    <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">-->
+<!--        <input type="hidden" th:field="*{tenant}" />-->
+<!--        <table class="property-table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th class="property-header">City</th>-->
+<!--                <th class="property-header">Address</th>-->
+<!--                <th class="property-header">Price (€)</th>-->
+<!--                <th class="property-header">Description</th>-->
+<!--                <th class="property-header">Owner</th>-->
+<!--                <th class="property-header">Visit</th>-->
+<!--                <th class="property-header">Action</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr class="property-row" th:each="property : ${filteredProperties}">-->
+<!--                <td class="property-cell" title="City" th:text="${property.getCity()}"></td>-->
+<!--                <td class="property-cell" title="Address" th:text="${property.getAddress()}"></td>-->
+<!--                <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>-->
+<!--                <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>-->
+<!--                <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>-->
+<!--                <td><input type="checkbox" name="visitChecked" value="true" /></td>-->
+<!--                <td class="property-cell">-->
+<!--                    <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </form>-->
+<!--</div>-->
 
-<div th:if="${#lists.isEmpty(filteredProperties)}">
-    No properties found under this price.
-</div>
+<!--<div th:if="${#lists.isEmpty(filteredProperties)}">-->
+<!--    No properties found under this price.-->
+<!--</div>-->

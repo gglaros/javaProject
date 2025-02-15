@@ -36,7 +36,7 @@
                 <td th:text="${app.status !=null ? app.status : 'NO'}"></td>
 
                 <td>
-                    <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-light btn-sm"
+                    <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary"
                        th:href="@{'/OwnerApplications/change/appStatus/' + ${app.id}}">Change Status</a>
                 </td>
 
@@ -54,9 +54,6 @@
            th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>
     </td>
 
-<!--    <td>-->
-<!--        <a class="btn btn-primary" th:href="@{'/OwnerApplications/make/' + ${owner.id}}">Submit an application</a>-->
-<!--    </td>-->
 
 </div>
 </body>

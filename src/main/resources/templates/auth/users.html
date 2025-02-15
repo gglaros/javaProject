@@ -29,7 +29,7 @@
                 <td th:text="${user.roles}"></td>
 
                 <td th:if="${user.hasRole('ROLE_OWNER') or user.hasRole('ROLE_TENANT')}">
-                    <a class="btn btn-info" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+                    <a class="btn btn-primary" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
                 </td>
 
             </tr>

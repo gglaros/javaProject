@@ -19,8 +19,7 @@
             <th>Phone</th>
             <th>UserName</th>
             <th>Validation status</th>
-<!--            <th>Properties</th>-->
-<!--            <th>Actions</th>-->
+
         </tr>
         </thead>
         <tbody>
@@ -32,15 +31,6 @@
             <td class="table-element" th:text="${tenant.user}"></td>
             <td class="table-element" th:text="${tenant.validation}"></td>
 
-<!--            <td>-->
-<!--                <a class="button" th:href="@{'/tenant/MyApplications/' + ${tenant.id}}">applications </a>-->
-<!--&lt;!&ndash;                <a class="button" th:href="@{'/owner/show/properties/' + ${owner.id}}">properties </a>&ndash;&gt;-->
-
-<!--            </td>-->
-<!--            <td>-->
-<!--                <a class="btn btn-primary" th:href="@{/tenantApplications/make/{tenantId}(tenantId=${tenant.id})}">Make Application</a>-->
-
-<!--            </td>-->
         </tr>
         </tbody>
     </table>

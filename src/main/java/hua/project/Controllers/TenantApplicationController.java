@@ -103,24 +103,6 @@ public class TenantApplicationController {
     }
 
 
-//    @GetMapping("/search")
-//    public String searchProperties(@RequestParam("maxPrice") double maxPrice, Model model) {
-//        List<Property> filteredProperties;
-//
-//        if (maxPrice >0) {
-//            filteredProperties = propertyService.findByMaxPrice(maxPrice);
-//        } else {
-//            filteredProperties = propertyService.getAllProperty();
-//
-//        }
-//        System.out.println(maxPrice);
-//        System.out.println(filteredProperties);
-//
-//        model.addAttribute("properties", filteredProperties);
-//        return "applicationTenant/tenantApplicationForm";
-//
-//    }
-
     @Operation(
             summary = "Filter properties by max price",
             description = "Allows a validated tenant to search for properties within a specified max price.",

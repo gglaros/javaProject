@@ -35,15 +35,12 @@
             </tbody>
         </table>
     </div>
-<!--    <a class="btn btn-primary" th:href="@{'/owner/make/property/' + ${owner.id}  }">add property</a>-->
     <!-- Αν η λίστα properties είναι άδεια -->
     <div th:if="${#lists.isEmpty(ownerProperties)}">
         You do not have any properties registered yet!
     </div>
-<!--    <td>-->
         <a sec:authorize="hasRole('OWNER')" class="btn btn-primary"
          th:href="@{'/owner/make/property/' + ${owner.id}  }">Register property</a>
-<!--    </td>-->
 
 </div>
 </body>

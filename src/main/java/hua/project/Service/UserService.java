@@ -93,7 +93,6 @@ private OwnerRepository ownerRepository;
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> opt = userRepository.findByUsername(username);
-System.out.println("loaduserbyuusername");
         if(opt.isEmpty())
             throw new UsernameNotFoundException("User with email: " +username +" not found !");
         else {

@@ -15,7 +15,6 @@
         <table class="table">
             <thead>
             <tr>
-<!--                <th>Tenant</th>-->
                 <th>Tenant Email</th>
                 <th>Property City</th>
                 <th>Property Address</th>
@@ -27,7 +26,6 @@
             </thead>
             <tbody>
             <tr th:each="Tenantapp: ${tenantApplications}">
-<!--                <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().getUser().getUsername() : 'NO'}"></td>-->
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getTenant().email : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getCity() : 'NO'}"></td>
                 <td th:text="${Tenantapp.property !=null ? Tenantapp.getProperty().getAddress() : 'NO'}"></td>
@@ -36,10 +34,6 @@
                 <td th:text="${Tenantapp.getVisit()}"></td>
                 <td th:text="${Tenantapp.getStatus() !=null ? Tenantapp.getStatus() : 'waiting'}"></td>
 
-<!--                <td>-->
-<!--                    <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary"-->
-<!--                       th:href="@{'/tenantApplications/change/appStatus/' + ${Tenantapp.id}}"> Change status </a>-->
-<!--                </td>-->
 
             </tr>
             </tbody>

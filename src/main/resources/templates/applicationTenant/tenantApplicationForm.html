@@ -11,10 +11,6 @@
 </head>
 <body>
 <div layout:fragment="main-content">
-<!--    <form th:action="@{/tenantApplications/search}" method="get">-->
-<!--        <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />-->
-<!--        <button type="submit">Search</button>-->
-<!--    </form>-->
     <h1>Available properties</h1>
     <form th:action="@{/tenantApplications/search}" method="get">
         <input type="number" name="maxPrice" placeholder="Enter max price (€)" min="0" required />
@@ -23,38 +19,42 @@
 
 
     <div th:if="${not #lists.isEmpty(properties)}">
-        <form th:action="@{/tenantApplications/submit}" method="post" th:object="${tenantApplication}">
+        <form th:action="@{/tenantApplications/submit}" method="post" onsubmit="hideButton()" th:object="${tenantApplication}">
             <input type="hidden" th:field="*{tenant}" />
-             <table class="property-table">
+             <table class="table">
                 <thead>
                 <tr>
-                    <th class="property-header">City</th>
-                    <th class="property-header">Address</th>
-                    <th class="property-header">Price (€)</th>
-                    <th class="property-header">Description</th>
-                    <th class="property-header">Owner</th>
-                    <th class="property-header">Visit</th>
-                    <th class="property-header">Action</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Price (€)</th>
+                    <th>Description</th>
+                    <th>Owner</th>
+                    <th>Visit</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="property-row" th:each="property : ${properties}">
-                    <td class="property-cell" title="City" th:text="${property.getCity()}"></td>
-                    <td class="property-cell" title="Address" th:text="${property.getAddress()}"></td>
-                    <td class="property-cell" title="Price" th:text="${property.rentPrice}"></td>
-                    <td class="property-cell" title="Description" th:text="${property.getDescription()}"></td>
-<!--                    <td class="property-cell" title="Owner" th:text="${property.getOwner().firstName}"></td>-->
-                    <td class="property-cell" title="Owner" th:text="${property.getOwner() != null ? property.getOwner().firstName : 'N/A'}"></td>
+                <tr th:each="property : ${properties}">
+                    <td class="table-element" title="City" th:text="${property.getCity()}"></td>
+                    <td class="table-element" title="Address" th:text="${property.getAddress()}"></td>
+                    <td class="table-element" title="Price" th:text="${property.rentPrice}"></td>
+                    <td class="table-element" title="Description" th:text="${property.getDescription()}"></td>
+                    <td class="table-element" title="Owner" th:text="${property.getOwner() != null ? property.getOwner().firstName : 'N/A'}"></td>
                     <td><input type="checkbox" name="visitChecked" value="true" /></td>
-                    <td class="property-cell">
-                        <button type="submit" name="propertyId" th:value="${property.getId()}">Send request</button>
+                    <td>
+                        <button class="btn btn-primary" type="submit" name="propertyId" id="submitButton" th:value="${property.getId()}">Send request</button>
                     </td>
-
                 </tr>
                 </tbody>
             </table>
 
         </form>
+        <script>
+            function hideButton() {
+                const button = document.getElementById("submitButton");
+                button.style.display = "none"; // Αποκρύπτει το κουμπί
+            }
+        </script>
     </div>
     <div th:if="${#lists.isEmpty(properties)}">
         There are no available properties on eye, please try again later

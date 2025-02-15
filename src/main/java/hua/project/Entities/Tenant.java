@@ -37,8 +37,6 @@ public class Tenant {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
     public Tenant(int id, String firstName, String lastName, String email, String phone, List<TenantApplication> tenantApplications, Validation validation) {
         this.id = id;
         this.firstName = firstName;

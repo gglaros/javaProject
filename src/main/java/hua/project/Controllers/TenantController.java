@@ -47,7 +47,6 @@ public class TenantController {
             description = "Fetches the rental applications submitted by the logged-in tenant.",
             tags = {"Tenant Applications"}
     )
-
     @Secured("ROLE_TENANT")
     @GetMapping("/rentalRequests")
     public String showTenantApplicationById(Authentication authentication, Model model) {
@@ -79,7 +78,6 @@ public class TenantController {
             description = "Fetches the list of all tenant applications. This is only accessible to admins.",
             tags = {"Tenant Applications"}
     )
-
     @Secured("ROLE_ADMIN")
     @GetMapping("/all/applications")
     public String showAllTenantApplications(Model model) {
