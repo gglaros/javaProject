@@ -28,10 +28,16 @@
             <div class="error-message" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> </div>
         </div>
 
-        <div class="form-group">
+<!--        <div class="form-group">-->
+<!--            <label for="phone">Phone</label>-->
+<!--            <input type="text" id="phone" class="form-control" th:field="*{phone}"  required >-->
+<!--            <div class="error-message" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"> </div>-->
+<!--        </div>-->
+
+        <div>
             <label for="phone">Phone</label>
-            <input type="text" id="phone" class="form-control" th:field="*{phone}"  required >
-            <div class="error-message" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"> </div>
+            <input type="text" id="phone"  minlength="10" maxlength="10" pattern="^\+?[0-9]{7,15}$"
+                   title="Phone number must be 7 to 15 digits and can optionally start with '+'." class="form-control"  th:field="*{phone}" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -37,15 +37,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home","register","saveUser", "/images/**", "/js/**", "/css/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**"
+                        .requestMatchers("/", "/home","/register","/saveUser", "/images/**", "/js/**", "/css/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**"
                         ).permitAll()
-                        .requestMatchers("/OwnerApplications","/OwnerApplications/change/appStatus/{appId}","owner","owner/show/properties/{ownerId}","property/**",
-                                "tenant","tenant/all/applications","tenant/change/valStatus/{tenantId}","/users","/user/delete/{userId}").hasRole("ADMIN")
+                        .requestMatchers("/OwnerApplications","/OwnerApplications/change/appStatus/{appId}","/owner","/owner/show/properties/{ownerId}","/property/**",
+                                "/tenant","/tenant/all/applications","/tenant/change/valStatus/{tenantId}","/users","/user/delete/{userId}").hasRole("ADMIN")
 
-                        .requestMatchers("/OwnerApplications/make/{ownerId}","owner/make/property/{id}","owner/OwnerApplications","owner/show/properties", "owner/show/requests",
-                                "tenantApplications/change/appStatus/{appId}").hasRole("OWNER")
+                        .requestMatchers("/OwnerApplications/make/{ownerId}","/owner/make/property/{id}","/owner/OwnerApplications","/owner/show/properties", "/owner/show/requests",
+                                "/tenantApplications/change/appStatus/{appId}").hasRole("OWNER")
 
-                        .requestMatchers("/tenantApplications/viewProperties","tenant/rentalRequests","tenant/profile").hasRole("TENANT")
+                        .requestMatchers("/tenantApplications/viewProperties","/tenant/rentalRequests","/tenant/profile").hasRole("TENANT")
                         .anyRequest().authenticated()
                 )
 
