@@ -12,5 +12,6 @@ import java.util.List;
 @Repository
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findAllByOwnerId(int ownerId);
-    List<Property> findByRentPriceLessThanEqual(double maxPrice);
+//    List<Property> findByRentPriceLessThanEqual(double maxPrice);
+    List<Property> findByRentPriceLessThanEqualAndStatus(double maxPrice, String status);
 }
