@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("tenantApplications")
@@ -124,21 +125,28 @@ public class TenantApplicationController {
             model.addAttribute("user", user);
             return "tenant/tenant";
         }
-        if (existTenant.getValidation()==Validation.VALIDATED) {
+
+        if (existTenant.getValidation() == Validation.VALIDATED) {
             int id = existTenant.getId();
-            List<Property> filteredProperties ;
+
+            // Get properties filtered by price
+            List<Property> priceFilteredProperties = propertyService.findByMaxPrice(maxPrice);
+
+            // Get properties filtered by "on eye" status & no application
+            List<Property> noApplicationProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
+
+            // Find intersection (properties that exist in both lists)
+            List<Property> filteredProperties = priceFilteredProperties.stream()
+                    .filter(noApplicationProperties::contains)
+                    .collect(Collectors.toList());
+
             TenantApplication tenantApplication = new TenantApplication();
             tenantApplication.setTenant(existTenant);
 
-            if (maxPrice >0) {
-                filteredProperties = propertyService.findByMaxPrice(maxPrice);
-            } else {
+            // If maxPrice is not valid, return all properties
+            if (maxPrice <= 0) {
                 filteredProperties = propertyService.getAllProperty();
-
             }
-            System.out.println(maxPrice);
-            System.out.println(filteredProperties);
-
 
             model.addAttribute("tenantApplication", tenantApplication);
             model.addAttribute("properties", filteredProperties);

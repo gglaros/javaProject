@@ -70,10 +70,7 @@ public Property getPropertyById(Integer id) {
 
 
     public List<Property> findByMaxPrice(double maxPrice) {
-     List<Property> properties =propertyRepository.findByRentPriceLessThanEqualAndStatus(maxPrice,"on eye");
+     List<Property> properties =propertyRepository.findByRentPriceLessThanEqual(maxPrice);
      return properties;
-////     return properties.stream().filter(property -> property.getStatus() != null && property.getStatus().equalsIgnoreCase("on eye") &&
-//                tenantApplications.stream().noneMatch(application -> application.getProperty().getId() == property.getId() &&
-//                        application.getStatus() != null)).collect(Collectors.toList());
     }
 }
