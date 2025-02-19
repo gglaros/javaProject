@@ -129,13 +129,13 @@ public class TenantApplicationController {
         if (existTenant.getValidation() == Validation.VALIDATED) {
             int id = existTenant.getId();
 
-            // Get properties filtered by price
+            //get properties filtered by price
             List<Property> priceFilteredProperties = propertyService.findByMaxPrice(maxPrice);
 
-            // Get properties filtered by "on eye" status & no application
+            //get properties filtered by "on eye" status & no application
             List<Property> noApplicationProperties = tenantApplicationService.getPropertiesByOnEyeStatusAndNoApplication(id);
 
-            // Find intersection (properties that exist in both lists)
+            //find intersection (properties that exist in both lists)
             List<Property> filteredProperties = priceFilteredProperties.stream()
                     .filter(noApplicationProperties::contains)
                     .collect(Collectors.toList());
@@ -143,8 +143,8 @@ public class TenantApplicationController {
             TenantApplication tenantApplication = new TenantApplication();
             tenantApplication.setTenant(existTenant);
 
-            // If maxPrice is not valid, return all properties
-            if (maxPrice <= 0) {
+            //if maxPrice is not valid, return all properties
+            if (maxPrice < 0) {
                 filteredProperties = propertyService.getAllProperty();
             }
 
