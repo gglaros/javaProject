@@ -3,6 +3,12 @@
 
 Υλοποιήθηκε με Spring Boot και PostgreSQL για να παρέχει ασφαλή και αποδοτική λειτουργία.
 
+## Features
+- User registration/login (Spring Security)
+- Property listing and filtering
+- Admin dashboard
+- REST API (Spring Boot)
+
 # Commands for setting up and running the project:
 * Clone project: git clone https://github.com/giorgosglaros07/javaProject.git
 * mvn clean install
